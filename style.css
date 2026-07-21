@@ -97,7 +97,7 @@
   .stat span{font-size:.8rem;color:var(--muted);line-height:1.4;display:block;margin-top:3px}
   .verify{font:500 .86rem/1.8 ui-sans-serif,system-ui,sans-serif;color:var(--muted)}
   .verify code{font-family:var(--mono);font-size:.84em;background:var(--pill);
-               padding:2px 7px;border-radius:6px}
+               padding:2px 7px;border-radius:6px;white-space:nowrap}
 
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   @media(max-width:880px){.grid2{grid-template-columns:1fr}}
