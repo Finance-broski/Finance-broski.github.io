@@ -59,47 +59,6 @@
           (UPI or card)</a>, then paste the payment reference here. International: leave blank,
           the invoice follows.</small></label>
           <input id="f-pay" type="text" name="entry.1090934634"></div>
-        <div class="field wide"><label>Before I look: predict your own six verdicts
-          <small>Your call on each check. Page one of the verdict scores your predictions against
-          what the audit actually found.</small></label>
-          <div class="predgrid">
-            <div class="predrow"><span>Survivorship</span>
-              <span class="opts">
-                <label><input type="radio" name="pred_survivorship" value="Pass" required> Pass</label>
-                <label><input type="radio" name="pred_survivorship" value="Flag"> Flag</label>
-                <label><input type="radio" name="pred_survivorship" value="Fail"> Fail</label>
-              </span></div>
-            <div class="predrow"><span>Look-ahead / point-in-time</span>
-              <span class="opts">
-                <label><input type="radio" name="pred_lookahead" value="Pass" required> Pass</label>
-                <label><input type="radio" name="pred_lookahead" value="Flag"> Flag</label>
-                <label><input type="radio" name="pred_lookahead" value="Fail"> Fail</label>
-              </span></div>
-            <div class="predrow"><span>Cost realism</span>
-              <span class="opts">
-                <label><input type="radio" name="pred_costs" value="Pass" required> Pass</label>
-                <label><input type="radio" name="pred_costs" value="Flag"> Flag</label>
-                <label><input type="radio" name="pred_costs" value="Fail"> Fail</label>
-              </span></div>
-            <div class="predrow"><span>Overfitting / selection</span>
-              <span class="opts">
-                <label><input type="radio" name="pred_overfitting" value="Pass" required> Pass</label>
-                <label><input type="radio" name="pred_overfitting" value="Flag"> Flag</label>
-                <label><input type="radio" name="pred_overfitting" value="Fail"> Fail</label>
-              </span></div>
-            <div class="predrow"><span>Statistical validity</span>
-              <span class="opts">
-                <label><input type="radio" name="pred_statistics" value="Pass" required> Pass</label>
-                <label><input type="radio" name="pred_statistics" value="Flag"> Flag</label>
-                <label><input type="radio" name="pred_statistics" value="Fail"> Fail</label>
-              </span></div>
-            <div class="predrow"><span>Fill feasibility</span>
-              <span class="opts">
-                <label><input type="radio" name="pred_fills" value="Pass" required> Pass</label>
-                <label><input type="radio" name="pred_fills" value="Flag"> Flag</label>
-                <label><input type="radio" name="pred_fills" value="Fail"> Fail</label>
-              </span></div>
-          </div></div>
         <div class="field wide"><label>What will you do with this backtest?</label>
           <div class="radios">
             <label><input type="radio" name="entry.1604223621" value="sizing real money" required> Sizing real money</label>
@@ -142,15 +101,6 @@
         ot=document.getElementById('f-other-t'),orr=document.getElementById('f-other-r');
     ot.addEventListener('input',function(){ if(ot.value) orr.checked=true; });
     f.addEventListener('submit',function(){
-      var keys=['survivorship','lookahead','costs','overfitting','statistics','fills'],out=[];
-      for(var i=0;i<keys.length;i++){
-        var c=f.querySelector('input[name=pred_'+keys[i]+']:checked');
-        out.push(keys[i]+'='+(c?c.value:'?'));
-      }
-      var res=document.getElementById('f-res');
-      res.value=res.value+'
-
-[Self-prediction before audit] '+out.join(', ');
       setTimeout(function(){ f.style.display='none'; done.style.display='block';
         done.scrollIntoView({behavior:'smooth',block:'center'}); },600); });
   })();
