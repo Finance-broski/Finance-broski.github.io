@@ -8,190 +8,7 @@
 <meta property="og:title" content="Backtest Audit: independent verification for quant strategies">
 <meta property="og:description" content="Find out if your backtest is lying, before you trade it. Six checks, fixed price, 48h written verdict.">
 <meta property="og:type" content="website">
-<style>
-  :root{
-    --bg:#fbfbfa; --fg:#141412; --muted:#5f5f5a; --line:#e4e4df;
-    --card:#ffffff; --pill:#f0efe9;
-    --accent:#2a78d6; --accent-ink:#ffffff; --accent-soft:#e7f0fb;
-    --pass:#1f7a3d; --passbg:#e8f3ec; --flag:#9a6b00; --flagbg:#f7efd8;
-    --fail:#a33025; --failbg:#f8e9e7;
-    --pos:#2a78d6; --neg:#e34948; --bar-neutral:#b9b9b2;
-    --mono:ui-monospace,"Cascadia Code",Consolas,monospace;
-    --shadow:0 1px 2px rgba(20,20,18,.05),0 8px 24px -12px rgba(20,20,18,.12);
-  }
-  @media (prefers-color-scheme:dark){
-    :root:not([data-theme="light"]){
-      --bg:#131313; --fg:#ececea; --muted:#9a9a94; --line:#2a2a28;
-      --card:#1a1a19; --pill:#232321;
-      --accent:#3987e5; --accent-ink:#0b0b0b; --accent-soft:#182335;
-      --pass:#7ec99a; --passbg:#17251c; --flag:#d9b35c; --flagbg:#292214;
-      --fail:#e08a80; --failbg:#2b1a18;
-      --pos:#3987e5; --neg:#e66767; --bar-neutral:#4a4a46;
-      --shadow:none;
-    }
-  }
-  :root[data-theme="dark"]{
-    --bg:#131313; --fg:#ececea; --muted:#9a9a94; --line:#2a2a28;
-    --card:#1a1a19; --pill:#232321;
-    --accent:#3987e5; --accent-ink:#0b0b0b; --accent-soft:#182335;
-    --pass:#7ec99a; --passbg:#17251c; --flag:#d9b35c; --flagbg:#292214;
-    --fail:#e08a80; --failbg:#2b1a18;
-    --pos:#3987e5; --neg:#e66767; --bar-neutral:#4a4a46;
-    --shadow:none;
-  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{margin:0;background:var(--bg);color:var(--fg);
-       font:17px/1.62 ui-sans-serif,system-ui,"Segoe UI",Roboto,sans-serif;
-       -webkit-font-smoothing:antialiased}
-  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
-  .narrow{max-width:880px}
-  h1{font-size:clamp(2rem,5vw,3.1rem);line-height:1.08;letter-spacing:-.03em;
-     font-weight:750;margin:0 0 1rem}
-  h2{font-size:1.5rem;letter-spacing:-.02em;font-weight:700;margin:0 0 .4rem}
-  .sub{color:var(--muted);margin:0 0 1.6rem;max-width:640px}
-  p{margin:0 0 1rem}
-  a{color:var(--fg);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
-  a:hover{text-decoration-thickness:2px}
-  .fine{font-size:.9rem;color:var(--muted);line-height:1.55}
-  section{padding:3.4rem 0 0}
-  .kicker{font:700 .72rem/1 ui-sans-serif,system-ui,sans-serif;letter-spacing:.16em;
-          text-transform:uppercase;color:var(--accent);margin-bottom:.9rem}
-
-  .topbar{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 82%,transparent);
-          backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-  .topbar .in{max-width:1100px;margin:0 auto;padding:12px 24px;display:flex;
-              align-items:center;gap:1.2rem}
-  .brand{font-weight:750;letter-spacing:-.01em;text-decoration:none}
-  .nav{margin-left:auto;display:flex;gap:1.1rem;align-items:center}
-  .nav a{font-size:.9rem;color:var(--muted);text-decoration:none}
-  .nav a:hover{color:var(--fg)}
-  .nav .go{background:var(--accent);color:var(--accent-ink);padding:8px 16px;
-           border-radius:999px;font-weight:650;font-size:.88rem}
-  @media(max-width:640px){.nav a:not(.go){display:none}}
-
-  .hero{position:relative;padding:4.2rem 0 3rem;overflow:hidden}
-  .hero::before{content:"";position:absolute;inset:0;pointer-events:none;
-    background:radial-gradient(900px 420px at 85% -10%,
-               color-mix(in srgb,var(--accent) 16%,transparent),transparent 70%)}
-  .hero .in{position:relative;display:grid;grid-template-columns:1.15fr .85fr;
-            gap:3rem;align-items:center}
-  @media(max-width:880px){.hero .in{grid-template-columns:1fr}}
-  .lede{font-size:1.12rem;color:var(--muted);max-width:520px;margin:0 0 1.6rem}
-  .cta{display:inline-block;padding:14px 28px;border-radius:999px;background:var(--accent);
-       color:var(--accent-ink);text-decoration:none;font-weight:700;font-size:1rem}
-  .cta:hover{filter:brightness(1.08);text-decoration:none}
-  .cta2{display:inline-block;margin-left:.9rem;font-size:.95rem;color:var(--muted)}
-
-  .report{background:var(--card);border:1px solid var(--line);border-radius:16px;
-          box-shadow:var(--shadow);padding:18px 20px}
-  .report .rh{display:flex;justify-content:space-between;align-items:baseline;
-              border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:6px}
-  .report .rh b{font-size:.95rem}
-  .report .rh span{font:600 .7rem/1 var(--mono);color:var(--muted)}
-  .rrow{display:flex;justify-content:space-between;align-items:center;gap:1rem;
-        padding:9px 0;border-bottom:1px solid var(--line);font-size:.92rem}
-  .rrow:last-child{border-bottom:0}
-  .rrow small{color:var(--muted);font-size:.78rem}
-  .chip{font:700 .66rem/1 ui-sans-serif,system-ui,sans-serif;letter-spacing:.08em;
-        padding:4px 9px;border-radius:999px;white-space:nowrap}
-  .chip.fail{color:var(--fail);background:var(--failbg)}
-  .chip.flag{color:var(--flag);background:var(--flagbg)}
-  .chip.pass{color:var(--pass);background:var(--passbg)}
-
-  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;
-         background:var(--line);border:1px solid var(--line);border-radius:14px;
-         overflow:hidden;margin:2.4rem 0 .8rem}
-  .stat{background:var(--card);padding:16px 18px}
-  .stat b{display:block;font:750 1.5rem/1.2 ui-sans-serif,system-ui,sans-serif;
-          letter-spacing:-.02em;color:var(--accent)}
-  .stat span{font-size:.8rem;color:var(--muted);line-height:1.4;display:block;margin-top:3px}
-  .verify{font:500 .86rem/1.8 ui-sans-serif,system-ui,sans-serif;color:var(--muted)}
-  .verify code{font-family:var(--mono);font-size:.84em;background:var(--pill);
-               padding:2px 7px;border-radius:6px}
-
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  @media(max-width:880px){.grid2{grid-template-columns:1fr}}
-  .finding{background:var(--card);border:1px solid var(--line);border-radius:16px;
-           box-shadow:var(--shadow);padding:18px 20px;display:flex;flex-direction:column}
-  .finding .head{display:flex;gap:.7rem;align-items:center;margin-bottom:.4rem;flex-wrap:wrap}
-  .finding .what{font-weight:650;font-size:1rem;letter-spacing:-.01em}
-  .finding p{font-size:.95rem;color:var(--muted);margin:.3rem 0 0;line-height:1.55}
-  .finding .num{font-family:var(--mono);font-size:.9em;color:var(--fg)}
-  .finding svg{width:100%;height:auto;margin-top:auto;padding-top:.8rem}
-  .axnote{font:500 .72rem/1.4 ui-sans-serif,system-ui,sans-serif;color:var(--muted);
-          margin-top:.4rem}
-
-  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-  @media(max-width:880px){.grid3{grid-template-columns:1fr 1fr}}
-  @media(max-width:600px){.grid3{grid-template-columns:1fr}}
-  .check{background:var(--card);border:1px solid var(--line);border-radius:16px;
-         padding:18px 20px}
-  .check .n{font:750 .8rem/1 var(--mono);color:var(--accent);display:block;margin-bottom:.6rem}
-  .check b{font-size:.98rem;letter-spacing:-.01em}
-  .check p{font-size:.93rem;color:var(--muted);margin:.35rem 0 0;line-height:1.5}
-
-  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:1.4rem}
-  @media(max-width:700px){.steps{grid-template-columns:1fr}}
-  .step{border-left:3px solid var(--accent);padding:2px 0 2px 16px}
-  .step b{display:block;font-size:.98rem;margin-bottom:.25rem}
-  .step p{font-size:.93rem;color:var(--muted);margin:0;line-height:1.5}
-
-  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:1.4rem}
-  @media(max-width:880px){.tiers{grid-template-columns:1fr}}
-  .tier{background:var(--card);border:1px solid var(--line);border-radius:16px;
-        padding:22px;display:flex;flex-direction:column;box-shadow:var(--shadow)}
-  .tier.featured{border-color:var(--accent);
-        background:linear-gradient(180deg,var(--accent-soft),var(--card) 55%)}
-  .tier .tag{font:700 .66rem/1 ui-sans-serif,system-ui,sans-serif;letter-spacing:.1em;
-             color:var(--accent);margin-bottom:.6rem;text-transform:uppercase}
-  .tier h3{margin:0 0 .2rem;font-size:1.12rem;letter-spacing:-.01em}
-  .tier .amt{font:750 1.7rem/1.2 ui-sans-serif,system-ui,sans-serif;letter-spacing:-.02em;
-             margin:.3rem 0 .7rem}
-  .tier .amt small{font:600 .8rem/1 ui-sans-serif,system-ui,sans-serif;color:var(--muted)}
-  .tier p{font-size:.94rem;color:var(--muted);line-height:1.55;margin:0 0 .8rem}
-  .tier .foot{margin-top:auto;font:600 .78rem/1.5 ui-sans-serif,system-ui,sans-serif;
-              color:var(--muted)}
-  .pill{display:inline-block;background:var(--pill);border-radius:999px;
-        padding:4px 11px;font:600 .74rem/1.5 ui-sans-serif,system-ui,sans-serif;
-        color:var(--muted);margin:0 .35rem .35rem 0}
-
-  details{border-top:1px solid var(--line);padding:.9rem 0}
-  details:last-of-type{border-bottom:1px solid var(--line)}
-  summary{cursor:pointer;font-weight:650;font-size:1.05rem;list-style:none}
-  summary::-webkit-details-marker{display:none}
-  summary::after{content:"+";float:right;color:var(--accent);font-weight:500}
-  details[open] summary::after{content:"−"}
-  details p{font-size:.99rem;color:var(--muted);margin:.6rem 0 0;max-width:70ch}
-
-  .intake{background:var(--card);border:1px solid var(--line);border-radius:16px;
-          box-shadow:var(--shadow);padding:26px;margin-top:1.4rem}
-  .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  @media(max-width:760px){.fgrid{grid-template-columns:1fr}}
-  .field{display:flex;flex-direction:column;gap:5px}
-  .field.wide{grid-column:1/-1}
-  .field label{font:600 .84rem/1.35 ui-sans-serif,system-ui,sans-serif}
-  .field label small{color:var(--muted);font-weight:500}
-  .field input[type=text],.field input[type=email],.field textarea{
-    background:var(--bg);border:1px solid var(--line);border-radius:10px;color:var(--fg);
-    padding:11px 13px;font:inherit;font-size:.95rem}
-  .field textarea{min-height:88px;resize:vertical}
-  .field input:focus,.field textarea:focus{outline:2px solid var(--accent);outline-offset:1px;
-    border-color:transparent}
-  .radios{display:flex;flex-wrap:wrap;gap:.5rem .9rem;align-items:center;font-size:.93rem}
-  .radios label{display:flex;gap:.4rem;align-items:center;font-weight:500;cursor:pointer}
-  .radios input[type=radio]{accent-color:var(--accent)}
-  .radios input[type=text]{background:var(--bg);border:1px solid var(--line);border-radius:8px;
-    color:var(--fg);padding:6px 10px;font:inherit;font-size:.88rem;width:150px}
-  .intake .actions{display:flex;align-items:center;gap:1.1rem;margin-top:1.2rem;flex-wrap:wrap}
-  .intake button{border:0;cursor:pointer}
-  .success{display:none;background:var(--passbg);border:1px solid var(--pass);border-radius:12px;
-           padding:18px 20px;font-size:.96rem}
-  .success b{color:var(--pass)}
-  .cols2{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem}
-  @media(max-width:760px){.cols2{grid-template-columns:1fr}}
-  footer{margin-top:4rem;padding:1.8rem 0 3rem;border-top:1px solid var(--line)}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -202,7 +19,7 @@
     <a href="#checks">The six checks</a>
     <a href="#price">Price</a>
     <a href="#faq">FAQ</a>
-    <a class="go" href="#start">Start a Check</a>
+    <a class="go" href="start.html">Start a Check</a>
   </nav>
 </div></div>
 
@@ -213,15 +30,15 @@
     <p class="lede">Before you trade it, fund it, or pay a prop-challenge fee on it: six forensic
     checks for the failure modes that make paper returns evaporate live. Fixed price, written
     verdict in 48 hours.</p>
-    <a class="cta" href="#start">Start a Check →</a>
-    <a class="cta2" href="#findings">see real findings ↓</a>
+    <a class="cta" href="start.html">Start a Check →</a>
+    <a class="cta2" href="#findings">See real findings ↓</a>
   </div>
   <div class="report" aria-label="Report format sample">
     <div class="rh"><b>Audit verdict</b><span>REPORT FORMAT</span></div>
     <div class="rrow"><span>Survivorship</span><span class="chip pass">PASS</span></div>
-    <div class="rrow"><span>Look-ahead / point-in-time <br><small>signal uses a field only knowable
-      after the close</small></span><span class="chip fail">FAIL</span></div>
-    <div class="rrow"><span>Cost realism <br><small>edge survives to 60bps, assumed 30</small></span>
+    <div class="rrow"><span>Look-ahead / point-in-time <br><small>The signal uses a field only knowable
+      after the close.</small></span><span class="chip fail">FAIL</span></div>
+    <div class="rrow"><span>Cost realism <br><small>The edge survives to 60bps; 30 was assumed.</small></span>
       <span class="chip flag">FLAG</span></div>
     <div class="rrow"><span>Overfitting / selection</span><span class="chip flag">FLAG</span></div>
     <div class="rrow"><span>Statistical validity</span><span class="chip pass">PASS</span></div>
@@ -234,15 +51,15 @@
 <div class="wrap">
 
   <div class="stats">
-    <div class="stat"><b>3,852</b><span>stocks in my point-in-time Indian panel</span></div>
-    <div class="stat"><b>1,186</b><span>no longer trade; most datasets silently drop them</span></div>
-    <div class="stat"><b>+4.0pp/yr</b><span>measured bias cost on one realistic strategy</span></div>
-    <div class="stat"><b>48h</b><span>from complete folder to written verdict</span></div>
+    <div class="stat"><b>3,852</b><span>Stocks in my point-in-time Indian panel.</span></div>
+    <div class="stat"><b>1,186</b><span>No longer trade; most datasets silently drop them.</span></div>
+    <div class="stat"><b>+4.0pp/yr</b><span>Measured bias cost on one realistic strategy.</span></div>
+    <div class="stat"><b>48h</b><span>From complete folder to written verdict.</span></div>
   </div>
   <p class="verify">Verify me before you pay me:
     <code>pip install backtest-bias</code> ·
-    <a href="https://www.kaggle.com/financebroski">the notebook that reproduces +3.0pp on public data</a> ·
-    <a href="https://financebroski.substack.com">published audit findings</a>
+    <a href="https://www.kaggle.com/financebroski">The notebook that reproduces +3.0pp on public data</a> ·
+    <a href="https://financebroski.substack.com">Published audit findings</a>
   </p>
 
   <section id="findings">
@@ -263,19 +80,19 @@
           <line x1="24" y1="120" x2="330" y2="120" stroke="var(--line)" stroke-width="1"/>
           <line x1="24" y1="93.5" x2="330" y2="93.5" stroke="var(--muted)" stroke-width="1"
                 stroke-dasharray="4 4" opacity=".7"/>
-          <text x="330" y="89" font-size="10.5" fill="var(--muted)" text-anchor="end">t = 2, the usual bar</text>
+          <text x="330" y="89" font-size="10.5" fill="var(--muted)" text-anchor="end">t = 2, the usual significance bar</text>
           <path d="M62 120 V29 Q62 25 66 25 H118 Q122 25 122 29 V120 Z" fill="var(--fail)">
             <title>same-day field: t = 7.61</title></path>
           <text x="92" y="18" font-size="12" font-weight="700" fill="var(--fail)"
                 text-anchor="middle" font-family="var(--mono)">7.61</text>
-          <text x="92" y="136" font-size="10.5" fill="var(--muted)" text-anchor="middle">same-day field</text>
+          <text x="92" y="136" font-size="10.5" fill="var(--muted)" text-anchor="middle">Same-day field</text>
           <path d="M212 120 V115.3 Q212 111.3 216 111.3 H268 Q272 111.3 272 115.3 V120 Z"
                 fill="var(--bar-neutral)"><title>lagged one day: t = 0.66</title></path>
           <text x="242" y="105" font-size="12" font-weight="700" fill="var(--fg)"
                 text-anchor="middle" font-family="var(--mono)">0.66</text>
-          <text x="242" y="136" font-size="10.5" fill="var(--muted)" text-anchor="middle">lagged one day</text>
+          <text x="242" y="136" font-size="10.5" fill="var(--muted)" text-anchor="middle">Lagged one day</text>
         </svg>
-        <div class="axnote">t-statistic of the same signal, before and after removing the leak.
+        <div class="axnote">The t-statistic of the same signal, before and after removing the leak.
         Caught in my own pipeline by the checks this service runs.</div>
       </div>
 
@@ -291,7 +108,7 @@
             <title>gross: +28.8%/yr</title></path>
           <text x="68" y="15" font-size="11.5" font-weight="700" fill="var(--pos)"
                 text-anchor="middle" font-family="var(--mono)">+28.8</text>
-          <text x="68" y="68" font-size="10" fill="var(--muted)" text-anchor="middle">gross</text>
+          <text x="68" y="68" font-size="10" fill="var(--muted)" text-anchor="middle">Gross</text>
           <path d="M116 55 V43.6 Q116 39.6 120 39.6 H168 Q172 39.6 172 43.6 V55 Z" fill="var(--pos)">
             <title>at 30bps round trip: +13.7%/yr</title></path>
           <text x="144" y="33" font-size="11.5" font-weight="700" fill="var(--pos)"
@@ -308,7 +125,7 @@
                 text-anchor="middle" font-family="var(--mono)">−72.0</text>
           <text x="296" y="49" font-size="10" fill="var(--muted)" text-anchor="middle">@200bps</text>
         </svg>
-        <div class="axnote">%/yr net, at realistic round-trip cost for that liquidity bucket.
+        <div class="axnote">Net %/yr at realistic round-trip cost for that liquidity bucket.
         The gross number was real. It just wasn't reachable.</div>
       </div>
 
@@ -361,13 +178,13 @@
     <div class="kicker">Process</div>
     <h2>How it works</h2>
     <div class="steps">
-      <div class="step"><b>1 · Send the folder</b>
+      <div class="step"><b>1 · Send the folder.</b>
         <p>Trade list and equity curve, a platform export, or written rules precise enough to act
         on. Code welcome, never required.</p></div>
-      <div class="step"><b>2 · The 48h clock runs</b>
+      <div class="step"><b>2 · The 48h clock runs.</b>
         <p>Starts when payment and a complete folder are both in. If something is missing I ask
         once and the clock pauses.</p></div>
-      <div class="step"><b>3 · Written verdict</b>
+      <div class="step"><b>3 · Written verdict.</b>
         <p>Pass, flag or fail on each check, the measured haircut where possible, and a
         prioritised fix list.</p></div>
     </div>
@@ -387,99 +204,29 @@
         <p>The full six-check audit. Written verdict in 48 hours. For most backtests this is the
         only step needed.</p>
         <p class="foot">India pays by Razorpay link, instantly. International invoiced in USD.</p>
-        <a class="cta" style="margin-top:.6rem;text-align:center" href="#start">Start a Check →</a>
+        <a class="cta" style="margin-top:.6rem;text-align:center" href="start.html">Start a Check →</a>
       </div>
       <div class="tier">
         <h3>Fix</h3>
         <div class="amt">$1,500</div>
         <p>A Check found real problems and you want them repaired: the leak closed, the cost model
         rebuilt, the test rerun clean.</p>
-        <p class="foot">Scoped in writing after a Check · 7-day window</p>
+        <p class="foot">Scoped in writing after a Check. 7-day delivery window.</p>
       </div>
       <div class="tier">
         <h3>Deep</h3>
         <div class="amt">$6,000</div>
         <p>Full pipeline engagement: your data rebuilt point-in-time correct, the audit run at
         source level, the report your next strategies inherit.</p>
-        <p class="foot">Scoped in writing · 7-day window</p>
+        <p class="foot">Scoped in writing. 7-day delivery window.</p>
       </div>
     </div>
     <p style="margin-top:1rem">
       <span class="pill">48h turnaround</span>
-      <span class="pill">fixed price</span>
-      <span class="pill">no code required</span>
+      <span class="pill">Fixed price</span>
+      <span class="pill">No code required</span>
       <span class="pill">NDA on request</span>
     </p>
-  </section>
-
-  <section id="start" class="narrow">
-    <div class="kicker">Intake</div>
-    <h2>Start a Check</h2>
-    <p class="sub">The 48-hour clock starts when payment and a complete folder are both in.
-    Everything you send stays on my machine only, is never shared or reused, and is deleted on
-    request.</p>
-    <div class="intake">
-      <form id="intakeForm"
-            action="https://docs.google.com/forms/d/e/1FAIpQLSdlR2I-qhjUSrezpmu2fByrr3yfODdpSNCDwuxdISu3G2bJgw/formResponse"
-            method="POST" target="hidden_sink">
-        <div class="fgrid">
-          <div class="field"><label for="f-name">Name or handle</label>
-            <input id="f-name" type="text" name="entry.810207762" required></div>
-          <div class="field"><label for="f-mail">Email for the verdict PDF</label>
-            <input id="f-mail" type="email" name="emailAddress" required></div>
-          <div class="field wide"><label for="f-strat">The strategy
-            <small>link to a zip or drive folder with code, a platform export (AlgoTest, Streak,
-            TradingView), or written rules precise enough to act on</small></label>
-            <textarea id="f-strat" name="entry.988616352" required></textarea></div>
-          <div class="field wide"><label for="f-res">The results you believe
-            <small>equity curve or trade list, and the headline number (CAGR, Sharpe, win rate)
-            you want checked</small></label>
-            <textarea id="f-res" name="entry.358843678" required></textarea></div>
-          <div class="field"><label for="f-uni">Universe
-            <small>how instruments were selected, as of when</small></label>
-            <input id="f-uni" type="text" name="entry.1541509628" required></div>
-          <div class="field"><label for="f-data">Data source(s)
-            <small>what data, from where, what period</small></label>
-            <input id="f-data" type="text" name="entry.429363022" required></div>
-          <div class="field"><label for="f-cost">Costs assumed
-            <small>brokerage, slippage, taxes, if any</small></label>
-            <input id="f-cost" type="text" name="entry.32343501" required></div>
-          <div class="field"><label for="f-pay">Payment reference
-            <small>India: Razorpay reference. International: leave blank, the invoice follows</small></label>
-            <input id="f-pay" type="text" name="entry.1090934634"></div>
-          <div class="field wide"><label>What will you do with this backtest?</label>
-            <div class="radios">
-              <label><input type="radio" name="entry.1604223621" value="sizing real money" required> sizing real money</label>
-              <label><input type="radio" name="entry.1604223621" value="building further"> building further</label>
-              <label><input type="radio" name="entry.1604223621" value="publishing"> publishing</label>
-              <label><input type="radio" name="entry.1604223621" value="__other_option__" id="f-other-r"> other:</label>
-              <input type="text" name="entry.1604223621.other_option_response" id="f-other-t"
-                     aria-label="Other purpose">
-            </div></div>
-        </div>
-        <div class="actions">
-          <button class="cta" type="submit">Send the folder &#8594;</button>
-          <span class="fine">Prefer the plain form?
-            <a href="https://forms.gle/sAvosfHnitCBm9FD7">Open it on Google Forms</a></span>
-        </div>
-      </form>
-      <div class="success" id="intakeDone">
-        <b>Got it.</b> If the folder's complete, the clock is running and the verdict lands within
-        48 hours as a written PDF. If something is missing I'll ask once, and the clock pauses
-        until it arrives.
-      </div>
-    </div>
-    <iframe name="hidden_sink" style="display:none" aria-hidden="true"></iframe>
-    <script>
-      (function(){
-        var f=document.getElementById('intakeForm'),done=document.getElementById('intakeDone'),
-            ot=document.getElementById('f-other-t'),orr=document.getElementById('f-other-r'),sent=false;
-        ot.addEventListener('input',function(){ if(ot.value) orr.checked=true; });
-        f.addEventListener('submit',function(){ sent=true;
-          setTimeout(function(){ f.style.display='none'; done.style.display='block';
-            done.scrollIntoView({behavior:'smooth',block:'center'}); },600); });
-      })();
-    </script>
   </section>
 
   <section id="faq" class="narrow">
@@ -545,7 +292,7 @@
     <p class="fine">Ayan Jain ·
       <a href="https://www.kaggle.com/financebroski">Kaggle</a> ·
       <a href="https://financebroski.substack.com">Substack</a> ·
-      <a href="#start">Start a Check</a></p>
+      <a href="start.html">Start a Check</a></p>
   </footer>
 
 </div>

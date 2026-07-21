@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Start a Check · Backtest Audit</title>
+<meta name="description" content="Intake for the six-check backtest audit. Fixed price, written verdict in 48 hours.">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar"><div class="in">
+  <a class="brand" href="index.html">Ayan Jain · Backtest Audit</a>
+  <nav class="nav">
+    <a href="index.html">← Back to the site</a>
+  </nav>
+</div></div>
+
+<div class="wrap narrow" style="padding-top:3rem">
+  <div class="kicker">Intake</div>
+  <h1 style="font-size:clamp(1.7rem,4vw,2.3rem)">Start a Check.</h1>
+  <p class="sub">The 48-hour clock starts when payment and a complete folder are both in.
+  Everything you send stays on my machine only, is never shared or reused, and is deleted on
+  request.</p>
+
+  <div class="intake">
+    <form id="intakeForm"
+          action="https://docs.google.com/forms/d/e/1FAIpQLSdlR2I-qhjUSrezpmu2fByrr3yfODdpSNCDwuxdISu3G2bJgw/formResponse"
+          method="POST" target="hidden_sink">
+      <div class="fgrid">
+        <div class="field"><label for="f-name">Name or handle</label>
+          <input id="f-name" type="text" name="entry.810207762" required></div>
+        <div class="field"><label for="f-mail">Email for the verdict PDF</label>
+          <input id="f-mail" type="email" name="emailAddress" required></div>
+        <div class="field wide"><label for="f-strat">The strategy
+          <small>A link to a zip or drive folder with code, a platform export (AlgoTest, Streak,
+          TradingView), or written rules precise enough to act on.</small></label>
+          <textarea id="f-strat" name="entry.988616352" required></textarea></div>
+        <div class="field wide"><label for="f-res">The results you believe
+          <small>An equity curve or trade list, and the headline number (CAGR, Sharpe, win rate)
+          you want checked.</small></label>
+          <textarea id="f-res" name="entry.358843678" required></textarea></div>
+        <div class="field"><label for="f-uni">Universe
+          <small>How instruments were selected, and as of when.</small></label>
+          <input id="f-uni" type="text" name="entry.1541509628" required></div>
+        <div class="field"><label for="f-data">Data source(s)
+          <small>What data, from where, and for what period.</small></label>
+          <input id="f-data" type="text" name="entry.429363022" required></div>
+        <div class="field"><label for="f-cost">Costs assumed
+          <small>Brokerage, slippage, and taxes, if any.</small></label>
+          <input id="f-cost" type="text" name="entry.32343501" required></div>
+        <div class="field"><label for="f-pay">Payment reference
+          <small>India: your Razorpay reference. International: leave blank, the invoice
+          follows.</small></label>
+          <input id="f-pay" type="text" name="entry.1090934634"></div>
+        <div class="field wide"><label>What will you do with this backtest?</label>
+          <div class="radios">
+            <label><input type="radio" name="entry.1604223621" value="sizing real money" required> Sizing real money</label>
+            <label><input type="radio" name="entry.1604223621" value="building further"> Building further</label>
+            <label><input type="radio" name="entry.1604223621" value="publishing"> Publishing</label>
+            <label><input type="radio" name="entry.1604223621" value="__other_option__" id="f-other-r"> Other:</label>
+            <input type="text" name="entry.1604223621.other_option_response" id="f-other-t"
+                   aria-label="Other purpose">
+          </div></div>
+      </div>
+      <div class="actions">
+        <button class="cta" type="submit">Send the folder →</button>
+        <span class="fine">Prefer the plain form?
+          <a href="https://forms.gle/sAvosfHnitCBm9FD7">Open it on Google Forms.</a></span>
+      </div>
+    </form>
+    <div class="success" id="intakeDone">
+      <b>Got it.</b> If the folder is complete, the clock is running and the verdict lands within
+      48 hours as a written PDF. If something is missing, I will ask once, and the clock pauses
+      until it arrives.
+    </div>
+  </div>
+
+  <p class="fine" style="margin-top:1.2rem">Standard Check: ₹7,500 in India by Razorpay link, or
+  $250 internationally, invoiced in USD. Details and recent findings are on the
+  <a href="index.html">main page</a>.</p>
+
+  <footer>
+    <p class="fine">This is an audit of software and data quality. It is not investment advice,
+    not a trading signal, and not a prediction that any strategy will make money. I audit the
+    process; the market grades the strategy.</p>
+  </footer>
+</div>
+
+<iframe name="hidden_sink" style="display:none" aria-hidden="true"></iframe>
+<script>
+  (function(){
+    var f=document.getElementById('intakeForm'),done=document.getElementById('intakeDone'),
+        ot=document.getElementById('f-other-t'),orr=document.getElementById('f-other-r');
+    ot.addEventListener('input',function(){ if(ot.value) orr.checked=true; });
+    f.addEventListener('submit',function(){
+      setTimeout(function(){ f.style.display='none'; done.style.display='block';
+        done.scrollIntoView({behavior:'smooth',block:'center'}); },600); });
+  })();
+</script>
+</body>
+</html>
