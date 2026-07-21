@@ -42,10 +42,10 @@
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{margin:0;background:var(--bg);color:var(--fg);
-       font:16px/1.6 ui-sans-serif,system-ui,"Segoe UI",Roboto,sans-serif;
+       font:17px/1.62 ui-sans-serif,system-ui,"Segoe UI",Roboto,sans-serif;
        -webkit-font-smoothing:antialiased}
   .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
-  .narrow{max-width:760px}
+  .narrow{max-width:880px}
   h1{font-size:clamp(2rem,5vw,3.1rem);line-height:1.08;letter-spacing:-.03em;
      font-weight:750;margin:0 0 1rem}
   h2{font-size:1.5rem;letter-spacing:-.02em;font-weight:700;margin:0 0 .4rem}
@@ -53,7 +53,7 @@
   p{margin:0 0 1rem}
   a{color:var(--fg);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
   a:hover{text-decoration-thickness:2px}
-  .fine{font-size:.85rem;color:var(--muted);line-height:1.55}
+  .fine{font-size:.9rem;color:var(--muted);line-height:1.55}
   section{padding:3.4rem 0 0}
   .kicker{font:700 .72rem/1 ui-sans-serif,system-ui,sans-serif;letter-spacing:.16em;
           text-transform:uppercase;color:var(--accent);margin-bottom:.9rem}
@@ -90,7 +90,7 @@
   .report .rh b{font-size:.95rem}
   .report .rh span{font:600 .7rem/1 var(--mono);color:var(--muted)}
   .rrow{display:flex;justify-content:space-between;align-items:center;gap:1rem;
-        padding:9px 0;border-bottom:1px solid var(--line);font-size:.88rem}
+        padding:9px 0;border-bottom:1px solid var(--line);font-size:.92rem}
   .rrow:last-child{border-bottom:0}
   .rrow small{color:var(--muted);font-size:.78rem}
   .chip{font:700 .66rem/1 ui-sans-serif,system-ui,sans-serif;letter-spacing:.08em;
@@ -116,7 +116,7 @@
            box-shadow:var(--shadow);padding:18px 20px;display:flex;flex-direction:column}
   .finding .head{display:flex;gap:.7rem;align-items:center;margin-bottom:.4rem;flex-wrap:wrap}
   .finding .what{font-weight:650;font-size:1rem;letter-spacing:-.01em}
-  .finding p{font-size:.9rem;color:var(--muted);margin:.3rem 0 0;line-height:1.55}
+  .finding p{font-size:.95rem;color:var(--muted);margin:.3rem 0 0;line-height:1.55}
   .finding .num{font-family:var(--mono);font-size:.9em;color:var(--fg)}
   .finding svg{width:100%;height:auto;margin-top:auto;padding-top:.8rem}
   .axnote{font:500 .72rem/1.4 ui-sans-serif,system-ui,sans-serif;color:var(--muted);
@@ -129,13 +129,13 @@
          padding:18px 20px}
   .check .n{font:750 .8rem/1 var(--mono);color:var(--accent);display:block;margin-bottom:.6rem}
   .check b{font-size:.98rem;letter-spacing:-.01em}
-  .check p{font-size:.88rem;color:var(--muted);margin:.35rem 0 0;line-height:1.5}
+  .check p{font-size:.93rem;color:var(--muted);margin:.35rem 0 0;line-height:1.5}
 
   .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:1.4rem}
   @media(max-width:700px){.steps{grid-template-columns:1fr}}
   .step{border-left:3px solid var(--accent);padding:2px 0 2px 16px}
   .step b{display:block;font-size:.98rem;margin-bottom:.25rem}
-  .step p{font-size:.88rem;color:var(--muted);margin:0;line-height:1.5}
+  .step p{font-size:.93rem;color:var(--muted);margin:0;line-height:1.5}
 
   .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:1.4rem}
   @media(max-width:880px){.tiers{grid-template-columns:1fr}}
@@ -149,7 +149,7 @@
   .tier .amt{font:750 1.7rem/1.2 ui-sans-serif,system-ui,sans-serif;letter-spacing:-.02em;
              margin:.3rem 0 .7rem}
   .tier .amt small{font:600 .8rem/1 ui-sans-serif,system-ui,sans-serif;color:var(--muted)}
-  .tier p{font-size:.89rem;color:var(--muted);line-height:1.55;margin:0 0 .8rem}
+  .tier p{font-size:.94rem;color:var(--muted);line-height:1.55;margin:0 0 .8rem}
   .tier .foot{margin-top:auto;font:600 .78rem/1.5 ui-sans-serif,system-ui,sans-serif;
               color:var(--muted)}
   .pill{display:inline-block;background:var(--pill);border-radius:999px;
@@ -158,12 +158,36 @@
 
   details{border-top:1px solid var(--line);padding:.9rem 0}
   details:last-of-type{border-bottom:1px solid var(--line)}
-  summary{cursor:pointer;font-weight:650;font-size:1rem;list-style:none}
+  summary{cursor:pointer;font-weight:650;font-size:1.05rem;list-style:none}
   summary::-webkit-details-marker{display:none}
   summary::after{content:"+";float:right;color:var(--accent);font-weight:500}
   details[open] summary::after{content:"−"}
-  details p{font-size:.93rem;color:var(--muted);margin:.6rem 0 0;max-width:70ch}
+  details p{font-size:.99rem;color:var(--muted);margin:.6rem 0 0;max-width:70ch}
 
+  .intake{background:var(--card);border:1px solid var(--line);border-radius:16px;
+          box-shadow:var(--shadow);padding:26px;margin-top:1.4rem}
+  .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:760px){.fgrid{grid-template-columns:1fr}}
+  .field{display:flex;flex-direction:column;gap:5px}
+  .field.wide{grid-column:1/-1}
+  .field label{font:600 .84rem/1.35 ui-sans-serif,system-ui,sans-serif}
+  .field label small{color:var(--muted);font-weight:500}
+  .field input[type=text],.field input[type=email],.field textarea{
+    background:var(--bg);border:1px solid var(--line);border-radius:10px;color:var(--fg);
+    padding:11px 13px;font:inherit;font-size:.95rem}
+  .field textarea{min-height:88px;resize:vertical}
+  .field input:focus,.field textarea:focus{outline:2px solid var(--accent);outline-offset:1px;
+    border-color:transparent}
+  .radios{display:flex;flex-wrap:wrap;gap:.5rem .9rem;align-items:center;font-size:.93rem}
+  .radios label{display:flex;gap:.4rem;align-items:center;font-weight:500;cursor:pointer}
+  .radios input[type=radio]{accent-color:var(--accent)}
+  .radios input[type=text]{background:var(--bg);border:1px solid var(--line);border-radius:8px;
+    color:var(--fg);padding:6px 10px;font:inherit;font-size:.88rem;width:150px}
+  .intake .actions{display:flex;align-items:center;gap:1.1rem;margin-top:1.2rem;flex-wrap:wrap}
+  .intake button{border:0;cursor:pointer}
+  .success{display:none;background:var(--passbg);border:1px solid var(--pass);border-radius:12px;
+           padding:18px 20px;font-size:.96rem}
+  .success b{color:var(--pass)}
   .cols2{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem}
   @media(max-width:760px){.cols2{grid-template-columns:1fr}}
   footer{margin-top:4rem;padding:1.8rem 0 3rem;border-top:1px solid var(--line)}
@@ -178,7 +202,7 @@
     <a href="#checks">The six checks</a>
     <a href="#price">Price</a>
     <a href="#faq">FAQ</a>
-    <a class="go" href="https://forms.gle/sAvosfHnitCBm9FD7">Start a Check</a>
+    <a class="go" href="#start">Start a Check</a>
   </nav>
 </div></div>
 
@@ -189,7 +213,7 @@
     <p class="lede">Before you trade it, fund it, or pay a prop-challenge fee on it: six forensic
     checks for the failure modes that make paper returns evaporate live. Fixed price, written
     verdict in 48 hours.</p>
-    <a class="cta" href="https://forms.gle/sAvosfHnitCBm9FD7">Start a Check →</a>
+    <a class="cta" href="#start">Start a Check →</a>
     <a class="cta2" href="#findings">see real findings ↓</a>
   </div>
   <div class="report" aria-label="Report format sample">
@@ -363,7 +387,7 @@
         <p>The full six-check audit. Written verdict in 48 hours. For most backtests this is the
         only step needed.</p>
         <p class="foot">India pays by Razorpay link, instantly. International invoiced in USD.</p>
-        <a class="cta" style="margin-top:.6rem;text-align:center" href="https://forms.gle/sAvosfHnitCBm9FD7">Start a Check →</a>
+        <a class="cta" style="margin-top:.6rem;text-align:center" href="#start">Start a Check →</a>
       </div>
       <div class="tier">
         <h3>Fix</h3>
@@ -386,6 +410,76 @@
       <span class="pill">no code required</span>
       <span class="pill">NDA on request</span>
     </p>
+  </section>
+
+  <section id="start" class="narrow">
+    <div class="kicker">Intake</div>
+    <h2>Start a Check</h2>
+    <p class="sub">The 48-hour clock starts when payment and a complete folder are both in.
+    Everything you send stays on my machine only, is never shared or reused, and is deleted on
+    request.</p>
+    <div class="intake">
+      <form id="intakeForm"
+            action="https://docs.google.com/forms/d/e/1FAIpQLSdlR2I-qhjUSrezpmu2fByrr3yfODdpSNCDwuxdISu3G2bJgw/formResponse"
+            method="POST" target="hidden_sink">
+        <div class="fgrid">
+          <div class="field"><label for="f-name">Name or handle</label>
+            <input id="f-name" type="text" name="entry.810207762" required></div>
+          <div class="field"><label for="f-mail">Email for the verdict PDF</label>
+            <input id="f-mail" type="email" name="emailAddress" required></div>
+          <div class="field wide"><label for="f-strat">The strategy
+            <small>link to a zip or drive folder with code, a platform export (AlgoTest, Streak,
+            TradingView), or written rules precise enough to act on</small></label>
+            <textarea id="f-strat" name="entry.988616352" required></textarea></div>
+          <div class="field wide"><label for="f-res">The results you believe
+            <small>equity curve or trade list, and the headline number (CAGR, Sharpe, win rate)
+            you want checked</small></label>
+            <textarea id="f-res" name="entry.358843678" required></textarea></div>
+          <div class="field"><label for="f-uni">Universe
+            <small>how instruments were selected, as of when</small></label>
+            <input id="f-uni" type="text" name="entry.1541509628" required></div>
+          <div class="field"><label for="f-data">Data source(s)
+            <small>what data, from where, what period</small></label>
+            <input id="f-data" type="text" name="entry.429363022" required></div>
+          <div class="field"><label for="f-cost">Costs assumed
+            <small>brokerage, slippage, taxes, if any</small></label>
+            <input id="f-cost" type="text" name="entry.32343501" required></div>
+          <div class="field"><label for="f-pay">Payment reference
+            <small>India: Razorpay reference. International: leave blank, the invoice follows</small></label>
+            <input id="f-pay" type="text" name="entry.1090934634"></div>
+          <div class="field wide"><label>What will you do with this backtest?</label>
+            <div class="radios">
+              <label><input type="radio" name="entry.1604223621" value="sizing real money" required> sizing real money</label>
+              <label><input type="radio" name="entry.1604223621" value="building further"> building further</label>
+              <label><input type="radio" name="entry.1604223621" value="publishing"> publishing</label>
+              <label><input type="radio" name="entry.1604223621" value="__other_option__" id="f-other-r"> other:</label>
+              <input type="text" name="entry.1604223621.other_option_response" id="f-other-t"
+                     aria-label="Other purpose">
+            </div></div>
+        </div>
+        <div class="actions">
+          <button class="cta" type="submit">Send the folder &#8594;</button>
+          <span class="fine">Prefer the plain form?
+            <a href="https://forms.gle/sAvosfHnitCBm9FD7">Open it on Google Forms</a></span>
+        </div>
+      </form>
+      <div class="success" id="intakeDone">
+        <b>Got it.</b> If the folder's complete, the clock is running and the verdict lands within
+        48 hours as a written PDF. If something is missing I'll ask once, and the clock pauses
+        until it arrives.
+      </div>
+    </div>
+    <iframe name="hidden_sink" style="display:none" aria-hidden="true"></iframe>
+    <script>
+      (function(){
+        var f=document.getElementById('intakeForm'),done=document.getElementById('intakeDone'),
+            ot=document.getElementById('f-other-t'),orr=document.getElementById('f-other-r'),sent=false;
+        ot.addEventListener('input',function(){ if(ot.value) orr.checked=true; });
+        f.addEventListener('submit',function(){ sent=true;
+          setTimeout(function(){ f.style.display='none'; done.style.display='block';
+            done.scrollIntoView({behavior:'smooth',block:'center'}); },600); });
+      })();
+    </script>
   </section>
 
   <section id="faq" class="narrow">
@@ -451,7 +545,7 @@
     <p class="fine">Ayan Jain ·
       <a href="https://www.kaggle.com/financebroski">Kaggle</a> ·
       <a href="https://financebroski.substack.com">Substack</a> ·
-      <a href="https://forms.gle/sAvosfHnitCBm9FD7">Start a Check</a></p>
+      <a href="#start">Start a Check</a></p>
   </footer>
 
 </div>
