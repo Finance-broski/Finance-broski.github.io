@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Backtest Audit — independent verification for quant strategies</title>
+<meta name="description" content="Independent forensic audit of quant backtests: survivorship, look-ahead, cost realism, overfitting, statistical validity, fill feasibility. Fixed price, 48h written verdict.">
+<meta property="og:title" content="Backtest Audit — independent verification for quant strategies">
+<meta property="og:description" content="Find out if your backtest is lying, before you trade it. Six checks, fixed price, 48h written verdict.">
+<meta property="og:type" content="website">
+<style>
+  :root{
+    --bg:#fbfbfa; --fg:#1a1a18; --muted:#5f5f5a; --line:#e2e2dd;
+    --card:#ffffff; --accent:#1a1a18; --pill:#f0efe9;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{ --bg:#131313; --fg:#ececea; --muted:#9a9a94; --line:#2a2a28;
+           --card:#1a1a19; --accent:#ececea; --pill:#232321; }
+  }
+  :root[data-theme="light"]{
+    --bg:#fbfbfa; --fg:#1a1a18; --muted:#5f5f5a; --line:#e2e2dd;
+    --card:#ffffff; --accent:#1a1a18; --pill:#f0efe9;
+  }
+  :root[data-theme="dark"]{
+    --bg:#131313; --fg:#ececea; --muted:#9a9a94; --line:#2a2a28;
+    --card:#1a1a19; --accent:#ececea; --pill:#232321;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--fg);
+    font:16.5px/1.62 ui-serif,Georgia,"Iowan Old Style",Palatino,serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:64px 22px 96px}
+  h1{font-size:clamp(1.75rem,4.6vw,2.5rem);line-height:1.2;margin:0 0 .5rem;letter-spacing:-.02em}
+  h2{font-size:1.16rem;margin:2.9rem 0 .85rem;letter-spacing:-.01em}
+  .kicker{font:600 .74rem/1 ui-sans-serif,system-ui,sans-serif;letter-spacing:.14em;
+          text-transform:uppercase;color:var(--muted);margin-bottom:1.4rem}
+  .lede{font-size:1.14rem;color:var(--fg);margin:0 0 1.5rem}
+  p{margin:0 0 1.05rem}
+  .muted{color:var(--muted)}
+  a{color:var(--fg);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+  a:hover{text-decoration-thickness:2px}
+  ol{padding-left:1.15rem;margin:0}
+  ol li{margin-bottom:.85rem;padding-left:.25rem}
+  ol li b{font-weight:600}
+  .rule{height:1px;background:var(--line);border:0;margin:3rem 0}
+  .price{
+    background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:22px 24px;margin:1.2rem 0;
+  }
+  .price .row{display:flex;flex-wrap:wrap;gap:.5rem 1.2rem;align-items:baseline}
+  .price .amt{font:700 1.5rem/1 ui-sans-serif,system-ui,sans-serif;letter-spacing:-.02em}
+  .price .sub{color:var(--muted);font-size:.94rem}
+  .cta{
+    display:inline-block;margin-top:.7rem;padding:13px 26px;border-radius:999px;
+    background:var(--accent);color:var(--bg);text-decoration:none;
+    font:600 .97rem/1 ui-sans-serif,system-ui,sans-serif;
+  }
+  .cta:hover{opacity:.87;text-decoration:none}
+  .pill{
+    display:inline-block;background:var(--pill);border-radius:999px;
+    padding:4px 11px;font:600 .74rem/1.5 ui-sans-serif,system-ui,sans-serif;
+    color:var(--muted);margin-right:.4rem
+  }
+  .fine{font-size:.87rem;color:var(--muted);line-height:1.55}
+  footer{margin-top:3.2rem;padding-top:1.6rem;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="kicker">Backtest Audit</div>
+  <h1>Your backtest says 34% CAGR.<br>Find out if it's lying.</h1>
+  <p class="lede">Before you trade it, fund it, or pay a prop-challenge fee on it — an independent
+  check for the six failure modes that make paper returns evaporate live.</p>
+
+  <p>I build point-in-time market data for a living. My Indian equity dataset covers
+  <b>3,838 stocks including 1,193 that no longer exist</b> — the ones most datasets silently
+  delete, and the ones whose absence flatters every backtest run on them.</p>
+
+  <p>When I measured what those biases actually cost on a realistic strategy, the answer was
+  <b>+4.0 percentage points a year</b> of pure illusion. You don't have to take my word for it:
+  a cut-down version of that study runs on a 99-name public sample and reproduces
+  <b>+3.0 points</b> — <a href="https://www.kaggle.com/financebroski">the notebook is on Kaggle</a>,
+  and you can execute it yourself.</p>
+
+  <p>This service runs the same forensics on <i>your</i> backtest.</p>
+
+  <h2>The six checks</h2>
+  <ol>
+    <li><b>Survivorship</b> — is your universe quietly missing the companies that died?</li>
+    <li><b>Look-ahead / point-in-time</b> — does any signal use information that didn't exist on
+        the trade date? Adjusted prices, restated fundamentals, index membership as of today.</li>
+    <li><b>Cost realism</b> — are commissions, slippage, impact and taxes at levels a real fill
+        would actually pay?</li>
+    <li><b>Overfitting / selection</b> — how many variants were tried before this one? Deflated
+        performance metrics and a parameter-sensitivity map.</li>
+    <li><b>Statistical validity</b> — is the edge distinguishable from luck at your sample size?
+        Streak and drawdown behaviour checked against the distribution.</li>
+    <li><b>Fill feasibility</b> — could the market have absorbed your orders at those prices?
+        Volume participation, limit-fill assumptions, gap handling.</li>
+  </ol>
+
+  <h2>What you get</h2>
+  <p>A written verdict: pass / flag / fail on each of the six, the estimated performance haircut
+  wherever it's measurable, and a prioritised fix list. Not a grade for your ego — an engineering
+  document for your next iteration.</p>
+  <p class="fine">If a check fails in a way that needs deeper work than the fixed scope covers,
+  I'll tell you what it would take before doing anything further. No surprise invoices.</p>
+
+  <h2>Price</h2>
+  <div class="price">
+    <div class="row">
+      <span class="amt">₹7,500</span>
+      <span class="sub">India · paid online, instantly</span>
+    </div>
+    <div class="row" style="margin-top:.6rem">
+      <span class="amt">$250</span>
+      <span class="sub">International · invoiced in USD</span>
+    </div>
+    <p class="fine" style="margin:.95rem 0 0">
+      <span class="pill">48h turnaround</span>
+      <span class="pill">fixed price</span>
+      <span class="pill">no code required</span>
+    </p>
+  </div>
+  <p class="fine">The 48-hour clock starts when payment and a complete folder are both in. Send a
+  trade list and equity curve, a platform export, or written rules precise enough to act on — code
+  is welcome but never required.</p>
+
+  <a class="cta" href="https://forms.gle/sAvosfHnitCBm9FD7">Start an audit →</a>
+
+  <h2>Confidentiality</h2>
+  <p>Whatever you send stays on my machine, is never reused or redistributed, and is deleted on
+  request. If you'd rather not send code at all, don't — a trade list and an equity curve are
+  enough for all six checks. NDA on request.</p>
+
+  <h2>Who this is for</h2>
+  <p>Quants about to size real money on a backtest. Prop-challenge takers, where an audit costs
+  less than a second attempt and tells you which one to make. Developers selling strategies who
+  want independent verification to point at. And anyone whose equity curve looks a little too
+  clean to be true.</p>
+
+  <hr class="rule">
+  <footer>
+    <p class="fine">This is an audit of software and data quality. It is not investment advice,
+    not a trading signal, and not a prediction that any strategy will make money. I audit the
+    process; the market grades the strategy.</p>
+    <p class="fine">Ayan Jain ·
+      <a href="https://www.kaggle.com/financebroski">Kaggle</a> ·
+      <a href="https://forms.gle/sAvosfHnitCBm9FD7">Start an audit</a></p>
+  </footer>
+
+</div>
+</body>
+</html>
