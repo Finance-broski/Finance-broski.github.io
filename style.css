@@ -117,7 +117,7 @@
   @media(max-width:600px){.grid3{grid-template-columns:1fr}}
   .check{background:var(--card);border:1px solid var(--line);border-radius:16px;
          padding:18px 20px}
-  .check .n{font:750 .8rem/1 var(--mono);color:var(--accent);display:block;margin-bottom:.6rem}
+  .check .n{font:750 1.15rem/1 var(--mono);color:var(--accent);display:block;margin-bottom:.6rem}
   .check b{font-size:.98rem;letter-spacing:-.01em}
   .check p{font-size:.93rem;color:var(--muted);margin:.35rem 0 0;line-height:1.5}
 
