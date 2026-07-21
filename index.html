@@ -12,18 +12,26 @@
   :root{
     --bg:#fbfbfa; --fg:#1a1a18; --muted:#5f5f5a; --line:#e2e2dd;
     --card:#ffffff; --accent:#1a1a18; --pill:#f0efe9;
+    --pass:#1f7a3d; --passbg:#e8f3ec; --flag:#9a6b00; --flagbg:#f7efd8;
+    --fail:#a33025; --failbg:#f8e9e7; --mono:ui-monospace,"Cascadia Code",Consolas,monospace;
   }
   @media (prefers-color-scheme:dark){
     :root{ --bg:#131313; --fg:#ececea; --muted:#9a9a94; --line:#2a2a28;
-           --card:#1a1a19; --accent:#ececea; --pill:#232321; }
+           --card:#1a1a19; --accent:#ececea; --pill:#232321;
+           --pass:#7ec99a; --passbg:#17251c; --flag:#d9b35c; --flagbg:#292214;
+           --fail:#e08a80; --failbg:#2b1a18; }
   }
   :root[data-theme="light"]{
     --bg:#fbfbfa; --fg:#1a1a18; --muted:#5f5f5a; --line:#e2e2dd;
     --card:#ffffff; --accent:#1a1a18; --pill:#f0efe9;
+    --pass:#1f7a3d; --passbg:#e8f3ec; --flag:#9a6b00; --flagbg:#f7efd8;
+    --fail:#a33025; --failbg:#f8e9e7;
   }
   :root[data-theme="dark"]{
     --bg:#131313; --fg:#ececea; --muted:#9a9a94; --line:#2a2a28;
     --card:#1a1a19; --accent:#ececea; --pill:#232321;
+    --pass:#7ec99a; --passbg:#17251c; --flag:#d9b35c; --flagbg:#292214;
+    --fail:#e08a80; --failbg:#2b1a18;
   }
   *{box-sizing:border-box}
   body{
@@ -31,39 +39,78 @@
     font:16.5px/1.62 ui-serif,Georgia,"Iowan Old Style",Palatino,serif;
     -webkit-font-smoothing:antialiased;
   }
-  .wrap{max-width:720px;margin:0 auto;padding:64px 22px 96px}
-  h1{font-size:clamp(1.75rem,4.6vw,2.5rem);line-height:1.2;margin:0 0 .5rem;letter-spacing:-.02em}
-  h2{font-size:1.16rem;margin:2.9rem 0 .85rem;letter-spacing:-.01em}
+  .wrap{max-width:760px;margin:0 auto;padding:60px 22px 96px}
+  h1{font-size:clamp(1.75rem,4.6vw,2.5rem);line-height:1.2;margin:0 0 .6rem;letter-spacing:-.02em}
+  h2{font-size:1.16rem;margin:3rem 0 .9rem;letter-spacing:-.01em}
   .kicker{font:600 .74rem/1 ui-sans-serif,system-ui,sans-serif;letter-spacing:.14em;
           text-transform:uppercase;color:var(--muted);margin-bottom:1.4rem}
-  .lede{font-size:1.14rem;color:var(--fg);margin:0 0 1.5rem}
+  .lede{font-size:1.14rem;margin:0 0 1.6rem}
   p{margin:0 0 1.05rem}
-  .muted{color:var(--muted)}
   a{color:var(--fg);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
   a:hover{text-decoration-thickness:2px}
-  ol{padding-left:1.15rem;margin:0}
-  ol li{margin-bottom:.85rem;padding-left:.25rem}
-  ol li b{font-weight:600}
-  .rule{height:1px;background:var(--line);border:0;margin:3rem 0}
-  .price{
-    background:var(--card);border:1px solid var(--line);border-radius:12px;
-    padding:22px 24px;margin:1.2rem 0;
-  }
-  .price .row{display:flex;flex-wrap:wrap;gap:.5rem 1.2rem;align-items:baseline}
-  .price .amt{font:700 1.5rem/1 ui-sans-serif,system-ui,sans-serif;letter-spacing:-.02em}
-  .price .sub{color:var(--muted);font-size:.94rem}
-  .cta{
-    display:inline-block;margin-top:.7rem;padding:13px 26px;border-radius:999px;
-    background:var(--accent);color:var(--bg);text-decoration:none;
-    font:600 .97rem/1 ui-sans-serif,system-ui,sans-serif;
-  }
-  .cta:hover{opacity:.87;text-decoration:none}
-  .pill{
-    display:inline-block;background:var(--pill);border-radius:999px;
-    padding:4px 11px;font:600 .74rem/1.5 ui-sans-serif,system-ui,sans-serif;
-    color:var(--muted);margin-right:.4rem
-  }
+  .muted{color:var(--muted)}
   .fine{font-size:.87rem;color:var(--muted);line-height:1.55}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
+         background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;
+         margin:1.8rem 0 .9rem}
+  .stat{background:var(--card);padding:14px 16px}
+  .stat b{display:block;font:700 1.28rem/1.2 ui-sans-serif,system-ui,sans-serif;letter-spacing:-.02em}
+  .stat span{font-size:.8rem;color:var(--muted);line-height:1.35;display:block;margin-top:2px}
+
+  .verify{font:500 .85rem/1.7 ui-sans-serif,system-ui,sans-serif;color:var(--muted);margin:0 0 .4rem}
+  .verify code{font-family:var(--mono);font-size:.84em;background:var(--pill);
+               padding:2px 7px;border-radius:6px}
+
+  ol.checks{padding-left:1.15rem;margin:0}
+  ol.checks li{margin-bottom:.8rem;padding-left:.25rem}
+  ol.checks b{font-weight:600}
+
+  .finding{background:var(--card);border:1px solid var(--line);border-radius:12px;
+           padding:16px 18px;margin:0 0 12px}
+  .finding .head{display:flex;gap:.7rem;align-items:center;margin-bottom:.35rem;flex-wrap:wrap}
+  .chip{font:700 .68rem/1 ui-sans-serif,system-ui,sans-serif;letter-spacing:.08em;
+        padding:4px 9px;border-radius:999px}
+  .chip.fail{color:var(--fail);background:var(--failbg)}
+  .chip.flag{color:var(--flag);background:var(--flagbg)}
+  .chip.pass{color:var(--pass);background:var(--passbg)}
+  .finding .what{font:600 .95rem/1.4 ui-sans-serif,system-ui,sans-serif}
+  .finding p{font-size:.93rem;color:var(--muted);margin:.2rem 0 0;line-height:1.55}
+  .finding .num{font-family:var(--mono);font-size:.9em;color:var(--fg)}
+
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:1.2rem 0}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  .step b{display:block;font:600 .95rem/1.3 ui-sans-serif,system-ui,sans-serif;margin-bottom:.3rem}
+  .step p{font-size:.9rem;color:var(--muted);margin:0;line-height:1.5}
+  .step .n{font:700 .72rem/1 ui-sans-serif,system-ui,sans-serif;color:var(--muted);
+           letter-spacing:.1em;display:block;margin-bottom:.5rem}
+
+  table.tiers{width:100%;border-collapse:collapse;margin:1.1rem 0 .4rem;
+              font:.95rem/1.5 ui-sans-serif,system-ui,sans-serif}
+  table.tiers th{text-align:left;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;
+                 color:var(--muted);font-weight:600;padding:0 12px 8px 0}
+  table.tiers td{border-top:1px solid var(--line);padding:12px 12px 12px 0;vertical-align:top}
+  table.tiers .amt{font-weight:700;white-space:nowrap}
+  table.tiers .name{font-weight:600}
+  .tiernote{font-size:.85rem;color:var(--muted)}
+
+  .cta{display:inline-block;margin-top:1rem;padding:13px 26px;border-radius:999px;
+       background:var(--accent);color:var(--bg);text-decoration:none;
+       font:600 .97rem/1 ui-sans-serif,system-ui,sans-serif}
+  .cta:hover{opacity:.87;text-decoration:none}
+  .pill{display:inline-block;background:var(--pill);border-radius:999px;
+        padding:4px 11px;font:600 .74rem/1.5 ui-sans-serif,system-ui,sans-serif;
+        color:var(--muted);margin-right:.4rem}
+
+  details{border-top:1px solid var(--line);padding:.85rem 0}
+  details:last-of-type{border-bottom:1px solid var(--line)}
+  summary{cursor:pointer;font:600 .98rem/1.4 ui-sans-serif,system-ui,sans-serif;list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";float:right;color:var(--muted);font-weight:400}
+  details[open] summary::after{content:"2"}
+  details p{font-size:.94rem;color:var(--muted);margin:.6rem 0 0}
+
+  .rule{height:1px;background:var(--line);border:0;margin:3rem 0}
   footer{margin-top:3.2rem;padding-top:1.6rem;border-top:1px solid var(--line)}
 </style>
 </head>
@@ -73,22 +120,60 @@
   <div class="kicker">Backtest Audit</div>
   <h1>Your backtest says 34% CAGR.<br>Find out if it's lying.</h1>
   <p class="lede">Before you trade it, fund it, or pay a prop-challenge fee on it, get an independent
-  check for the six failure modes that make paper returns evaporate live.</p>
+  check for the failure modes that make paper returns evaporate live.</p>
 
-  <p>I build point-in-time market data for a living. My Indian equity dataset covers
-  <b>3,838 stocks including 1,193 that no longer exist</b>. Those are the ones most datasets
-  silently delete, and the ones whose absence flatters every backtest run on them.</p>
+  <div class="stats">
+    <div class="stat"><b>3,852</b><span>stocks in my point-in-time Indian panel</span></div>
+    <div class="stat"><b>1,186</b><span>no longer trade; most datasets silently drop them</span></div>
+    <div class="stat"><b>+4.0pp/yr</b><span>measured bias cost on one realistic strategy</span></div>
+    <div class="stat"><b>48h</b><span>from complete folder to written verdict</span></div>
+  </div>
+  <p class="verify">Verify me before you pay me:
+    <code>pip install backtest-bias</code> ·
+    <a href="https://www.kaggle.com/financebroski">the notebook that reproduces +3.0pp on public data</a> ·
+    <a href="https://financebroski.substack.com">published audit findings</a>
+  </p>
 
-  <p>When I measured what those biases actually cost on a realistic strategy, the answer was
-  <b>+4.0 percentage points a year</b> of pure illusion. You don't have to take my word for it:
-  a cut-down version of that study runs on a 99-name public sample and reproduces
-  <b>+3.0 points</b>. <a href="https://www.kaggle.com/financebroski">The notebook is on Kaggle</a>
-  and you can run it yourself.</p>
+  <h2>Recent findings, with the verdicts they got</h2>
+  <p class="fine">All real, all from the last few weeks: two from public-data audits, two from my own
+  pipeline. I publish what I catch in my own work for the same reason a good lab publishes its
+  failed experiments.</p>
 
-  <p>This service runs the same forensics on <i>your</i> backtest.</p>
+  <div class="finding">
+    <div class="head"><span class="chip fail">LOOK-AHEAD</span>
+      <span class="what">A t = 7.6 "edge" that was actually a data leak</span></div>
+    <p>A delivery-percentage signal showed <span class="num">t = 7.61</span>, monotone across
+    buckets. The field is only knowable after the close. Lagged one day:
+    <span class="num">t = 0.66</span>, ordering reversed. In my own pipeline, caught by the checks
+    this service runs.</p>
+  </div>
+  <div class="finding">
+    <div class="head"><span class="chip fail">SURVIVORSHIP</span>
+      <span class="what">The dead companies your data source deleted</span></div>
+    <p>Popular free sources drop delisted names. Rebuilt with every
+    dead company kept in the universe, one realistic strategy lost
+    <span class="num">+4.0pp/yr</span> of its claimed return. A public
+    99-name version reproduces <span class="num">+3.0pp</span>, runnable on Kaggle.</p>
+  </div>
+  <div class="finding">
+    <div class="head"><span class="chip flag">COST REALISM</span>
+      <span class="what">A 28.8%/yr strategy that dies at its own trading cost</span></div>
+    <p>Illiquid-stock reversal in India: <span class="num">+28.8%/yr</span> gross,
+    <span class="num">t = 11.65</span>, beautifully monotone. Realistic all-in cost for that
+    liquidity bucket is 100 to 300bps a round trip. Net: deeply negative at every horizon. The
+    gross number was real. It just wasn't reachable.</p>
+  </div>
+  <div class="finding">
+    <div class="head"><span class="chip flag">DATA DEFECT</span>
+      <span class="what">Fields that are zero, not missing, and pass every null check</span></div>
+    <p>Two fields in a widely-used panel are exactly <span class="num">0.0</span> before 2022
+    rather than NaN, so <span class="num">notna()</span> passes and any ranking built on them
+    silently sorts "has the field" from "doesn't". Produced a fake
+    <span class="num">t = 7.6</span> result before it was caught.</p>
+  </div>
 
   <h2>The six checks</h2>
-  <ol>
+  <ol class="checks">
     <li><b>Survivorship.</b> Is your universe quietly missing the companies that died?</li>
     <li><b>Look-ahead and point-in-time.</b> Does any signal use information that didn't exist on
         the trade date? Adjusted prices, restated fundamentals, index membership as of today.</li>
@@ -102,39 +187,93 @@
         Volume participation, limit-fill assumptions, gap handling.</li>
   </ol>
 
-  <h2>What you get</h2>
-  <p>A written verdict: pass / flag / fail on each of the six, the estimated performance haircut
-  wherever it's measurable, and a prioritised fix list. Not a grade for your ego. An engineering
-  document for your next iteration.</p>
-  <p class="fine">If a check fails in a way that needs deeper work than the fixed scope covers,
-  I'll tell you what it would take before doing anything further. No surprise invoices.</p>
+  <h2>How it works</h2>
+  <div class="steps">
+    <div class="step"><span class="n">STEP 1</span><b>Send the folder</b>
+      <p>Trade list and equity curve, a platform export, or written rules precise enough to act on.
+      Code welcome, never required.</p></div>
+    <div class="step"><span class="n">STEP 2</span><b>48h clock runs</b>
+      <p>Starts when payment and a complete folder are both in. If something is missing I ask once
+      and the clock pauses.</p></div>
+    <div class="step"><span class="n">STEP 3</span><b>Written verdict</b>
+      <p>Pass, flag or fail on each check, the estimated performance haircut where measurable, and
+      a prioritised fix list.</p></div>
+  </div>
+  <p class="fine">Not a grade for your ego. An engineering document for your next iteration. If a
+  check fails in a way that needs deeper work than the fixed scope covers, I tell you what it would
+  take before doing anything further. No surprise invoices.</p>
 
   <h2>Price</h2>
-  <div class="price">
-    <div class="row">
-      <span class="amt">₹7,500</span>
-      <span class="sub">India · paid online, instantly</span>
-    </div>
-    <div class="row" style="margin-top:.6rem">
-      <span class="amt">$250</span>
-      <span class="sub">International · invoiced in USD</span>
-    </div>
-    <p class="fine" style="margin:.95rem 0 0">
-      <span class="pill">48h turnaround</span>
-      <span class="pill">fixed price</span>
-      <span class="pill">no code required</span>
-    </p>
-  </div>
-  <p class="fine">The 48-hour clock starts when payment and a complete folder are both in. Send a
-  trade list and equity curve, a platform export, or written rules precise enough to act on. Code
-  is welcome but never required.</p>
+  <table class="tiers">
+    <tr><th>Tier</th><th>What it is</th><th>Price</th></tr>
+    <tr>
+      <td class="name">Check</td>
+      <td>The full six-check audit above. Written verdict in 48h. The entry point, and for most
+          backtests the only step needed.</td>
+      <td class="amt">₹7,500 India<br>$250 international</td>
+    </tr>
+    <tr>
+      <td class="name">Fix</td>
+      <td>A Check found real problems and you want them repaired: the leak closed, the cost model
+          rebuilt, the test rerun clean. Scoped in writing after a Check. 7-day window.</td>
+      <td class="amt">$1,500</td>
+    </tr>
+    <tr>
+      <td class="name">Deep</td>
+      <td>Full pipeline engagement: your data rebuilt point-in-time correct, the audit run at
+          source level, and the report your next strategies inherit. 7-day window.</td>
+      <td class="amt">$6,000</td>
+    </tr>
+  </table>
+  <p class="tiernote">India pays by Razorpay link, instantly. International is invoiced in USD.
+  Fix and Deep start with a scope note you approve in writing, so the price you agree to is the
+  price you pay.</p>
+  <p style="margin-top:.9rem">
+    <span class="pill">48h turnaround</span>
+    <span class="pill">fixed price</span>
+    <span class="pill">no code required</span>
+  </p>
+  <a class="cta" href="https://forms.gle/sAvosfHnitCBm9FD7">Start a Check →</a>
 
-  <a class="cta" href="https://forms.gle/sAvosfHnitCBm9FD7">Start an audit →</a>
+  <h2>Questions people actually ask</h2>
+  <details>
+    <summary>Can't I just ask an AI to do this for free?</summary>
+    <p>I use AI heavily myself; it's why the price is a few hundred dollars and not a consultant's
+    week. But three things don't come with the free prompt. The reference data: AI cannot conjure a
+    survivorship-correct, point-in-time panel to check yours against, and mine took months to build.
+    The adversarial stance: a model in the strategy owner's hands tends to validate the owner. And
+    liability: a named human signs this verdict. In one recent week my own tooling produced four
+    significant-looking results, up to t = 7.6, and every one was a bug. The catching is the
+    product.</p>
+  </details>
+  <details>
+    <summary>Do I have to share my code or my alpha?</summary>
+    <p>No. A trade list and an equity curve are enough for all six checks. The audit tests whether
+    your test is trustworthy; it doesn't need to know why you trade what you trade. Code only enters
+    at the Fix and Deep tiers, under an engagement letter with custody and deletion terms. NDA on
+    request.</p>
+  </details>
+  <details>
+    <summary>Which markets do you cover?</summary>
+    <p>Equities, futures and options, any country. My reference datasets are deepest for India and
+    the US, which is where the survivorship and point-in-time checks have the most teeth.</p>
+  </details>
+  <details>
+    <summary>Will you tell me if my strategy is good?</summary>
+    <p>I'll tell you whether your test can be trusted. That's the part you cannot see from inside,
+    and the part everything else depends on. The market grades the strategy.</p>
+  </details>
+  <details>
+    <summary>What if you find nothing wrong?</summary>
+    <p>Then you get a verdict saying so, per check, and that document is worth something: it's an
+    independent audit you can show a funder, a prop firm, or yourself at 2am before going live.
+    A clean pass from a hostile reviewer is not the same as your own backtest saying it's fine.</p>
+  </details>
 
   <h2>Confidentiality</h2>
   <p>Whatever you send stays on my machine, is never reused or redistributed, and is deleted on
   request. If you'd rather not send code at all, don't. A trade list and an equity curve are
-  enough for all six checks. NDA on request.</p>
+  enough for all six checks.</p>
 
   <h2>Who this is for</h2>
   <p>Quants about to size real money on a backtest. Prop-challenge takers, where an audit costs
@@ -149,7 +288,8 @@
     process; the market grades the strategy.</p>
     <p class="fine">Ayan Jain ·
       <a href="https://www.kaggle.com/financebroski">Kaggle</a> ·
-      <a href="https://forms.gle/sAvosfHnitCBm9FD7">Start an audit</a></p>
+      <a href="https://financebroski.substack.com">Substack</a> ·
+      <a href="https://forms.gle/sAvosfHnitCBm9FD7">Start a Check</a></p>
   </footer>
 
 </div>
