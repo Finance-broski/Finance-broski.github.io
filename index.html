@@ -8,8 +8,13 @@
 <meta property="og:title" content="Backtest Audit: independent verification for quant strategies">
 <meta property="og:description" content="Find out if your backtest is lying, before you trade it. Six checks, fixed price, 48h written verdict.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://finance-broski.github.io/">
+<meta property="og:image" content="https://finance-broski.github.io/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="favicon.png">
 <meta name="referrer" content="strict-origin">
 <link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can't I just ask an AI to do this for free?", "acceptedAnswer": {"@type": "Answer", "text": "I use AI heavily myself. What the free prompt lacks: a survivorship-correct point-in-time reference panel, an adversarial reviewer rather than a model validating its owner, and a named human liable for the verdict."}}, {"@type": "Question", "name": "Do I have to share my code or my alpha?", "acceptedAnswer": {"@type": "Answer", "text": "No. A trade list and an equity curve are enough for all six checks. Code enters only at the Fix and Deep tiers, under an engagement letter. NDA on request."}}, {"@type": "Question", "name": "Which markets do you cover?", "acceptedAnswer": {"@type": "Answer", "text": "Equities, futures and options, any country. Reference datasets are deepest for India and the US."}}, {"@type": "Question", "name": "Will you tell me if my strategy is good?", "acceptedAnswer": {"@type": "Answer", "text": "I tell you whether your test can be trusted. The market grades the strategy."}}, {"@type": "Question", "name": "What if you find nothing wrong?", "acceptedAnswer": {"@type": "Answer", "text": "You get a per-check verdict saying so: an independent audit you can show a funder, a prop firm, or yourself before going live."}}]}</script>
 </head>
 <body>
 
@@ -164,7 +169,7 @@
       <div class="check"><span class="n">03</span><b>Cost realism</b>
         <p>Are commissions, slippage, impact and taxes at levels a real fill would actually pay?</p></div>
       <div class="check"><span class="n">04</span><b>Overfitting / selection</b>
-        <p>How many variants were tried before this one? Deflated metrics and a
+        <p>How many configurations did you try, over how many years? Deflated metrics and a
         parameter-sensitivity map.</p></div>
       <div class="check"><span class="n">05</span><b>Statistical validity</b>
         <p>Is the edge distinguishable from luck at your sample size? Streaks and drawdowns
@@ -183,8 +188,9 @@
         <p>Trade list and equity curve, a platform export, or written rules precise enough to act
         on. Code welcome, never required.</p></div>
       <div class="step"><b>2 · The 48h clock runs.</b>
-        <p>Starts when payment and a complete folder are both in. If something is missing I ask
-        once and the clock pauses.</p></div>
+        <p>Starts when payment and a complete folder are both in. Inside it, I reconstruct your
+        test, rerun it independently, and cross-check it against my own panel. If something is
+        missing I ask once and the clock pauses.</p></div>
       <div class="step"><b>3 · Written verdict.</b>
         <p>Pass, flag or fail on each check, the measured haircut where possible, and a
         prioritised fix list.</p></div>
@@ -293,6 +299,7 @@
     <p class="fine">Ayan Jain ·
       <a href="https://www.kaggle.com/financebroski" rel="noopener">Kaggle</a> ·
       <a href="https://financebroski.substack.com" rel="noopener">Substack</a> ·
+      <a href="https://github.com/Finance-broski" rel="noopener">GitHub</a> ·
       <a href="start.html">Start a Check</a></p>
   </footer>
 
