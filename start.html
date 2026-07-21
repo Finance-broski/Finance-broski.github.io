@@ -61,15 +61,15 @@
         <div class="field"><label for="f-look">Your look-ahead belief
           <small>Which fields, if any, might use information from after the trade date? Your
           estimate of the cost, in pp/yr. "None that I know of" is a valid answer.</small></label>
-          <input id="f-look" type="text" required></div>
+          <input id="f-look" type="text" name="entry.1627521509" required></div>
         <div class="field"><label for="f-variants">Configurations tried
           <small>How many variants did you try before this one, over how many years of
           data?</small></label>
-          <input id="f-variants" type="text" required></div>
+          <input id="f-variants" type="text" name="entry.1011362692" required></div>
         <div class="field"><label for="f-trades">Independent trades
           <small>Roughly how many trades does the test contain, and your largest position as a
           share of that day's volume.</small></label>
-          <input id="f-trades" type="text" required></div>
+          <input id="f-trades" type="text" name="entry.1490116029" required></div>
         <div class="field"><label for="f-pay">Payment reference
           <small>India: <a href="https://rzp.io/rzp/7BG40WG" rel="noopener" target="_blank">pay ₹7,500 by Razorpay
           (UPI or card)</a>, then paste the payment reference here. International: leave blank,
@@ -117,11 +117,6 @@
         ot=document.getElementById('f-other-t'),orr=document.getElementById('f-other-r');
     ot.addEventListener('input',function(){ if(ot.value) orr.checked=true; });
     f.addEventListener('submit',function(){
-      var res=document.getElementById('f-res');
-      res.value=res.value
-        +'\n\n[Prior: look-ahead belief] '+document.getElementById('f-look').value
-        +'\n[Prior: configurations tried] '+document.getElementById('f-variants').value
-        +'\n[Prior: trades and largest position] '+document.getElementById('f-trades').value;
       setTimeout(function(){ f.style.display='none'; done.style.display='block';
         done.scrollIntoView({behavior:'smooth',block:'center'}); },600); });
   })();
