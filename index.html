@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
 <title>Backtest Audit: independent verification for quant strategies</title>
 <meta name="description" content="Independent forensic audit of quant backtests: survivorship, look-ahead, cost realism, overfitting, statistical validity, fill feasibility. Fixed price, 48h written verdict.">
 <meta property="og:title" content="Backtest Audit: independent verification for quant strategies">
-<meta property="og:description" content="Find out if your backtest is lying, before you trade it. Six checks, fixed price, 48h written verdict.">
+<meta property="og:description" content="Six forensic checks for the failure modes that turn a paper edge into a live loss. One independent verdict, in writing.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://finance-broski.github.io/">
 <meta property="og:image" content="https://finance-broski.github.io/og.png">
@@ -32,12 +33,12 @@
 <div class="hero"><div class="wrap in">
   <div>
     <div class="kicker">Independent verification for quant strategies</div>
-    <h1>Your backtest says 34% CAGR. Find out if it's lying.</h1>
-    <p class="lede">Before you trade it, fund it, or pay a prop-challenge fee on it: six forensic
-    checks for the failure modes that make paper returns evaporate live. Fixed price, written
-    verdict in 48 hours.</p>
+    <h1>Your backtest says 34% CAGR. Most of them are lying.</h1>
+    <p class="lede">Six forensic checks for the failure modes that turn a paper edge into a live
+    loss. One independent verdict, in writing.</p>
     <a class="cta" href="start.html">Start a Check →</a>
-    <a class="cta2" href="#findings">See real findings ↓</a>
+    <a class="cta2" href="#findings">Read the findings ↓</a>
+    <p class="creed">One person runs every check. One person signs the verdict. Named, and liable for it.</p>
   </div>
   <div class="report" aria-label="Report format sample">
     <div class="rh"><b>Audit verdict</b><span>REPORT FORMAT</span></div>
@@ -63,7 +64,7 @@
     <div class="stat"><b>+4.0pp/yr</b><span>Measured bias cost on one realistic strategy.</span></div>
     <div class="stat"><b>48h</b><span>From complete folder to written verdict.</span></div>
   </div>
-  <p class="verify">Verify me before you pay me:
+  <p class="verify">Everything here is checkable:
     <code>pip install backtest-bias</code> ·
     <a href="https://www.kaggle.com/financebroski" rel="noopener">The notebook that reproduces +3.0pp on public data</a> ·
     <a href="https://financebroski.substack.com" rel="noopener">Published audit findings</a> ·
@@ -323,5 +324,21 @@
   </footer>
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+<script>
+/* subtle smooth-scroll — off for reduced-motion or if the lib fails to load (page still scrolls natively) */
+(function(){
+  if(matchMedia("(prefers-reduced-motion:reduce)").matches || typeof Lenis==="undefined") return;
+  var lenis=new Lenis({lerp:0.09,wheelMultiplier:0.9,smoothWheel:true});
+  function raf(t){lenis.raf(t);requestAnimationFrame(raf);} requestAnimationFrame(raf);
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener("click",function(e){
+      var h=a.getAttribute("href"); if(h.length<2) return;
+      var t=document.querySelector(h); if(t){e.preventDefault();lenis.scrollTo(t,{offset:-8});}
+    });
+  });
+})();
+</script>
 </body>
 </html>
