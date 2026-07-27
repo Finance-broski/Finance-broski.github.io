@@ -61,6 +61,9 @@
     .nav .go{padding:8px 13px;font-size:.78rem;white-space:nowrap}
     section{padding:3.4rem 0 0}
     .hero{padding:3.4rem 0 2.4rem}
+    /* Patek-style section snap — a small scroll settles to the next section, no awkward gaps */
+    html{scroll-snap-type:y mandatory;scroll-padding-top:52px}
+    .hero,section,footer{scroll-snap-align:start}
   }
 
   .hero{position:relative;padding:5.6rem 0 4.2rem;overflow:hidden}

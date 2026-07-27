@@ -329,7 +329,7 @@
 <script>
 /* subtle smooth-scroll — off for reduced-motion or if the lib fails to load (page still scrolls natively) */
 (function(){
-  if(matchMedia("(prefers-reduced-motion:reduce)").matches || typeof Lenis==="undefined") return;
+  if(matchMedia("(prefers-reduced-motion:reduce)").matches || matchMedia("(max-width:640px)").matches || typeof Lenis==="undefined") return;
   var lenis=new Lenis({lerp:0.09,wheelMultiplier:0.9,smoothWheel:true});
   function raf(t){lenis.raf(t);requestAnimationFrame(raf);} requestAnimationFrame(raf);
   document.querySelectorAll('a[href^="#"]').forEach(function(a){
