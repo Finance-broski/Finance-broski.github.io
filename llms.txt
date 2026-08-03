@@ -26,6 +26,7 @@ computed.
   https://github.com/Finance-broski/backtest-bias/blob/main/BIAS_TABLE.md
 - backtest-bias (Python package): tests a price panel for survivorship and dead-name coverage.
   `pip install backtest-bias` https://pypi.org/project/backtest-bias/
+  Citable via DOI: https://doi.org/10.5281/zenodo.21770386
 - The Graveyard: a public ledger of killed research hypotheses, with preregistered bars,
   verdicts, and configuration counts. https://github.com/Finance-broski/graveyard
 - SSRN working paper on survivorship bias in Indian equity backtests:
