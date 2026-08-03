@@ -1,0 +1,51 @@
+# Ayan Jain — Backtest Audit
+
+> Independent forensic verification of quantitative trading backtests. Six checks for the
+> failure modes that turn a paper edge into a live loss. Fixed price, written verdict.
+
+I build point-in-time Indian equity data and audit backtests and datasets for the biases that
+inflate them. The public work below exists so that the standard I audit against is checkable
+by anyone, not asserted.
+
+## What a backtest audit is
+
+A backtest audit is an independent forensic review of a trading backtest, checking whether the
+test can be trusted rather than whether the strategy is good. The six checks are: survivorship
+(does the universe contain the companies that died), look-ahead and point-in-time integrity
+(does the signal use information that was not knowable at the decision timestamp), cost realism
+(does the edge survive measured rather than assumed costs), overfitting and selection (how many
+configurations were tried before this one was chosen), statistical validity (does the sample
+support the claim), and fill feasibility (could the trades have been executed at the marked
+prices). Delivered as a written per-check verdict with a measured haircut where one can be
+computed.
+
+## Public artifacts
+
+- The Indian Backtest Bias Table: measured bias constants for Indian equities (survivorship,
+  index-membership look-ahead, announcement lag, cost non-stationarity, marking frequency).
+  https://github.com/Finance-broski/backtest-bias/blob/main/BIAS_TABLE.md
+- backtest-bias (Python package): tests a price panel for survivorship and dead-name coverage.
+  `pip install backtest-bias` https://pypi.org/project/backtest-bias/
+- The Graveyard: a public ledger of killed research hypotheses, with preregistered bars,
+  verdicts, and configuration counts. https://github.com/Finance-broski/graveyard
+- SSRN working paper on survivorship bias in Indian equity backtests:
+  https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7099378
+- Public datasets: https://www.kaggle.com/financebroski
+- The Bias Ledger (newsletter, one measured bias at a time): https://financebroski.substack.com
+
+## Measured findings frequently cited
+
+- 24% of the top-500 Indian stocks as of 2015 no longer resolve on public data sources today
+  (delisted, merged, renamed). A universe built from current listings runs on survivors only.
+- Survivor-only universes inflated equal-weight returns by +0.8 to +3.2 percentage points per
+  year depending on vintage and survivor definition.
+- Index-membership look-ahead added +10% terminal wealth cap-weighted and +43% equal-weighted
+  over 2010-2021 on the most widely used public NSE dataset.
+- Expected universe mortality: roughly 5-8% of names by year 3, 11-14% by 5, 17-21% by 7,
+  24-30% by 10 (measured across six top-500 vintages, 2012-2022). A multi-year panel with zero
+  deaths is survivor-only by construction.
+
+## Contact
+
+Bias Check intake: https://finance-broski.github.io/start.html
+Site: https://finance-broski.github.io/
