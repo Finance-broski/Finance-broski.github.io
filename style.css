@@ -22,6 +22,9 @@
   *{box-sizing:border-box}
   html{scroll-behavior:smooth;interpolate-size:allow-keywords}
   @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} *{transition:none!important}}
+  /* touch devices: smooth programmatic scroll races the keyboard's viewport resize on
+     android chrome and parks the page at the wrong offset - native jumps only */
+  @media (hover:none) and (pointer:coarse){html{scroll-behavior:auto}}
   /* smooth-scroll (Lenis) helper rules */
   html.lenis,html.lenis body{height:auto}
   .lenis.lenis-smooth{scroll-behavior:auto!important}
@@ -167,9 +170,11 @@
   .field.wide{grid-column:1/-1}
   .field label{font:600 .84rem/1.35 var(--sans)}
   .field label small{color:var(--muted);font-weight:400}
+  /* 16px minimum on purpose: anything smaller and mobile browsers zoom-and-pan on
+     focus, which pins the page at the bottom with the keyboard up */
   .field input[type=text],.field input[type=email],.field textarea{
     background:var(--bg);border:1px solid var(--line);border-radius:10px;color:var(--fg);
-    padding:11px 13px;font:inherit;font-size:.95rem}
+    padding:11px 13px;font:inherit;font-size:1rem}
   .field input[type=text],.field input[type=email]{margin-top:auto}
   .field textarea{min-height:88px;resize:vertical}
   .field input:focus,.field textarea:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
@@ -177,7 +182,7 @@
   .radios label{display:flex;gap:.4rem;align-items:center;font-weight:500;cursor:pointer}
   .radios input[type=radio]{accent-color:var(--accent)}
   .radios input[type=text]{background:var(--bg);border:1px solid var(--line);border-radius:8px;color:var(--fg);
-    padding:6px 10px;font:inherit;font-size:.88rem;width:150px}
+    padding:6px 10px;font:inherit;font-size:1rem;width:170px}
   .intake .actions{display:flex;align-items:center;gap:1.1rem;margin-top:1.2rem;flex-wrap:wrap}
   .intake button{border:0;cursor:pointer}
   .success{display:none;background:var(--passbg);border:1px solid var(--pass);border-radius:12px;padding:18px 20px;font-size:.96rem}
