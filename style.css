@@ -64,8 +64,10 @@
     .nav .go{padding:8px 13px;font-size:.78rem;white-space:nowrap}
     section{padding:3.4rem 0 0}
     .hero{padding:3.4rem 0 2.4rem}
-    /* Patek-style section snap — a small scroll settles to the next section, no awkward gaps */
-    html{scroll-snap-type:y mandatory;scroll-padding-top:52px}
+    /* Section-settle, hero pages only. NEVER mandatory: a mandatory snap container on a
+       page whose only snap point is the footer (start.html) traps the viewport at the
+       bottom and fights every upward scroll - the exact bug this line once caused. */
+    html:has(.hero){scroll-snap-type:y proximity;scroll-padding-top:52px}
     .hero,section,footer{scroll-snap-align:start}
   }
 
