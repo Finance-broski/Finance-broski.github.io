@@ -1,5 +1,5 @@
   /* ============================================================
-     Backtest Audit — obsidian & champagne (house style, matches
+     Backtest Audit: obsidian & champagne (house style, matches
      the factor·health monitor). Light-only: warm porcelain + champagne.
      Type system: serif display · sans body · mono data.
      ============================================================ */
@@ -17,7 +17,7 @@
     --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     --shadow:0 1px 2px rgba(20,20,18,.04),0 12px 30px -16px rgba(20,20,18,.14);
   }
-  /* light-only by design — no dark theme */
+  /* light-only by design, no dark theme */
 
   *{box-sizing:border-box}
   html{scroll-behavior:smooth;interpolate-size:allow-keywords}
@@ -193,7 +193,7 @@
   @media(max-width:760px){.cols2{grid-template-columns:1fr}}
   footer{margin-top:4.2rem;padding:2rem 0 3rem;border-top:1px solid var(--line)}
 
-  /* MOBILE: card sections become horizontal swipe carousels — same content, a fraction of the scroll */
+  /* MOBILE: card sections become horizontal swipe carousels: same content, a fraction of the scroll */
   @media(max-width:700px){
     .grid2,.grid3,.tiers{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
       padding-bottom:14px;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-padding-left:2px}
