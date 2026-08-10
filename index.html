@@ -392,7 +392,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
 <script>
-/* subtle smooth-scroll — off for reduced-motion or if the lib fails to load (page still scrolls natively) */
+/* subtle smooth-scroll, off for reduced-motion or if the lib fails to load (page still scrolls natively) */
 (function(){
   if(matchMedia("(prefers-reduced-motion:reduce)").matches || matchMedia("(max-width:640px)").matches || typeof Lenis==="undefined") return;
   var lenis=new Lenis({lerp:0.09,wheelMultiplier:0.9,smoothWheel:true});

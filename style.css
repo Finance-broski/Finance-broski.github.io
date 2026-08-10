@@ -160,7 +160,7 @@
   summary:hover{color:var(--accent)}
   summary::-webkit-details-marker{display:none}
   summary::after{content:"+";float:right;color:var(--accent);font-weight:400;font-family:var(--sans)}
-  details[open] summary::after{content:"−"}
+  details[open] summary::after{content:"-"}
   details::details-content{block-size:0;overflow:hidden;opacity:0;transition:block-size .32s ease,opacity .26s ease}
   details[open]::details-content{block-size:auto;opacity:1}
   details p{font-size:.99rem;color:var(--muted);margin:.6rem 0 0;max-width:70ch}
