@@ -217,3 +217,13 @@
 .gy b{display:block;color:#efe9da;font-weight:600;margin:.25rem 0 .3rem;font-size:.98rem}
 .gy p{margin:0;font-size:.88rem;color:#a49d8d;line-height:1.5}
 .gyband a.gylink{color:#c9a55a;text-decoration:underline;text-underline-offset:3px;font-size:.95rem}
+
+/* AURA PASS 2026-08-12: daylight mirror of the graveyard's watermark device */
+.hero{padding:7.6rem 0 5.6rem}
+.hero::after{content:"PASS FLAG FAIL PASS PASS FLAG PASS FAIL PASS FLAG PASS PASS FAIL FLAG PASS PASS FLAG FAIL PASS PASS FLAG PASS FAIL PASS";position:absolute;inset:-24px;z-index:0;pointer-events:none;font-family:ui-monospace,Consolas,monospace;font-size:2.7rem;line-height:2.5;letter-spacing:.55em;font-weight:600;color:rgba(25,26,30,.038);white-space:normal;overflow:hidden}
+.hero h1{font-size:clamp(2.9rem,6.2vw,4.7rem);line-height:1.03;letter-spacing:-.015em}
+.hero .lede{font-size:1.12rem;max-width:33rem}
+.stat b{font-size:2.25rem}
+.gyband{padding:4.6rem 0 4.4rem}
+.gyband h2{font-size:2.1rem;font-family:var(--serif)}
+@media(max-width:880px){.hero{padding:4.4rem 0 3rem}.hero h1{font-size:clamp(2.2rem,9vw,2.9rem)}.hero::after{font-size:1.9rem;line-height:2.3}}
