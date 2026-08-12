@@ -206,17 +206,17 @@ body.home .stats{background:transparent;border:0;box-shadow:none;gap:0}
 body.home .stat{background:transparent;border-top:1px solid #d9d3c6;padding:15px 19px 0 2px}
 body.home .stat b{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:1.9rem;font-weight:600;color:#9a7a3f;letter-spacing:-.02em;display:block}
 body.home .stat span{color:#5c584e;font-size:.84rem}
-.gyband{background:#141519;color:#cfc8b8;position:relative;overflow:hidden;padding:3.6rem 0 3.4rem;scroll-snap-align:start}
-.gyband::before{content:"G-001 G-012 G-024 G-036 G-041 G-057 G-062 G-075 G-090 G-093 G-105 G-112 G-118 G-127 G-133 G-140 G-148 G-152";position:absolute;inset:-10px;font-family:ui-monospace,Consolas,monospace;font-size:2.5rem;line-height:2.2;letter-spacing:.35em;color:rgba(207,200,184,.05);white-space:normal;pointer-events:none}
-.gyband .in{position:relative;z-index:1}
-.gyband .gycount{font-family:ui-monospace,Consolas,monospace;font-size:1.05rem;letter-spacing:.12em;color:#c9a55a;margin-bottom:1.6rem}
-.gyband h2{color:#efe9da;font-size:1.7rem;margin:0 0 1.5rem}
-.gygrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.6rem;margin-bottom:1.8rem}
-.gy{border-left:1px solid rgba(201,165,90,.4);padding-left:1rem}
-.gy .code{font-family:ui-monospace,Consolas,monospace;color:#c9a55a;font-size:.82rem;letter-spacing:.1em}
-.gy b{display:block;color:#efe9da;font-weight:600;margin:.25rem 0 .3rem;font-size:.98rem}
-.gy p{margin:0;font-size:.88rem;color:#a49d8d;line-height:1.5}
-.gyband a.gylink{color:#c9a55a;text-decoration:underline;text-underline-offset:3px;font-size:.95rem}
+body.home .gyband{background:#141519;color:#cfc8b8;position:relative;overflow:hidden;padding:3.6rem 0 3.4rem;scroll-snap-align:start}
+body.home .gyband::before{content:"G-001 G-012 G-024 G-036 G-041 G-057 G-062 G-075 G-090 G-093 G-105 G-112 G-118 G-127 G-133 G-140 G-148 G-152";position:absolute;inset:-10px;font-family:ui-monospace,Consolas,monospace;font-size:2.5rem;line-height:2.2;letter-spacing:.35em;color:rgba(207,200,184,.05);white-space:normal;pointer-events:none}
+body.home .gyband .in{position:relative;z-index:1}
+body.home .gyband .gycount{font-family:ui-monospace,Consolas,monospace;font-size:1.05rem;letter-spacing:.12em;color:#c9a55a;margin-bottom:1.6rem}
+body.home .gyband h2{color:#efe9da;font-size:1.7rem;margin:0 0 1.5rem}
+body.home .gygrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.6rem;margin-bottom:1.8rem}
+body.home .gy{border-left:1px solid rgba(201,165,90,.4);padding-left:1rem}
+body.home .gy .code{font-family:ui-monospace,Consolas,monospace;color:#c9a55a;font-size:.82rem;letter-spacing:.1em}
+body.home .gy b{display:block;color:#efe9da;font-weight:600;margin:.25rem 0 .3rem;font-size:.98rem}
+body.home .gy p{margin:0;font-size:.88rem;color:#a49d8d;line-height:1.5}
+body.home .gyband a.gylink{color:#c9a55a;text-decoration:underline;text-underline-offset:3px;font-size:.95rem}
 
 /* AURA PASS 2026-08-12: daylight mirror of the graveyard's watermark device */
 body.home .hero{padding:7.6rem 0 5.6rem}
@@ -224,6 +224,6 @@ body.home .hero::after{content:"PASS FLAG FAIL PASS PASS FLAG PASS FAIL PASS FLA
 body.home .hero h1{font-size:clamp(2.9rem,6.2vw,4.7rem);line-height:1.03;letter-spacing:-.015em}
 body.home .hero .lede{font-size:1.12rem;max-width:33rem}
 body.home .stat b{font-size:2.25rem}
-.gyband{padding:4.6rem 0 4.4rem}
-.gyband h2{font-size:2.1rem;font-family:var(--serif)}
+body.home .gyband{padding:4.6rem 0 4.4rem}
+body.home .gyband h2{font-size:2.1rem;font-family:var(--serif)}
 @media(max-width:880px){body.home .hero{padding:4.4rem 0 3rem}body.home .hero h1{font-size:clamp(2.2rem,9vw,2.9rem)}body.home .hero::after{font-size:1.9rem;line-height:2.3}}
