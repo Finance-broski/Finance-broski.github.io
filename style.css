@@ -227,3 +227,19 @@ body.home .stat b{font-size:2.25rem}
 body.home .gyband{padding:4.6rem 0 4.4rem}
 body.home .gyband h2{font-size:2.1rem;font-family:var(--serif)}
 @media(max-width:880px){body.home .hero{padding:4.4rem 0 3rem}body.home .hero h1{font-size:clamp(2.2rem,9vw,2.9rem)}body.home .hero::after{font-size:1.9rem;line-height:2.3}}
+
+/* EFFECTS PASS: graveyard motion grammar, daylight side. Watermark removed. */
+body.home .hero::after{content:none}
+@keyframes hmin{from{opacity:0;transform:translateY(18px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+.js body.home .hero .in>div:first-child>*{opacity:0;animation:hmin 1.3s cubic-bezier(.16,.7,.2,1) forwards}
+.js body.home .hero .in>div:first-child>:nth-child(1){animation-delay:.15s}
+.js body.home .hero .in>div:first-child>:nth-child(2){animation-delay:.45s}
+.js body.home .hero .in>div:first-child>:nth-child(3){animation-delay:.9s}
+.js body.home .hero .in>div:first-child>:nth-child(4){animation-delay:1.25s}
+.js body.home .hero .in>div:first-child>:nth-child(5){animation-delay:1.45s}
+.js body.home .hero .in>div:first-child>:nth-child(6){animation-delay:1.6s}
+.js body.home .hero .in>div:first-child>:nth-child(7){animation-delay:1.9s}
+.js body.home .hero .report{opacity:0;animation:hmin 1.4s cubic-bezier(.16,.7,.2,1) 1.1s forwards}
+.js body.home .rv{opacity:0;transform:translateY(14px);transition:opacity .65s cubic-bezier(.2,.6,.2,1),transform .65s cubic-bezier(.2,.6,.2,1)}
+.js body.home .rv.on{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.js body.home .hero .in>div:first-child>*,.js body.home .hero .report{animation:none;opacity:1}.js body.home .rv{opacity:1;transform:none;transition:none}}
