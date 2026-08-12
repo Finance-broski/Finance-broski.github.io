@@ -48,5 +48,5 @@ computed.
 
 ## Contact
 
-Bias Check intake: https://finance-broski.github.io/start.html
-Site: https://finance-broski.github.io/
+Bias Check intake: https://financebroski.com/start.html
+Site: https://financebroski.com/

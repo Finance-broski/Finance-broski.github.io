@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://finance-broski.github.io/sitemap.xml
+Sitemap: https://financebroski.com/sitemap.xml
