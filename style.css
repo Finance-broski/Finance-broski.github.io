@@ -33,7 +33,7 @@
        font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
   .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
   .narrow{max-width:880px}
-  h1{font-family:var(--serif);font-size:clamp(1.95rem,4.4vw,3rem);line-height:1.08;
+  h1{font-family:var(--serif);font-size:clamp(2.5rem,5.6vw,4.1rem);line-height:1.04;
      letter-spacing:-.012em;font-weight:500;margin:0 0 1rem}
   h2{font-family:var(--serif);font-size:1.5rem;letter-spacing:-.01em;font-weight:500;margin:0 0 .45rem}
   .sub{color:var(--muted);margin:0 0 1.6rem;max-width:640px}
@@ -200,3 +200,20 @@
     .grid2::-webkit-scrollbar,.grid3::-webkit-scrollbar,.tiers::-webkit-scrollbar{display:none}
     .grid2>*,.grid3>*,.tiers>*{flex:0 0 86%;scroll-snap-align:start}
   }
+
+.creed{font-family:var(--serif);font-style:italic;font-size:1.02rem;color:#5c584e;margin-top:1.5rem;padding-left:.95rem;border-left:2px solid #9a7a3f}
+.stats{background:transparent;border:0;box-shadow:none;gap:0}
+.stat{background:transparent;border-top:1px solid #d9d3c6;padding:15px 19px 0 2px}
+.stat b{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:1.9rem;font-weight:600;color:#9a7a3f;letter-spacing:-.02em;display:block}
+.stat span{color:#5c584e;font-size:.84rem}
+.gyband{background:#141519;color:#cfc8b8;position:relative;overflow:hidden;padding:3.6rem 0 3.4rem;scroll-snap-align:start}
+.gyband::before{content:"G-001 G-012 G-024 G-036 G-041 G-057 G-062 G-075 G-090 G-093 G-105 G-112 G-118 G-127 G-133 G-140 G-148 G-152";position:absolute;inset:-10px;font-family:ui-monospace,Consolas,monospace;font-size:2.5rem;line-height:2.2;letter-spacing:.35em;color:rgba(207,200,184,.05);white-space:normal;pointer-events:none}
+.gyband .in{position:relative;z-index:1}
+.gyband .gycount{font-family:ui-monospace,Consolas,monospace;font-size:1.05rem;letter-spacing:.12em;color:#c9a55a;margin-bottom:1.6rem}
+.gyband h2{color:#efe9da;font-size:1.7rem;margin:0 0 1.5rem}
+.gygrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.6rem;margin-bottom:1.8rem}
+.gy{border-left:1px solid rgba(201,165,90,.4);padding-left:1rem}
+.gy .code{font-family:ui-monospace,Consolas,monospace;color:#c9a55a;font-size:.82rem;letter-spacing:.1em}
+.gy b{display:block;color:#efe9da;font-weight:600;margin:.25rem 0 .3rem;font-size:.98rem}
+.gy p{margin:0;font-size:.88rem;color:#a49d8d;line-height:1.5}
+.gyband a.gylink{color:#c9a55a;text-decoration:underline;text-underline-offset:3px;font-size:.95rem}
