@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Auction Ledger &middot; live dislocation record of India's closing auction</title>
+<meta name="description" content="A living measurement record of NSE and BSE closing-auction dislocation since day one of the regime. Bars committed before each expiry session exists; numbers published either way.">
+<link rel="icon" href="mark.png">
+<link rel="stylesheet" href="style.css">
+<style>
+body.auction{background:var(--bg);color:var(--fg)}
+body.auction .wrap{max-width:980px;margin:0 auto;padding:3.2rem 1.2rem 4rem}
+body.auction h1{font-family:var(--serif);font-size:clamp(1.9rem,4.5vw,2.7rem);margin:.2rem 0 .6rem;letter-spacing:-.01em}
+body.auction .kick{font-family:var(--mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-hi)}
+body.auction .sub{color:var(--muted);max-width:64ch;line-height:1.6;margin:.4rem 0 0}
+body.auction .statrow{display:flex;gap:2.2rem;flex-wrap:wrap;margin:1.6rem 0 0}
+body.auction .stat .n{font-family:var(--mono);font-size:1.5rem;color:var(--fg)}
+body.auction .stat .l{font-size:.82rem;color:var(--faint);margin-top:.15rem}
+body.auction h2{font-family:var(--serif);font-size:1.35rem;margin:2.6rem 0 .5rem}
+body.auction p{color:var(--muted);line-height:1.6;max-width:70ch}
+body.auction .tablewrap{overflow-x:auto;margin-top:.9rem}
+body.auction table{border-collapse:collapse;width:100%;font-size:.92rem}
+body.auction th{text-align:left;font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:.5rem .8rem;border-bottom:2px solid var(--line)}
+body.auction td{padding:.55rem .8rem;border-bottom:1px solid var(--line);vertical-align:top}
+body.auction td.mono{font-family:var(--mono);font-size:.88rem;white-space:nowrap}
+body.auction .v{font-family:var(--mono);font-weight:600}
+body.auction .v.pass{color:var(--pass)}
+body.auction .v.flag{color:var(--flag)}
+body.auction .v.na{color:var(--faint)}
+body.auction .rules{background:var(--panel-hi);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:1.1rem 1.3rem;margin-top:1rem}
+body.auction .rules p{margin:.35rem 0;font-size:.92rem}
+body.auction a{color:var(--accent-hi)}
+body.auction .fine{font-size:.85rem;color:var(--faint);line-height:1.55;margin-top:2.4rem}
+body.auction .dl{display:inline-block;margin-top:.8rem;font-family:var(--mono);font-size:.85rem}
+</style>
+</head>
+<body class="auction">
+<div class="wrap">
+  <div class="kick">The Auction Ledger</div>
+  <h1>India's closing auction, measured live.</h1>
+  <p class="sub">On 2026-08-03 NSE and BSE replaced the last-30-minute VWAP close with a closing
+  auction for F&amp;O names. Nobody has history for this mechanism, so this page is the history:
+  the dislocation between each stock's 15:15 price and its official close, every session, both
+  exchanges, from day one. Before each expiry session exists I commit measurement bars publicly;
+  the number publishes here either way. The page regenerates automatically every evening from
+  the same pipeline, whether the result flatters the forecast or not.</p>
+
+  <div class="statrow">
+    <div class="stat"><div class="n">4</div><div class="l">auction expiries measured</div></div>
+    <div class="stat"><div class="n">1/1</div><div class="l">landed inside committed bars</div></div>
+    <div class="stat"><div class="n">18</div><div class="l">exchange-sessions in the series</div></div>
+    <div class="stat"><div class="n">2026-08-13</div><div class="l">last updated (auto)</div></div>
+  </div>
+
+  <h2>Expiry verdicts</h2>
+  <p>Dislocation = median |official close vs 15:15 last trade| across the F&amp;O universe.
+  Ratio = that session against the median of the trailing five non-expiry auction sessions on
+  the same exchange; the base definition is frozen in code.</p>
+  <div class="tablewrap"><table>
+    <tr><th>date</th><th>index</th><th>bars committed</th><th>measured</th><th>ratio</th><th>verdict</th></tr>
+    <tr><td class="mono">2026-08-04</td><td>NIFTY</td><td>no bars on file for this session (pre-streak or committed only in-thread)</td><td class="mono">40.5bp</td><td class="mono">nanx</td><td class="v na">&mdash;</td></tr><tr><td class="mono">2026-08-06</td><td>SENSEX</td><td>no bars on file for this session (pre-streak or committed only in-thread)</td><td class="mono">12.4bp</td><td class="mono">1.05x</td><td class="v na">&mdash;</td></tr><tr><td class="mono">2026-08-11</td><td>NIFTY</td><td>no bars on file for this session (pre-streak or committed only in-thread)</td><td class="mono">21.6bp</td><td class="mono">1.04x</td><td class="v na">&mdash;</td></tr><tr><td class="mono">2026-08-13</td><td>SENSEX</td><td>15-25bp raw, ratio ~1.0 (committed 2026-08-12, before the session existed)</td><td class="mono">17.9bp</td><td class="mono">1.25x</td><td class="v pass">INSIDE</td></tr>
+  </table></div>
+
+  <h2>The full series</h2>
+  <div class="tablewrap"><table>
+    <tr><th>date</th><th>exchange</th><th>median |bp|</th><th>p90 |bp|</th><th>names</th></tr>
+    <tr><td class="mono">2026-08-03</td><td>BSE</td><td class="mono">9.6</td><td class="mono">72</td><td class="mono">208</td></tr><tr><td class="mono">2026-08-03</td><td>NSE</td><td class="mono">52.7</td><td class="mono">114</td><td class="mono">210</td></tr><tr><td class="mono">2026-08-04</td><td>BSE</td><td class="mono">16.3</td><td class="mono">77</td><td class="mono">208</td></tr><tr><td class="mono">2026-08-04</td><td>NSE &middot; expiry</td><td class="mono">40.5</td><td class="mono">97</td><td class="mono">210</td></tr><tr><td class="mono">2026-08-05</td><td>BSE</td><td class="mono">11.8</td><td class="mono">55</td><td class="mono">208</td></tr><tr><td class="mono">2026-08-05</td><td>NSE</td><td class="mono">27.0</td><td class="mono">71</td><td class="mono">210</td></tr><tr><td class="mono">2026-08-06</td><td>BSE &middot; expiry</td><td class="mono">12.4</td><td class="mono">69</td><td class="mono">208</td></tr><tr><td class="mono">2026-08-06</td><td>NSE</td><td class="mono">18.5</td><td class="mono">63</td><td class="mono">210</td></tr><tr><td class="mono">2026-08-07</td><td>BSE</td><td class="mono">15.4</td><td class="mono">91</td><td class="mono">208</td></tr><tr><td class="mono">2026-08-07</td><td>NSE</td><td class="mono">17.5</td><td class="mono">54</td><td class="mono">210</td></tr><tr><td class="mono">2026-08-10</td><td>BSE</td><td class="mono">14.3</td><td class="mono">65</td><td class="mono">208</td></tr><tr><td class="mono">2026-08-10</td><td>NSE</td><td class="mono">20.8</td><td class="mono">58</td><td class="mono">210</td></tr><tr><td class="mono">2026-08-11</td><td>BSE</td><td class="mono">12.7</td><td class="mono">65</td><td class="mono">208</td></tr><tr><td class="mono">2026-08-11</td><td>NSE &middot; expiry</td><td class="mono">21.6</td><td class="mono">52</td><td class="mono">210</td></tr><tr><td class="mono">2026-08-12</td><td>BSE</td><td class="mono">17.0</td><td class="mono">71</td><td class="mono">208</td></tr><tr><td class="mono">2026-08-12</td><td>NSE</td><td class="mono">59.2</td><td class="mono">158</td><td class="mono">210</td></tr><tr><td class="mono">2026-08-13</td><td>BSE &middot; expiry</td><td class="mono">17.9</td><td class="mono">65</td><td class="mono">208</td></tr><tr><td class="mono">2026-08-13</td><td>NSE</td><td class="mono">24.2</td><td class="mono">60</td><td class="mono">210</td></tr>
+  </table></div>
+  <a class="dl" href="cas_dislocation.csv">download the series (csv)</a>
+
+  <h2>The rules this page runs on</h2>
+  <div class="rules">
+    <p>1. Bars for a future expiry are committed publicly before the session exists. Changing
+    them afterwards restarts the claim at zero.</p>
+    <p>2. The number publishes whatever it is. An OUTSIDE verdict stays on this page forever.</p>
+    <p>3. Prices are last trades at 15:15 from minute bars against raw exchange bhavcopy closes;
+    corporate-action jumps are excluded above 2000bp. Fuller honesty labels live in the
+    methodology write-ups.</p>
+    <p>4. The series is append-only. History does not get revised; errors get corrected in
+    the open with the correction noted.</p>
+  </div>
+
+  <p class="fine">Measurement, not advice. Nothing here is a recommendation to trade anything.
+  Method and the rest of the record: <a href="index.html">the audit practice</a> &middot;
+  <a href="graveyard.html">the graveyard</a>. Contact via the site.</p>
+</div>
+</body>
+</html>
