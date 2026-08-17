@@ -245,7 +245,10 @@ body.home .hero::after{content:none}
 @media(prefers-reduced-motion:reduce){.js body.home .hero .in>div:first-child>*,.js body.home .hero .report{animation:none;opacity:1}.js body.home .rv{opacity:1;transform:none;transition:none}}
 
 /* Data dropdown (nav) - body.home scoped per the shared-stylesheet law */
-body.home .navdata{position:relative}
+body.home .navdata{position:relative;border:0!important;padding:0}
+body.home .navdata summary{font:400 .9rem/1.6 var(--sans)}
+body.home .navdata summary::after{content:none}
+body.home .navdata::details-content{block-size:auto;overflow:visible;opacity:1;transition:none}
 body.home .navdata summary{font-size:.9rem;color:var(--muted);cursor:pointer;list-style:none;user-select:none}
 body.home .navdata summary::-webkit-details-marker{display:none}
 body.home .navdata summary:hover{color:var(--fg)}
