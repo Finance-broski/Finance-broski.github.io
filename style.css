@@ -248,7 +248,6 @@ body.home .hero::after{content:none}
 body.home .navdata{position:relative}
 body.home .navdata summary{font-size:.9rem;color:var(--muted);cursor:pointer;list-style:none;user-select:none}
 body.home .navdata summary::-webkit-details-marker{display:none}
-body.home .navdata summary::after{content:" 93";font-size:.75em}
 body.home .navdata summary:hover{color:var(--fg)}
 body.home .navdata[open] summary{color:var(--fg)}
 body.home .navdata-panel{position:absolute;right:0;top:calc(100% + 10px);min-width:330px;background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);padding:.5rem;z-index:60}
