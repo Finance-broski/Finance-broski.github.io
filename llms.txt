@@ -31,6 +31,12 @@ computed.
   verdicts, and configuration counts. https://github.com/Finance-broski/graveyard
 - SSRN working paper on survivorship bias in Indian equity backtests:
   https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7099378
+- The US Death Registry: what happened to every S&P 500 name that goes missing from free
+  membership data. 143 exits, each with fate (acquired, taken private, merged, renamed,
+  bankrupt), last trading date, and a primary source; 14 of the tickers were later reused by a
+  different issuer. Free CSV, no signup. https://financebroski.com/deaths.html
+- The Auction Ledger: live dislocation record of India's new closing auction, bars committed
+  before each expiry session exists. https://financebroski.com/auction.html
 - Public datasets: https://www.kaggle.com/financebroski
 - The Bias Ledger (newsletter, one measured bias at a time): https://financebroski.substack.com
 
