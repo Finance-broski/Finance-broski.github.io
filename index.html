@@ -476,6 +476,10 @@
 <script>
 (function(){var d=document,rm=matchMedia("(prefers-reduced-motion: reduce)").matches;
 d.documentElement.classList.add("js");
+/* Scroll reveal is DESKTOP ONLY, same cut as Lenis above. On a phone a fast flick
+   outruns the observer: sections sit invisible for a beat, then fade in late, and the
+   whole scroll reads as jank (reported on mobile 2026-08-19). Native feel wins there. */
+if(matchMedia("(max-width:640px)").matches) return;
 var sel=".finding,.check,.tier,.stat,.verify,.gy,.gycount,.gyband h2,.gylink,section>.kicker,section>h2,section>p,details";
 var els=[].slice.call(d.querySelectorAll(sel));
 if("IntersectionObserver" in window && !rm){

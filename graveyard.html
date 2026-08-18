@@ -913,9 +913,11 @@
     }
   }
 
-  /* scroll-reveal */
+  /* scroll-reveal - DESKTOP ONLY, same cut as Lenis. On a phone a fast flick outruns
+     the observer and content pops in late, which reads as scroll jank (2026-08-19). */
   var sel="section .kicker,section h2,section .sub,.wrap.narrow section p,.retr,.six a,.gv-class,.gv-def,.gv-tblwrap,.chips,.gv-search,.pull,.rite";
-  var els=[].slice.call(document.querySelectorAll(sel));
+  var els=matchMedia("(max-width:640px)").matches ? [] :
+      [].slice.call(document.querySelectorAll(sel));
   els.forEach(function(el){el.classList.add("rv")});
   if("IntersectionObserver" in window && !rm){
     var io=new IntersectionObserver(function(es){
