@@ -50,6 +50,7 @@ body.registry .nav a{color:var(--muted)}
 body.registry .dl{display:inline-block;margin-top:.8rem;font-family:var(--mono);font-size:.85rem}
 body.registry .fine{font-size:.85rem;color:var(--faint);line-height:1.55;margin-top:2.4rem}
 body.registry .mini{max-width:26rem}
+body.registry .pending{font-family:var(--mono);font-size:.86rem;line-height:2;max-width:none}
 body.registry .mini td{padding:.4rem .8rem}
 </style>
 </head>
@@ -147,9 +148,21 @@ body.registry .mini td{padding:.4rem .8rem}
     fixed with the source credited.</p>
   </div>
 
+  <h2>Under verification, not in the file yet</h2>
+  <p>A first-bar scan of the 2010 and 2015 vintages turns up 33 tickers whose price
+  history begins <em>after</em> the date they were supposedly index members. That is the
+  signature of a symbol a different issuer now owns, and it is the failure the invisibility
+  probe cannot see, because the download succeeds. EMC is the clearest: it resolves today as an
+  emerging-markets ETF whose history starts 2023-05-15, while EMC Corp was bought by Dell in
+  2016. These are <strong>not</strong> in the CSV, because every row in it rests on a primary
+  source and these do not yet. They are published here so the queue is visible rather than
+  private, and they need triage: some are a different company wearing the symbol, some are the
+  same company relisting after bankruptcy or a take-private, which is a different thing.</p>
+  <p class="pending"><code>ADT</code>, <code>APC</code>, <code>APTV</code>, <code>BEAM</code>, <code>BTU</code>, <code>CAM</code>, <code>CEG</code>, <code>CPRI</code>, <code>DELL</code>, <code>DOW</code>, <code>DV</code>, <code>EMC</code>, <code>FOXA</code>, <code>HOT</code>, <code>LIFE</code>, <code>META</code>, <code>MHS</code>, <code>NE</code>, <code>NSM</code>, <code>PCL</code>, <code>PCS</code>, <code>POM</code>, <code>Q</code>, <code>S</code>, <code>SCG</code>, <code>SE</code>, <code>SHLD</code>, <code>SLE</code>, <code>SNDK</code>, <code>SPLS</code>, <code>STI</code>, <code>SUN</code>, <code>TE</code></p>
+
   <h2>Credited contributions</h2>
   <p>Rows that exist because someone asked or corrected something.</p>
-  <div class="tablewrap"><table class="mini"><tr><td class="mono tick">FB</td><td class="who">u/White_Fang_ on r/algotrading<span class="note">asked how a name that was both renamed and had its ticker recycled is handled, which is how FB got into the file</span></td></tr></table></div>
+  <div class="tablewrap"><table class="mini"><tr><td class="mono tick">FB</td><td class="who">u/White_Fang_ on r/algotrading<span class="note">asked how a name that was both renamed and had its ticker recycled is handled, which is how FB got into the file</span></td></tr><tr><td class="mono tick">33 candidates</td><td class="who">u/White_Fang_ on r/algotrading<span class="note">pointed out that the probe misses exits where the ticker still resolves because a new issuer took the symbol, EMC being his example; a first-bar scan of both vintages found 35 such names, only 2 of which were already here</span></td></tr></table></div>
 
   <script data-goatcounter="https://financebroski.goatcounter.com/count"
           async src="//gc.zgo.at/count.js"></script>
