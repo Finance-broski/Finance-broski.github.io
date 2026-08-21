@@ -27,6 +27,11 @@ body.review .gline{margin:1.4rem 0 0;padding:.95rem 1.25rem;border:1px solid var
 body.review .gline b{font:600 .74rem/1 var(--sans);letter-spacing:.14em;color:var(--accent-hi)}
 body.review .census{margin:2.4rem 0 0}
 body.review .census img{width:100%;height:auto;border-radius:11px;border:1px solid var(--line)}
+body.review .contact{margin-top:2.4rem;background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:18px 22px;box-shadow:var(--shadow)}
+body.review .mailrow{display:flex;align-items:center;gap:1.1rem;flex-wrap:wrap;margin:.45rem 0 .3rem}
+body.review .addr{font-family:var(--mono);font-weight:700;font-size:1.06rem;color:var(--fg)}
+body.review .copybtn{font:650 .78rem/1 var(--sans);letter-spacing:.05em;background:var(--accent);color:var(--accent-ink);border:0;border-radius:7px;padding:8px 14px;cursor:pointer}
+body.review .copybtn:hover{background:var(--accent-hi)}
 </style>
 </head>
 <body class="review">
@@ -36,7 +41,7 @@ body.review .census img{width:100%;height:auto;border-radius:11px;border:1px sol
   <nav class="nav">
     <a href="index.html#price">Backtest audit</a>
     <a href="graveyard.html">Graveyard</a>
-    <a class="go" href="mailto:ayanjain259@gmail.com?subject=Review%20request">Email me</a>
+    <a class="go" href="#contact">Contact</a>
   </nav>
 </div></div>
 
@@ -78,9 +83,14 @@ body.review .census img{width:100%;height:auto;border-radius:11px;border:1px sol
     <img src="review-census.png" alt="Census of findings from one week of review work: 44 findings across 35 works by type, 13 clean passes, client rating five stars" loading="lazy">
   </div>
 
-  <p style="margin-top:2rem"><a class="cta" href="mailto:ayanjain259@gmail.com?subject=Review%20request">Email me: ayanjain259@gmail.com →</a>
-  <a class="cta2" href="https://www.linkedin.com/in/ayanjain259" target="_blank" rel="me noopener">or message me on LinkedIn</a></p>
-  <p class="fine" style="margin-top:.6rem">Attach the piece or link it; you get a quote before any work starts.</p>
+  <div class="contact" id="contact">
+    <div class="kicker">Send a piece</div>
+    <div class="mailrow"><span class="addr">ayanjain259@gmail.com</span>
+      <button class="copybtn" onclick="navigator.clipboard.writeText('ayanjain259@gmail.com').then(()=>{this.textContent='Copied';setTimeout(()=>this.textContent='Copy',1600)})">Copy</button>
+      <a class="cta2" style="margin-left:0" href="mailto:ayanjain259@gmail.com?subject=Review%20request">open in mail app</a>
+      <a class="cta2" style="margin-left:0" href="https://www.linkedin.com/in/ayanjain259" target="_blank" rel="me noopener">LinkedIn</a></div>
+    <p class="fine" style="margin:.4rem 0 0">Attach the piece or link it; you get a quote before any work starts. 48 hours standard.</p>
+  </div>
 </div>
 
 <footer style="padding:2.5rem 0 2.5rem"><div class="wrap" style="padding-top:0;padding-bottom:0">
