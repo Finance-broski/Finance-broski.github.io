@@ -73,7 +73,8 @@ td.n,th.n{text-align:right}
 .colophon{font-style:italic; margin-top:6px}
 .small{font-size:13.5px; color:var(--dim)}
 @media (max-width:640px){h1{font-size:30px; letter-spacing:.15em}
-  .frame{padding:22px 18px} .date .l,.date .r{display:none} .lede::first-letter{font-size:44px}}
+  .frame{padding:22px 18px} .date .l,.date .r,.date .dsep{display:none} .date{grid-template-columns:1fr} .date .ph{display:block;text-align:center} .lede::first-letter{font-size:44px}
+  p{text-align:left}}
 </style>
 </head>
 <body class="pairdesk">
@@ -83,7 +84,7 @@ td.n,th.n{text-align:right}
 <h1>PAIR DESK</h1>
 <div class="date">
   <span class="l">EST. AUGUST 2026</span>
-  <span class="c">US EQUITIES &nbsp;&middot;&nbsp; 1.7 MILLION PAIRS EXAMINED WEEKLY</span>
+  <span class="c"><span class="ph">US EQUITIES</span> <span class="dsep">&nbsp;&middot;&nbsp;</span> <span class="ph">1.7 MILLION PAIRS</span> <span class="ph">EXAMINED WEEKLY</span></span>
   <span class="r">SATURDAYS</span>
 </div>
 <div class="subrule">every column carries its caveat</div>
