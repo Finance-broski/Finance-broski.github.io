@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PairDesk: a pairs screener that publishes the test it failed</title>
+<meta name="description" content="A weekly US equity pairs desk. Computation, freshness and correctness, never forward information. Free aged build, measured decay curves, honest tiers.">
+<meta property="og:title" content="PairDesk: a pairs screener that publishes the test it failed">
+<meta property="og:description" content="1.7 million pairs screened weekly with the caveats printed on the page. The free build is aged on purpose.">
+<style>
+/* Self-contained by law: this page never touches the site stylesheet. It wears the desk's
+   printed-circular identity at full strength; the sheet sits on a slightly darker surround the
+   way a circular sits on a desk. */
+:root{--paper:#fbf8f2; --ink:#191512; --ox:#8b2117; --dim:#5c584e; --rule:#d8d2c4; --desk:#efe9db}
+*{box-sizing:border-box; margin:0}
+body.pairdesk{background:var(--desk); color:var(--ink);
+  font:16px/1.66 "Hoefler Text",Baskerville,"Palatino Linotype",Palatino,Georgia,serif;
+  padding:34px 14px 54px}
+.frame{max-width:880px; margin:0 auto; border:1.5px solid var(--ink); outline:1px solid var(--ink);
+  outline-offset:3px; padding:30px 52px 28px; background:var(--paper)}
+.crumb{font-size:12.5px; margin-bottom:16px}
+.crumb a{color:var(--dim); text-decoration:none; letter-spacing:.04em}
+.over{text-align:center; font-size:13px; letter-spacing:.38em; color:var(--dim)}
+h1{text-align:center; font-size:56px; letter-spacing:.24em; font-weight:600; margin:6px 0 10px;
+  text-indent:.24em}
+.date{display:grid; grid-template-columns:1fr auto 1fr; align-items:baseline; gap:14px;
+  font-size:12.5px; letter-spacing:.14em; border-top:2.5px solid var(--ink);
+  border-bottom:1px solid var(--ink); padding:7px 2px; margin:0 0 8px}
+.date .l{text-align:left; color:var(--dim)} .date .r{text-align:right; color:var(--dim)}
+.date .c{text-align:center}
+.subrule{border-bottom:1px solid var(--ink); margin:0 0 30px; padding-bottom:3px;
+  text-align:center; font-size:12px; letter-spacing:.2em; color:var(--dim); font-style:italic}
+h2{font-variant:small-caps; letter-spacing:.09em; font-size:20px; font-weight:600;
+  border-bottom:1px solid var(--ink); padding-bottom:5px; margin:0 0 14px; text-wrap:balance}
+.divider{text-align:center; color:var(--dim); letter-spacing:.5em; margin:34px 0 30px;
+  font-size:14px}
+p{margin:0 0 12px; text-align:justify; hyphens:auto}
+a{color:var(--ox); text-decoration:underline; text-underline-offset:3px}
+.lede::first-letter{font-size:56px; line-height:.82; float:left; padding:6px 10px 0 0;
+  color:var(--ox); font-weight:600}
+.fig{border-top:1px solid var(--ink); border-bottom:1px solid var(--ink); padding:16px 0 12px;
+  margin:22px 0}
+.fig-tag{font-variant:small-caps; letter-spacing:.14em; font-size:13px; text-align:center;
+  color:var(--ink); margin-bottom:8px}
+.plate{text-align:center}
+.plate svg{max-width:100%; height:auto}
+.fig-cap{font-size:14px; text-align:center; margin-top:6px}
+.fig-sub{font-size:12.5px; text-align:center; color:var(--dim); font-style:italic}
+.stale{border:1px solid var(--ink); padding:16px 20px; margin:18px 0; background:#f6f1e7}
+.stale b{font-variant:small-caps; letter-spacing:.04em}
+.decay2{display:grid; grid-template-columns:1fr 400px; gap:30px; align-items:start}
+@media (max-width:760px){.decay2{grid-template-columns:1fr}}
+table{border-collapse:collapse; width:100%; margin:8px 0 6px;
+  font-variant-numeric:lining-nums tabular-nums; font-size:15px}
+th{font-variant:small-caps; font-weight:600; letter-spacing:.05em; text-align:left;
+  border-bottom:1px solid var(--ink); padding:5px 10px 5px 0; font-size:13.5px}
+td{border-bottom:1px solid var(--rule); padding:6px 10px 6px 0}
+td.n,th.n{text-align:right}
+.tiers td:first-child{font-variant:small-caps}
+.notice{border:1.5px solid var(--ink); outline:1px solid var(--ink); outline-offset:2px;
+  padding:14px 22px; margin:20px auto; max-width:600px; text-align:center}
+.notice .nt{font-variant:small-caps; letter-spacing:.16em; font-size:13.5px; margin-bottom:6px}
+.notice p{text-align:center; margin:0; font-style:italic}
+.write{display:inline-block; border:1px solid var(--ink); padding:7px 22px; margin:4px 0 2px;
+  font-variant:small-caps; letter-spacing:.1em; font-size:15px; text-decoration:none;
+  color:var(--ink)}
+.write:hover{background:#f6f1e7}
+.sub-line{text-align:center; margin:14px 0 0}
+.sub-note{font-size:13.5px; color:var(--dim); text-align:center; margin-top:8px}
+.foot{margin-top:40px; font-size:13px; color:var(--dim); text-align:center;
+  border-top:2.5px solid var(--ink); padding-top:4px}
+.foot .thin{border-top:1px solid var(--ink); padding-top:10px; margin-top:2px}
+.colophon{font-style:italic; margin-top:6px}
+.small{font-size:13.5px; color:var(--dim)}
+@media (max-width:640px){h1{font-size:30px; letter-spacing:.15em}
+  .frame{padding:22px 18px} .date .l,.date .r{display:none} .lede::first-letter{font-size:44px}}
+</style>
+</head>
+<body class="pairdesk">
+<div class="frame">
+<div class="crumb"><a href="index.html">&larr; financebroski.com</a></div>
+<div class="over">A WEEKLY REGISTER OF STATISTICAL PAIRS</div>
+<h1>PAIR DESK</h1>
+<div class="date">
+  <span class="l">EST. AUGUST 2026</span>
+  <span class="c">US EQUITIES &nbsp;&middot;&nbsp; 1.7 MILLION PAIRS EXAMINED WEEKLY</span>
+  <span class="r">SATURDAYS</span>
+</div>
+<div class="subrule">every column carries its caveat</div>
+
+<p class="lede">Each build screens roughly 1,900 liquid US names, 1.7 million pairs: Engle-Granger
+in both directions at finite-sample critical values, walk-forward hedge ratios, a 108-cell
+parameter sweep, per-leg dollar volume with capital conversion, market beta per spread, deal and
+reporting-window flags from SEC filings, and a build stamp on every number. What it sells is
+computation, freshness and correctness. Not forward information. That distinction was measured,
+on this product, and
+<a href="https://github.com/Finance-broski/pairdesk">published with the free launch build</a>:
+with acceptance recomputed honestly inside each test year, accepted pairs do not beat
+correlation-matched rejected ones, and no sortable column ranks the year ahead. Every screener
+in this niche shares that property. One of them says so on its own front page.</p>
+
+<div class="fig">
+<div class="fig-tag">PLATE I</div>
+<div class="plate">
+<svg width="680" height="250" viewBox="0 0 680 250">
+  <line x1="0" y1="76.9" x2="680" y2="76.9" stroke="#8b2117" stroke-width="1" stroke-dasharray="5,4" opacity=".75"/>
+  <line x1="0" y1="173.1" x2="680" y2="173.1" stroke="#8b2117" stroke-width="1" stroke-dasharray="5,4" opacity=".75"/>
+  <line x1="0" y1="125.0" x2="680" y2="125.0" stroke="#5c584e" stroke-width="1" stroke-dasharray="1.5,4"/>
+  <polyline points="0.0,106.0 3.8,115.4 7.6,117.5 11.4,131.2 15.2,142.1 19.0,156.7 22.8,134.4 26.6,127.4 30.4,126.7 34.2,128.1 38.0,152.9 41.8,132.5 45.6,145.2 49.4,130.8 53.2,124.0 57.0,121.2 60.8,133.4 64.6,157.9 68.4,125.5 72.2,124.5 76.0,138.5 79.8,135.3 83.6,92.1 87.4,91.3 91.2,82.2 95.0,78.6 98.8,91.6 102.6,95.9 106.4,117.5 110.2,123.1 114.0,109.4 117.8,138.2 121.6,129.3 125.4,129.1 129.2,128.4 133.0,125.0 136.8,113.9 140.6,128.6 144.4,140.9 148.2,137.3 152.0,138.7 155.8,118.5 159.6,112.5 163.4,107.7 167.2,92.8 170.9,92.3 174.7,81.7 178.5,86.8 182.3,111.1 186.1,108.9 189.9,106.5 193.7,96.2 197.5,67.8 201.3,96.9 205.1,88.5 208.9,86.1 212.7,95.4 216.5,100.7 220.3,102.4 224.1,118.8 227.9,135.3 231.7,115.4 235.5,119.7 239.3,120.4 243.1,95.7 246.9,97.8 250.7,106.7 254.5,80.0 258.3,93.8 262.1,103.6 265.9,116.3 269.7,105.5 273.5,115.9 277.3,107.7 281.1,139.7 284.9,137.5 288.7,128.6 292.5,127.6 296.3,114.2 300.1,113.7 303.9,94.0 307.7,79.3 311.5,79.6 315.3,96.2 319.1,114.9 322.9,111.3 326.7,95.0 330.5,82.2 334.3,81.0 338.1,122.8 341.9,119.5 345.7,108.7 349.5,109.9 353.3,113.7 357.1,104.3 360.9,105.3 364.7,100.2 368.5,91.1 372.3,92.5 376.1,88.2 379.9,75.0 383.7,66.8 387.5,61.8 391.3,91.6 395.1,92.5 398.9,91.1 402.7,82.2 406.5,81.2 410.3,95.4 414.1,84.9 417.9,107.7 421.7,111.1 425.5,120.2 429.3,125.0 433.1,126.7 436.9,131.2 440.7,119.7 444.5,139.4 448.3,163.9 452.1,161.1 455.9,167.1 459.7,167.3 463.5,128.4 467.3,113.2 471.1,106.7 474.9,88.2 478.7,95.9 482.5,108.4 486.3,107.5 490.1,134.9 493.9,122.4 497.7,119.5 501.5,115.9 505.3,122.4 509.1,133.2 512.8,115.6 516.6,124.8 520.4,133.2 524.2,121.4 528.0,130.0 531.8,135.1 535.6,149.0 539.4,130.8 543.2,140.4 547.0,133.4 550.8,156.7 554.6,150.2 558.4,126.7 562.2,128.6 566.0,119.5 569.8,108.2 573.6,124.3 577.4,104.8 581.2,107.0 585.0,148.1 588.8,130.8 592.6,123.1 596.4,117.1 600.2,118.3 604.0,137.0 607.8,135.3 611.6,154.3 615.4,136.3 619.2,130.8 623.0,149.0 626.8,145.9 630.6,131.7 634.4,131.7 638.2,124.0 642.0,89.9 645.8,124.0 649.6,146.6 653.4,125.5 657.2,85.6 661.0,79.8 664.8,73.6 668.6,65.4 672.4,36.5 676.2,38.2 680.0,10.3" fill="none" stroke="#191512" stroke-width="1.9"/>
+  <circle cx="680.0" cy="10.3" r="5" fill="#8b2117"/>
+  <text x="8" y="69.9" font-size="12" fill="#8b2117" font-family="Palatino Linotype,Georgia,serif">+2&#963;</text>
+  <text x="8" y="189.1" font-size="12" fill="#8b2117" font-family="Palatino Linotype,Georgia,serif">&minus;2&#963;</text>
+</svg>
+<div class="fig-cap">SJM &nbsp;&middot;&nbsp; ERII: one register entry, the spread against its bands, 180 sessions</div>
+<div class="fig-sub">a reading, not a recommendation: the desk states where a spread sits, and what that has been worth is printed with its error bars</div>
+</div>
+</div>
+
+<div class="divider">&middot;&nbsp;&middot;&nbsp;&middot;</div>
+
+<h2>The free build, aged on purpose</h2>
+<div class="stale">
+<p><b>Read the 21 August 2026 build</b>: <a href="pairdesk-sample.html">open the desk</a>,
+complete and self-contained: 12,000 register rows, 700 candidates with charts, every column
+explained on hover, the methodology inside.</p>
+<p class="small" style="margin:0">This is not a teaser cut. It is the whole desk, aged. The list
+it carries is still mostly true; the standings are mostly gone. The figure below says exactly how
+much of each, which is the entire argument for the subscription in two curves.</p>
+</div>
+
+<div class="divider">&middot;&nbsp;&middot;&nbsp;&middot;</div>
+
+<h2>How fast a desk goes stale, measured</h2>
+<div class="decay2">
+<div>
+<p>Two goods age at two speeds. The <i>list</i> (which pairs pass) moves slowly, because a few
+sessions against a 2,500-session window is nothing. The <i>standings</i> (which spreads sit
+beyond two sigma today) move with daily prices, and a standing that faded mostly faded because
+the spread converged: the opportunity played out on someone else's screen.</p>
+<table>
+<tr><th>desk age</th><th class="n">list valid</th><th class="n">standings standing</th></tr>
+<tr><td>1 week</td><td class="n">95%</td><td class="n">76%</td></tr>
+<tr><td>1 month</td><td class="n">87%</td><td class="n">52%</td></tr>
+<tr><td>2 months</td><td class="n">80%</td><td class="n">35%</td></tr>
+<tr><td>3 months</td><td class="n">73%</td><td class="n">28%</td></tr>
+</table>
+</div>
+<div class="fig" style="margin:0">
+<div class="fig-tag">FIG. II</div>
+<div class="plate">
+<svg width="380" height="228" viewBox="0 0 380 228">
+  <g transform="translate(0,6)">
+  <line x1="0" y1="100.0" x2="380" y2="100.0" stroke="#5c584e" stroke-width="1" stroke-dasharray="2,4"/>
+  <polyline points="30.2,9.6 126.7,26.8 253.3,41.0 380.0,54.6" fill="none" stroke="#5c584e" stroke-width="2"/>
+  <polyline points="6.0,23.8 30.2,47.6 60.3,62.8 126.7,96.2 253.3,129.6 380.0,143.8" fill="none" stroke="#8b2117" stroke-width="2.5"/>
+  <text x="376" y="94.0" font-size="12" fill="#5c584e" text-anchor="end" font-family="Palatino Linotype,Georgia,serif">even odds</text>
+  <text x="199.0" y="30.0" font-size="13" fill="#5c584e" font-family="Palatino Linotype,Georgia,serif">the list</text>
+  <text x="120.6" y="136.0" font-size="13" fill="#8b2117" font-family="Palatino Linotype,Georgia,serif">the standings</text>
+  <text x="30.2" y="222" font-size="12" fill="#5c584e" text-anchor="middle" font-family="Palatino Linotype,Georgia,serif">1w</text>
+  <text x="126.7" y="222" font-size="12" fill="#5c584e" text-anchor="middle" font-family="Palatino Linotype,Georgia,serif">1m</text>
+  <text x="253.3" y="222" font-size="12" fill="#5c584e" text-anchor="middle" font-family="Palatino Linotype,Georgia,serif">2m</text>
+  <text x="372.0" y="222" font-size="12" fill="#5c584e" text-anchor="middle" font-family="Palatino Linotype,Georgia,serif">3m</text>
+  </g>
+</svg>
+<div class="fig-cap">the two clocks, measured</div>
+</div>
+</div>
+</div>
+<p class="small">Standings pooled across 12 month-end reference dates on 3,000 accepted pairs,
+about 3,200 observations per cell; the list measured by full re-test at the build end and
+corroborated by build-to-build turnover of about 3.3 percent. A fresh two-sigma standing has
+even odds of still standing a month later. The measurement re-runs with the builds, and this
+table moves with it. Method and caveats in the
+<a href="https://github.com/Finance-broski/pairdesk">public repository</a>.</p>
+
+<div class="divider">&middot;&nbsp;&middot;&nbsp;&middot;</div>
+
+<h2>The tiers, priced on the curve above</h2>
+<table class="tiers">
+<tr><th>tier</th><th>delivery</th><th class="n">price</th></tr>
+<tr><td>base</td><td>monthly desk and brief: list-grade, standings honestly stale</td><td class="n">$29 / month</td></tr>
+<tr><td>standard</td><td>bi-weekly desk and brief: 76% of standings readings current on average</td><td class="n">$39 / month</td></tr>
+<tr><td>pro</td><td>weekly desk and brief: standings-grade, 85% of readings current on average</td><td class="n">$49 / month</td></tr>
+</table>
+<p class="small">The cadences are read off the curve, not chosen: by one month standings
+validity has fallen through two-thirds, so the monthly desk is honestly a list product, and
+weekly is the only cadence that keeps standings validity at 85 percent on average.</p>
+
+<div class="notice">
+<div class="nt">NOTICE TO THE FOUNDING TEN</div>
+<p>The first ten subscribers take the weekly desk at the bi-weekly price, $39 a month,
+locked for as long as they stay.</p>
+</div>
+
+<div class="sub-line">
+<a class="write" id="writeBtn" href="mailto:ayanjain259@gmail.com?subject=PairDesk" onclick="copyAddr(event)">WRITE FOR A TIER</a>
+</div>
+<p class="sub-note"><b>ayanjain259@gmail.com</b>. The button copies the address.
+Billing is a monthly PayPal invoice; the desk and brief arrive by email on schedule.
+No platform, no login, no lock-in beyond the month you paid for.</p>
+<script>
+function copyAddr(e){
+  var a = "ayanjain259@gmail.com";
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    e.preventDefault();
+    navigator.clipboard.writeText(a).then(function(){
+      var el = document.getElementById("writeBtn");
+      el.textContent = "ADDRESS COPIED";
+      setTimeout(function(){ el.textContent = "WRITE FOR A TIER"; }, 2200);
+    });
+  }
+}
+</script>
+
+<div class="divider">&middot;&nbsp;&middot;&nbsp;&middot;</div>
+
+<h2>What a subscriber receives</h2>
+<p>The full desk as a single self-contained file, nothing to install and nothing phoning home,
+plus a one-page brief: what entered, what left, what crossed two sigma since the last build, and
+which decay flags rose. The register carries acceptance statistics with their true false-positive
+size printed beside them, half-lives, walk-forward standings, borrow breakevens, deal and
+reporting-window flags, and survivorship costs, quantified. The caveats are on the page, not in
+a footnote, because the reader this desk is for checks.</p>
+
+<div class="foot">
+<div class="thin">Built by <a href="index.html">Finance-broski</a> &nbsp;&middot;&nbsp;
+<a href="https://github.com/Finance-broski/pairdesk">the launch build and the self-test</a>
+&nbsp;&middot;&nbsp; independent quantitative research, numbers shown honest
+<div class="colophon">Set in Palatino. Computed, not predicted.</div>
+</div>
+</div>
+</div>
+</body>
+</html>
