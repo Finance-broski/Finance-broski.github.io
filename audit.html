@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,interactive-widget=resizes-content">
+<meta name="color-scheme" content="light">
+<title>Backtest Audit: independent verification for quant strategies</title>
+<meta name="description" content="Independent forensic audit of quant backtests: survivorship, look-ahead, cost realism, overfitting, statistical validity, fill feasibility. Fixed price, 48h written verdict.">
+<meta property="og:title" content="Backtest Audit: independent verification for quant strategies">
+<meta property="og:description" content="Six forensic checks for the failure modes that turn a paper edge into a live loss. One independent verdict, in writing.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://financebroski.com/audit.html">
+<meta property="og:image" content="https://financebroski.com/og-v2.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="mark.png">
+<meta name="referrer" content="strict-origin">
+<meta name="msvalidate.01" content="0D48A66EEF79490827B04219DA8CBC25" />
+<link rel="stylesheet" href="style.css?v=navdata3">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Backtest Audit","alternateName":"Bias Check","serviceType":"Independent forensic verification of quantitative trading backtests","description":"Six forensic checks on a trading backtest: survivorship, look-ahead and point-in-time integrity, cost realism, overfitting and selection, statistical validity, and fill feasibility. Written per-check verdict in 48 hours.","provider":{"@type":"Person","name":"Ayan Jain"},"areaServed":"Worldwide","url":"https://financebroski.com/audit.html","offers":{"@type":"Offer","price":"250","priceCurrency":"USD","url":"https://financebroski.com/start.html"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can't I just ask an AI to do this for free?", "acceptedAnswer": {"@type": "Answer", "text": "I use AI heavily myself. What the free prompt lacks: a survivorship-correct point-in-time reference panel, an adversarial reviewer rather than a model validating its owner, and a named human liable for the verdict."}}, {"@type": "Question", "name": "Do I have to share my code or my alpha?", "acceptedAnswer": {"@type": "Answer", "text": "No. A trade list and an equity curve are enough for all six checks. Code enters only at the Fix and Deep tiers, under an engagement letter. NDA on request."}}, {"@type": "Question", "name": "Which markets do you cover?", "acceptedAnswer": {"@type": "Answer", "text": "The six checks are method checks and work on any market's backtest. The data-level cross-check against my reference panel is deepest for Indian equities, partial for US indices; elsewhere I verify internal consistency."}}, {"@type": "Question", "name": "Will you tell me if my strategy is good?", "acceptedAnswer": {"@type": "Answer", "text": "I tell you whether your test can be trusted. The market grades the strategy."}}, {"@type": "Question", "name": "What if you find nothing wrong?", "acceptedAnswer": {"@type": "Answer", "text": "You get a per-check verdict saying so: an independent audit you can show a funder, a prop firm, or yourself before going live."}}]}</script>
+</head>
+<body class="home">
+
+<div class="topbar"><div class="in">
+  <a class="brand" href="/">Ayan Jain · Backtest Audit</a>
+  <nav class="nav">
+    <a href="/">Home</a>
+    <a href="#findings">Findings</a>
+    <a href="review.html">Referee desk</a>
+    <a href="#checks">The six checks</a>
+    <a href="#how">How it works</a>
+    <a href="graveyard.html">Graveyard</a>
+    <a href="pairdesk.html">Pair Desk</a>
+    <details class="navdata">
+      <summary>Data</summary>
+      <div class="navdata-panel">
+        <a href="deaths.html">US corporate-delistings registry<span>150 sourced exits, every invisible S&amp;P name</span></a>
+        <a href="https://www.kaggle.com/datasets/financebroski/s-and-p-500-survivorship-bias-point-in-time">S&amp;P 500 point-in-time membership<span>2010/2015 vintages + free-data visibility probe</span></a>
+        <a href="auction.html">The auction ledger<span>live dislocation record, CSVs updated nightly, standing bars</span></a>
+      </div>
+    </details>
+    <a href="#record">The record</a>
+    <a href="#price">Price</a>
+    <a href="#faq">FAQ</a>
+    <a class="go" href="start.html">Start a Check</a>
+  </nav>
+</div></div>
+
+<div class="hero"><div class="wrap in">
+  <div>
+    <div class="kicker">Independent verification for quant strategies</div>
+    <h1>Your backtest says 34% CAGR. Most of them are lying.</h1>
+    <p class="lede">Six forensic checks for the failure modes that turn a paper edge into a live
+    loss. One independent verdict, in writing.</p>
+    <a class="cta" href="start.html">Start a Check →</a>
+    <a href="graveyard.html" style="display:inline-block;margin-left:.9rem;color:#5c584e;text-decoration:underline;text-underline-offset:3px">155 tested, 143 killed: the graveyard</a>
+    <a class="cta2" href="#findings">Read the findings ↓</a>
+    <p class="creed">One person runs every check. One person signs the verdict. Named, and liable for it.</p>
+  </div>
+  <div class="report" aria-label="Report format sample">
+    <div class="rh"><b>Audit verdict</b><span>REPORT FORMAT</span></div>
+    <div class="rrow"><span>Survivorship</span><span class="chip pass">PASS</span></div>
+    <div class="rrow"><span>Look-ahead / point-in-time <br><small>The signal uses a field only knowable
+      after the close.</small></span><span class="chip fail">FAIL</span></div>
+    <div class="rrow"><span>Cost realism <br><small>The edge survives to 60bps; 30 was assumed.</small></span>
+      <span class="chip flag">FLAG</span></div>
+    <div class="rrow"><span>Overfitting / selection</span><span class="chip flag">FLAG</span></div>
+    <div class="rrow"><span>Statistical validity</span><span class="chip pass">PASS</span></div>
+    <div class="rrow"><span>Fill feasibility</span><span class="chip pass">PASS</span></div>
+    <p class="fine" style="margin:.7rem 0 0">Illustrative summary, not a client report. Every check
+    gets a verdict, a measured haircut where possible, and a fix.
+    <a href="sample-verdict.pdf" target="_blank" rel="noopener">Read a full sample verdict (PDF)</a>.</p>
+  </div>
+</div></div>
+
+<div class="wrap">
+
+  <div class="stats">
+    <div class="stat"><b>3,886</b><span>Stocks in my point-in-time Indian panel (recounted Jul 2026).</span></div>
+    <div class="stat"><b>1,362</b><span>No longer print prices; most datasets silently drop them.</span></div>
+    <div class="stat"><b>+4.0pp/yr</b><span>Measured bias cost on one realistic strategy.</span></div>
+    <div class="stat"><b>48h</b><span>From complete folder to written verdict.</span></div>
+  </div>
+  <p class="verify">Everything here is checkable:
+    <code>pip install backtest-bias</code> ·
+    <a href="https://www.kaggle.com/financebroski" rel="noopener">The notebook that reproduces +3.0pp on public data</a> ·
+    <a href="https://financebroski.substack.com" rel="noopener">Published audit findings</a> ·
+    <a href="sample-verdict.pdf" target="_blank" rel="noopener">A complete sample verdict (PDF)</a>
+  </p>
+
+
+</div>
+<div class="gyband"><div class="wrap in">
+  <div class="gycount">155 TESTED · 143 KILLED · 12 ALIVE · 1 RETRACTION</div>
+  <h2>From the graveyard.</h2>
+  <div class="gygrid">
+    <div class="gy"><span class="code">G-057</span><b>Intraday pairs reversion</b><p>Gross edge real. 0.3bp per trip against 40bp of cost. The bankroll dies in five weeks.</p></div>
+    <div class="gy"><span class="code">G-012</span><b>F&amp;O-inclusion repricing</b><p>t = 6.51 raw. Against a momentum-matched control: −0.5. It was momentum in costume.</p></div>
+    <div class="gy"><span class="code">G-062</span><b>Option scalping, long side</b><p>Twenty-four configurations. Every cell negative. Theta, spread and reversion all against the buyer.</p></div>
+  </div>
+  <a class="gylink" href="graveyard.html">Walk the full ledger →</a>
+</div></div>
+<div class="wrap">
+  <section id="findings">
+    <div class="kicker">Receipts</div>
+    <h2>Recent findings, with the verdicts they got</h2>
+    <p class="sub">All real, all from the last few weeks: two from public-data audits, two from my
+    own pipeline. I publish what I catch in my own work for the same reason a good lab publishes
+    its failed experiments. The newest receipts come from the <a href="review.html">referee
+    desk</a>: 44 findings across one client's 35 works in a single week, 13 passed clean,
+    verified exact, and two of my own claims retracted on the record along the way. The census
+    is public; the client is not.</p>
+
+    <div class="grid2">
+      <div class="finding">
+        <div class="head"><span class="chip fail">LOOK-AHEAD</span>
+          <span class="what">A t = 7.6 "edge" that was a data leak</span></div>
+        <p>A delivery-percentage signal showed <span class="num">t = 7.61</span>, monotone across
+        buckets. The field is only knowable after the close. Lagged one day:
+        <span class="num">t = 0.66</span>, ordering reversed.</p>
+        <svg viewBox="0 0 340 150" role="img" aria-label="Bar chart: t-statistic 7.61 with the same-day field versus 0.66 lagged one day; significance threshold at t equals 2">
+          <line x1="24" y1="120" x2="330" y2="120" stroke="var(--line)" stroke-width="1"/>
+          <line x1="24" y1="93.5" x2="330" y2="93.5" stroke="var(--muted)" stroke-width="1"
+                stroke-dasharray="4 4" opacity=".7"/>
+          <text x="330" y="89" font-size="10.5" fill="var(--muted)" text-anchor="end">t = 2, the usual significance bar</text>
+          <path d="M62 120 V29 Q62 25 66 25 H118 Q122 25 122 29 V120 Z" fill="var(--fail)">
+            <title>same-day field: t = 7.61</title></path>
+          <text x="92" y="18" font-size="12" font-weight="700" fill="var(--fail)"
+                text-anchor="middle" font-family="var(--mono)">7.61</text>
+          <text x="92" y="136" font-size="10.5" fill="var(--muted)" text-anchor="middle">Same-day field</text>
+          <path d="M212 120 V115.3 Q212 111.3 216 111.3 H268 Q272 111.3 272 115.3 V120 Z"
+                fill="var(--bar-neutral)"><title>lagged one day: t = 0.66</title></path>
+          <text x="242" y="105" font-size="12" font-weight="700" fill="var(--fg)"
+                text-anchor="middle" font-family="var(--mono)">0.66</text>
+          <text x="242" y="136" font-size="10.5" fill="var(--muted)" text-anchor="middle">Lagged one day</text>
+        </svg>
+        <div class="axnote">The t-statistic of the same signal, before and after removing the leak.
+        Caught in my own pipeline by the checks this service runs.</div>
+      </div>
+
+      <div class="finding">
+        <div class="head"><span class="chip flag">COST REALISM</span>
+          <span class="what">A 28.8%/yr strategy that dies at its own cost</span></div>
+        <p>Illiquid-stock reversal in India: <span class="num">+28.8%/yr</span> gross at
+        <span class="num">t = 11.65</span>, beautifully monotone. Then you pay to trade it.</p>
+        <svg viewBox="0 0 340 170" role="img" aria-label="Bar chart: annual return at increasing round-trip costs. Gross plus 28.8 percent, plus 13.7 at 30 basis points, minus 21.6 at 100, minus 72 at 200.">
+          <line x1="24" y1="55" x2="330" y2="55" stroke="var(--line)" stroke-width="1"/>
+          <text x="24" y="50" font-size="10" fill="var(--muted)">0%</text>
+          <path d="M40 55 V26 Q40 22 44 22 H92 Q96 22 96 26 V55 Z" fill="var(--pos)">
+            <title>gross: +28.8%/yr</title></path>
+          <text x="68" y="15" font-size="11.5" font-weight="700" fill="var(--pos)"
+                text-anchor="middle" font-family="var(--mono)">+28.8</text>
+          <text x="68" y="68" font-size="10" fill="var(--muted)" text-anchor="middle">Gross</text>
+          <path d="M116 55 V43.6 Q116 39.6 120 39.6 H168 Q172 39.6 172 43.6 V55 Z" fill="var(--pos)">
+            <title>at 30bps round trip: +13.7%/yr</title></path>
+          <text x="144" y="33" font-size="11.5" font-weight="700" fill="var(--pos)"
+                text-anchor="middle" font-family="var(--mono)">+13.7</text>
+          <text x="144" y="68" font-size="10" fill="var(--muted)" text-anchor="middle">@30bps</text>
+          <path d="M192 55 V75.6 Q192 79.6 196 79.6 H244 Q248 79.6 248 75.6 V55 Z" fill="var(--neg)">
+            <title>at 100bps round trip: minus 21.6%/yr</title></path>
+          <text x="220" y="93" font-size="11.5" font-weight="700" fill="var(--neg)"
+                text-anchor="middle" font-family="var(--mono)">-21.6</text>
+          <text x="220" y="49" font-size="10" fill="var(--muted)" text-anchor="middle">@100bps</text>
+          <path d="M268 55 V133.3 Q268 137.3 272 137.3 H320 Q324 137.3 324 133.3 V55 Z" fill="var(--neg)">
+            <title>at 200bps round trip: minus 72.0%/yr</title></path>
+          <text x="296" y="151" font-size="11.5" font-weight="700" fill="var(--neg)"
+                text-anchor="middle" font-family="var(--mono)">-72.0</text>
+          <text x="296" y="49" font-size="10" fill="var(--muted)" text-anchor="middle">@200bps</text>
+        </svg>
+        <div class="axnote">Net %/yr at realistic round-trip cost for that liquidity bucket.
+        The gross number was real. It just wasn't reachable.</div>
+      <div class="finding">
+        <div class="head"><span class="chip flag">REFEREE</span>
+          <span class="what">A chart that contradicted its own footer</span></div>
+        <p>From the desk's first week: a bar chart whose shares summed to the
+        <span class="num">mid-80s</span> against its own footer's 100, a bias formula quoted
+        from a regression <em>with</em> an intercept beside a regression without one, and a
+        "25%" that recomputes to <span class="num">27</span> from the post's own printed
+        values. 44 findings across one client's 35 works; 13 passed clean. The census is
+        public on <a href="review.html">the referee desk</a>; the client is not.</p>
+      </div>
+      </div>
+
+      <div class="finding">
+        <div class="head"><span class="chip fail">SURVIVORSHIP</span>
+          <span class="what">The dead companies your data source deleted</span></div>
+        <p>Popular free sources drop delisted names. Rebuilt with every dead company kept in the
+        universe, one realistic strategy lost <span class="num">+4.0pp/yr</span> of its claimed
+        return. A public 99-name version reproduces <span class="num">+3.0pp</span>, runnable on
+        Kaggle, so you can check the method before you trust it.</p>
+      </div>
+
+      <div class="finding">
+        <div class="head"><span class="chip flag">DATA DEFECT</span>
+          <span class="what">Fields that are zero, not missing</span></div>
+        <p>Two fields in a widely-used panel are exactly <span class="num">0.0</span> before 2022
+        rather than NaN, so <span class="num">notna()</span> passes and any ranking built on them
+        silently sorts "has the field" from "doesn't". Produced a fake
+        <span class="num">t = 7.6</span> result before it was caught.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="checks">
+    <div class="kicker">Scope</div>
+    <h2>The six checks</h2>
+    <p class="sub">Every audit runs all six. Each gets a pass, flag or fail, the estimated
+    performance haircut where measurable, and a fix.</p>
+    <div class="grid3">
+      <div class="check"><span class="n">01</span><b>Survivorship</b>
+        <p>Is your universe quietly missing the companies that died?</p></div>
+      <div class="check"><span class="n">02</span><b>Look-ahead / point-in-time</b>
+        <p>Does any signal use information that didn't exist on the trade date? Adjusted prices,
+        restated fundamentals, index membership as of today.</p></div>
+      <div class="check"><span class="n">03</span><b>Cost realism</b>
+        <p>Are commissions, slippage, impact and taxes at levels a real fill would actually pay?</p></div>
+      <div class="check"><span class="n">04</span><b>Overfitting / selection</b>
+        <p>How many configurations did you try, over how many years? Deflated metrics and a
+        parameter-sensitivity map.</p></div>
+      <div class="check"><span class="n">05</span><b>Statistical validity</b>
+        <p>Is the edge distinguishable from luck at your sample size? Streaks and drawdowns
+        checked against the distribution.</p></div>
+      <div class="check"><span class="n">06</span><b>Fill feasibility</b>
+        <p>Could the market have absorbed your orders at those prices? Volume participation,
+        limit fills, gap handling.</p></div>
+    </div>
+    <p class="sub" style="margin-top:2.2rem;margin-bottom:.8rem"><b>On written work, the
+    <a href="review.html">referee desk</a> adds three of its own.</b> Same discipline, same
+    written verdict, 48 hours standard, 24-hour rush available.</p>
+    <div class="grid3">
+      <div class="check"><span class="n">R1</span><b>Recomputation</b>
+        <p>Every statistic rebuilt from the material alone. If your text says 25 percent, the
+        printed values must give 25 percent.</p></div>
+      <div class="check"><span class="n">R2</span><b>Chart against text</b>
+        <p>Figures checked against their own captions, footers, and printed values. Where most
+        published errors actually live.</p></div>
+      <div class="check"><span class="n">R3</span><b>Citations and versions</b>
+        <p>References verified at the source, paraphrase distance checked, stale versions and
+        silent regressions caught by hash.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">Process</div>
+    <h2 id="how">How it works</h2>
+    <div class="steps">
+      <div class="step"><b>1 · Send the folder.</b>
+        <p>Trade list and equity curve, a platform export, or written rules precise enough to act
+        on. Code welcome, never required. Refereeing a post, paper, or script instead? Same
+        door: email the piece itself.</p></div>
+      <div class="step"><b>2 · The 48h clock runs.</b>
+        <p>Starts when payment and a complete folder are both in. Inside it, I reconstruct your
+        test, rerun it independently, and cross-check it against my own panel. If something is
+        missing I ask once and the clock pauses. A 24-hour rush lane exists when you need it,
+        at plus fifty percent.</p></div>
+      <div class="step"><b>3 · Written verdict.</b>
+        <p>Pass, flag or fail on each check, the measured haircut where possible, and a
+        prioritised fix list.</p></div>
+    </div>
+    <p class="fine" style="margin-top:1rem">Not a grade for your ego. An engineering document for
+    your next iteration. If a check fails in a way that needs deeper work than the fixed scope
+    covers, I tell you what it would take before doing anything further. No surprise invoices.</p>
+  </section>
+
+  <section id="record">
+    <div class="kicker">The record</div>
+    <h2>Work that was checked in public</h2>
+    <p class="sub">None of these people are clients. They are researchers and founders who
+    engaged with the method in the open, corrected it where it was wrong, and adopted it where
+    it held. That is a more useful thing than a testimonial, and a harder one to manufacture.</p>
+
+    <figure style="margin:2rem 0 2.2rem;
+        background:linear-gradient(180deg,var(--panel-hi),color-mix(in srgb,var(--accent) 7%,#fdfbf6));
+        border:1px solid color-mix(in srgb,var(--accent) 34%,var(--line));
+        border-top:3px solid var(--accent);border-radius:14px;
+        padding:clamp(1.7rem,4vw,2.6rem) clamp(1.5rem,4.5vw,3.1rem);
+        box-shadow:var(--shadow)">
+      <blockquote style="margin:0;border:0;padding:0">
+        <p style="margin:0;font-family:var(--serif);font-style:italic;
+            font-size:clamp(1.08rem,1.9vw,1.34rem);line-height:1.62;color:var(--fg);max-width:62ch">
+          &ldquo;Effectively audits PhD-level quantitative work from very little information.
+          Given a chart and a few hundred words, without the underlying code or data, he
+          independently derives the figures and identifies what does not reconcile. His review
+          has materially improved the published version of several analyses in my
+          series.&rdquo;</p>
+      </blockquote>
+      <figcaption style="margin-top:1.25rem">
+        <div style="color:var(--accent-hi);font-size:.98rem;letter-spacing:.01em">Heather
+          Dempsey, Doctor of Business Administration in Finance &middot; Quantitative
+          Researcher</div>
+        <div style="margin-top:.3rem;color:var(--muted);font-size:.85rem">I read her drafts
+          before they publish; where her pieces draw on the exchanges, they credit them by
+          name.</div>
+      </figcaption>
+    </figure>
+
+    <div class="grid2">
+      <div class="finding">
+        <div class="head"><span class="what">Variance-ratio testing</span></div>
+        <p>Dr. Heather Dempsey, quantitative researcher, amended a published piece after an
+        exchange about a discrepancy, and noted the change in the body of the post rather than
+        editing quietly. Correcting a published piece in public is rarer than the catch that
+        prompts it.</p>
+      </div>
+
+      <div class="finding">
+        <div class="head"><span class="what">Selection bias, adopted</span></div>
+        <p>A simulation showing that ranking on the same window that selected a candidate can
+        manufacture apparent mean reversion was published as a follow-up piece with named
+        credit, and the disjoint-window recompute became stated practice. The useful test is
+        whether a method travels beyond the person who proposed it.</p>
+      </div>
+
+      <div class="finding">
+        <div class="head"><span class="what">Effective sample size</span></div>
+        <p>On multiple testing under correlated search, we each corrected the other in the same
+        thread: an equicorrelation figure that did not survive checking, and a threshold
+        approximation of mine that ran high at practical sample sizes. Both corrections sit in
+        the public exchange.</p>
+      </div>
+
+      <div class="finding">
+        <div class="head"><span class="what">Platform founders</span></div>
+        <p>Two trading-platform founders have taken methodology suggestions from public threads
+        into their own products, and one invited me in as an independent voice on data honesty
+        for their users. The checks are not specific to my own book.</p>
+      </div>
+    </div>
+
+    <p class="fine">Everything above is public and linkable, and quoted with permission where a
+    person is named.</p>
+  </section>
+
+  <section id="why">
+    <div class="kicker">The case</div>
+    <h2>Why hire me, for either desk</h2>
+    <p class="sub">Audit before your capital finds out, review before your audience does. The
+    quick list, for the skimming and the undecided:</p>
+    <div class="grid3">
+      <div class="check"><b>Corrected in private</b>
+        <p>Errors caught here never reach your audience, your investors, or your referees. The
+        embarrassing version of every finding dies in a confidential report.</p></div>
+      <div class="check"><b>Numbers, not opinions</b>
+        <p>Every statistic recomputed from your material alone, every chart checked against its
+        own text. Findings you can defend line by line.</p></div>
+      <div class="check"><b>In writing, on a clock</b>
+        <p>Written verdict in 48 hours standard, 24-hour rush when it matters. No calls
+        required.</p></div>
+      <div class="check"><b>Priced before, not after</b>
+        <p>Fixed menu, scope agreed in writing before work starts, no surprise invoices.</p></div>
+      <div class="check"><b>Signed and liable</b>
+        <p>A named human runs every check and signs the verdict. My own retractions sit on the
+        public record; the review gets reviewed too.</p></div>
+      <div class="check"><b>Confidential, always</b>
+        <p>Never shared, never reused, deleted on request. Only you decide whether anyone ever
+        sees a verdict.</p></div>
+    </div>
+  </section>
+
+  <section id="price">
+    <div class="kicker">Price</div>
+    <h2>Start with a Check. Everything else is scoped from it.</h2>
+    <div class="tiers">
+      <div class="tier featured">
+        <div class="tag">Start here</div>
+        <h3>Check</h3>
+        <div class="amt">₹7,500 <small>India</small> · $250 <small>intl</small></div>
+        <p>The full six-check audit. Written verdict in 48 hours. For most backtests this is the
+        only step needed. <a href="sample-verdict.pdf" target="_blank" rel="noopener">See a full
+        sample verdict (PDF)</a>.</p>
+        <p><b>Guaranteed:</b> the intake asks what you already believe is wrong, in numbers. If
+        the verdict doesn't go beyond what you wrote, the fee comes back
+        (<a href="#guarantee">how "beyond" is judged</a>).</p>
+        <p class="foot">India: <a href="https://rzp.io/rzp/7BG40WG" rel="noopener">pay by Razorpay</a>, instantly.
+        International: <a href="https://rzp.io/rzp/lIaRyZ0a" rel="noopener">pay $250 by card</a>, invoice on request.</p>
+        <a class="cta" style="margin-top:.6rem;text-align:center" href="start.html">Start a Check →</a>
+      </div>
+      <div class="tier">
+        <h3>Fix</h3>
+        <div class="amt">$1,500</div>
+        <p>A Check found real problems and you want them repaired: the leak closed, the cost model
+        rebuilt, the test rerun clean.</p>
+        <p class="foot"><a href="engagement-letter.html">Scoped in writing</a> after a Check.
+        7-day delivery window.</p>
+      </div>
+      <div class="tier">
+        <h3>Deep</h3>
+        <div class="amt">$6,000</div>
+        <p>Full pipeline engagement: your data rebuilt point-in-time correct, the audit run at
+        source level, the report your next strategies inherit.</p>
+        <p class="foot"><a href="engagement-letter.html">Scoped in writing</a>. 7-day delivery
+        window.</p>
+      </div>
+    </div>
+    <p style="margin-top:1rem">
+      <span class="pill">48h turnaround</span>
+      <span class="pill">Fixed price</span>
+      <span class="pill">No code required</span>
+      <span class="pill">NDA on request</span>
+    </p>
+    <p class="fine" style="margin-top:.9rem">Publishing rather than trading? The
+    <a href="review.html">referee desk</a> prices per piece: first engagement three posts $50
+    &middot; posts $50 &middot; charts and tables $25 &middot; scripts from $75 &middot; papers
+    and theses from $100 &middot; 24-hour rush +50%. Findings in writing, same guarantee.</p>
+
+    <figure style="margin:1.7rem 0 0;padding:1.25rem 1.6rem;
+        border-left:3px solid var(--accent);background:var(--panel-hi);
+        border:1px solid var(--line);border-left:3px solid var(--accent);
+        border-radius:0 12px 12px 0">
+      <blockquote style="margin:0;border:0;padding:0">
+        <p style="margin:0;font-family:var(--serif);font-style:italic;
+            font-size:1.04rem;line-height:1.62;color:var(--fg);max-width:72ch">
+          &ldquo;He has reproduced my statistics from the posted material alone, caught a
+          mechanism error I had already published, and retracted one of his own corrections
+          unprompted when his model of my simulation turned out wrong. &hellip; He&rsquo;s fast
+          and very good.&rdquo;</p>
+      </blockquote>
+      <figcaption style="margin-top:.65rem;font-size:.85rem;color:var(--muted)">
+        Dr. Heather Dempsey, Doctor of Business Administration in Finance &middot; written while
+        introducing this practice to a research firm, August 2026</figcaption>
+    </figure>
+  </section>
+
+  <section id="faq" class="narrow">
+    <div class="kicker">Questions</div>
+    <h2>Questions people actually ask</h2>
+    <details>
+      <summary>Can't I just ask an AI to do this for free?</summary>
+      <p>I use AI heavily myself; it's why the price is a few hundred dollars and not a
+      consultant's week. But three things don't come with the free prompt. The reference data: AI
+      cannot conjure a survivorship-correct, point-in-time panel to check yours against, and mine
+      took months to build. The adversarial stance: a model in the strategy owner's hands tends to
+      validate the owner. And liability: a named human signs this verdict. In one recent week my
+      own tooling produced four significant-looking results, up to t = 7.6, and every one was a
+      bug. The catching is the product.</p>
+    </details>
+    <details>
+      <summary>Do I have to share my code or my alpha?</summary>
+      <p>No. A trade list and an equity curve are enough for all six checks. The audit tests
+      whether your test is trustworthy; it doesn't need to know why you trade what you trade. Code
+      only enters at the Fix and Deep tiers, under an engagement letter with custody and deletion
+      terms. NDA on request.</p>
+    </details>
+    <details>
+      <summary>Which markets do you cover?</summary>
+      <p>The six checks are method checks: they test how your backtest was built, so they work on
+      equities, futures and options from any market. The data-level cross-check against my own
+      reference panel is a different matter: it is deepest for Indian equities, partial for US
+      indices, and elsewhere I verify your data's internal consistency rather than compare it
+      against an independent panel. I say which kind of check produced each finding.</p>
+    </details>
+    <details>
+      <summary>Will you tell me if my strategy is good?</summary>
+      <p>I'll tell you whether your test can be trusted. That's the part you cannot see from
+      inside, and the part everything else depends on. The market grades the strategy.</p>
+    </details>
+    <details>
+      <summary>Do you referee written work too, or only backtests?</summary>
+      <p>Both. The <a href="review.html">referee desk</a> takes LinkedIn and X posts, white
+      papers, journal submissions, theses, and the Python or MATLAB underneath them, graduate
+      to post-doctoral level. Statistics recomputed, charts checked against their own text,
+      citations verified. Findings in writing, 48 hours standard, 24-hour rush at +50%.
+      Independent referee, affiliated with no journal.</p>
+    </details>
+    <details>
+      <summary>Is my material confidential?</summary>
+      <p>Always. Reviews and materials are never shared, never reused, and deleted on request.
+      Only you decide whether anyone ever sees a verdict. The public census on the referee desk
+      is counts only: no names, no content.</p>
+    </details>
+    <details id="guarantee">
+      <summary>How does the guarantee work?</summary>
+      <p>Check tier only. Your intake asks what you already believe about each check: which
+      fields might leak, what your costs really are, how many configurations you tried. That
+      document is the baseline. If the verdict doesn't go beyond it, tell me and the fee comes
+      back. Beyond means a named mechanism, a measured magnitude, or a fix that isn't in your
+      answers. You hold both documents, so the comparison is checkable from your side, not just
+      mine. No guarantee on Fix and Deep, which are scoped in writing before any money moves.</p>
+    </details>
+    <details>
+      <summary>What if you find nothing wrong?</summary>
+      <p>Then you get a verdict saying so, per check, and that document is worth something: an
+      independent audit you can show a funder, a prop firm, or yourself at 2am before going live.
+      A clean pass from a hostile reviewer is not the same as your own backtest saying it's fine.</p>
+    </details>
+    <details>
+      <summary>Turnaround and capacity</summary>
+      <p>48 hours means 48 clock hours, Indian time, from the moment payment and a complete
+      folder are both in. Current capacity is three Checks a week; if you land in a queue you
+      are told your position when you order, and your clock starts when your slot opens. A
+      missing-information request pauses the clock once until you reply.</p>
+    </details>
+  </section>
+
+  <section class="cols2">
+    <div>
+      <div class="kicker">Custody</div>
+      <h2 style="font-size:1.2rem">Confidentiality</h2>
+      <p class="fine">Whatever you send stays on my machine, is never reused or redistributed, and
+      is deleted on request, or in any case within 90 days of the engagement closing. If you'd
+      rather not send code at all, don't. A trade list and an equity curve are enough for all
+      six checks.</p>
+      <p class="fine">For transparency: I run my own systematic book in Indian markets. Nothing
+      a client sends is ever reused in it or in my research, and no verdict is influenced by my
+      own positioning. The audit is QA on your test, not an opinion on your trade.</p>
+    </div>
+    <div>
+      <div class="kicker">Fit</div>
+      <h2 style="font-size:1.2rem">Who this is for</h2>
+      <p class="fine">Quants about to size real money on a backtest. Prop-challenge takers, where
+      an audit costs less than a second attempt and tells you which one to make. Developers selling
+      strategies who want independent verification to point at. Algo providers preparing for SEBI's PaRRVA
+      regime, where a research report per algo is a standing requirement. And anyone whose equity curve looks
+      a little too clean to be true.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p class="fine">This is an audit of software and data quality. It is not investment advice,
+    not a trading signal, and not a prediction that any strategy will make money. I audit the
+    process; the market grades the strategy.</p>
+    <p class="fine">Ayan Jain, independent backtest auditor. Find me at:
+      <a href="https://www.linkedin.com/in/ayanjain259" rel="me noopener">LinkedIn</a> ·
+      <a href="https://github.com/Finance-broski" rel="me noopener">GitHub</a> ·
+      <a href="https://financebroski.substack.com" rel="me noopener">Subscribe: The Bias Ledger</a> ·
+      <a href="https://www.reddit.com/user/Finance__broski" rel="me noopener">Reddit</a> ·
+      <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7099378" rel="noopener">SSRN paper</a> ·
+      <a href="https://www.kaggle.com/financebroski" rel="me noopener">Kaggle</a> ·
+      <a href="start.html">Start a Check</a></p>
+  </footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+<script>
+/* subtle smooth-scroll, off for reduced-motion or if the lib fails to load (page still scrolls natively) */
+(function(){
+  if(matchMedia("(prefers-reduced-motion:reduce)").matches || matchMedia("(max-width:640px)").matches || typeof Lenis==="undefined") return;
+  var lenis=new Lenis({lerp:0.09,wheelMultiplier:0.9,smoothWheel:true});
+  function raf(t){lenis.raf(t);requestAnimationFrame(raf);} requestAnimationFrame(raf);
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener("click",function(e){
+      var h=a.getAttribute("href"); if(h.length<2) return;
+      var t=document.querySelector(h); if(t){e.preventDefault();lenis.scrollTo(t,{offset:-8});}
+    });
+  });
+})();
+</script>
+<script data-goatcounter="https://financebroski.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script>
+(function(){var d=document,rm=matchMedia("(prefers-reduced-motion: reduce)").matches;
+d.documentElement.classList.add("js");
+/* Scroll reveal is DESKTOP ONLY, same cut as Lenis above. On a phone a fast flick
+   outruns the observer: sections sit invisible for a beat, then fade in late, and the
+   whole scroll reads as jank (reported on mobile 2026-08-19). Native feel wins there. */
+if(matchMedia("(max-width:640px)").matches) return;
+var sel=".finding,.check,.tier,.stat,.verify,.gy,.gycount,.gyband h2,.gylink,section>.kicker,section>h2,section>p,details";
+var els=[].slice.call(d.querySelectorAll(sel));
+if("IntersectionObserver" in window && !rm){
+  els.forEach(function(e,i){e.classList.add("rv");e.style.transitionDelay=(i%5*0.07)+"s";});
+  var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add("on");io.unobserve(en.target);}});},{threshold:.12,rootMargin:"0px 0px -40px 0px"});
+  els.forEach(function(e){io.observe(e);});
+}})();
+</script>
+</body>
+</html>
