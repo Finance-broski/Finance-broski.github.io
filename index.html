@@ -28,7 +28,8 @@ body.home .hero .wrap{width:100%}
 }
 @media(max-width:640px){.grid3{grid-template-columns:1fr}}
 .hub-side{display:flex;flex-direction:column;gap:14px}
-@media(max-width:880px){.hub-side{margin-top:2rem}}
+@media(max-width:880px){.hub-side{margin-top:2rem;display:grid;grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.hub-side{grid-template-columns:1fr}}
 .hub-stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;
   box-shadow:var(--shadow);padding:22px 24px;text-align:center}
 .hub-stat .n{font-family:var(--serif);font-size:3rem;line-height:1;font-weight:500}
