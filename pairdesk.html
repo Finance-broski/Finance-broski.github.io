@@ -3,11 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PairDesk: a pairs screener that publishes the test it failed</title>
+<title>PairDesk: pairs trading screener for US stocks and ETFs</title>
 <link rel="icon" type="image/png" href="mark.png">
-<meta name="description" content="A weekly US equity pairs desk. Computation, freshness and correctness, never forward information. Free aged build, measured decay curves, honest tiers.">
-<meta property="og:title" content="PairDesk: a pairs screener that publishes the test it failed">
-<meta property="og:description" content="1.7 million pairs screened weekly with the caveats printed on the page. The free build is aged on purpose.">
+<link rel="canonical" href="https://financebroski.com/pairdesk.html">
+<meta name="description" content="Weekly pairs trading screener for US stocks and ETFs: 1.7 million pairs tested for cointegration, with half-lives, z-scores, hedge ratios and borrow breakevens, every caveat printed on the page. Free aged build, honest tiers.">
+<meta property="og:title" content="PairDesk: pairs trading screener for US stocks and ETFs">
+<meta property="og:description" content="1.7 million pairs tested weekly for cointegration, with the caveats printed on the page. The free build is aged on purpose.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is PairDesk?","acceptedAnswer":{"@type":"Answer","text":"A weekly pairs trading screener for US stocks and ETFs. Each build tests about 1.7 million pairs for cointegration and delivers a register of accepted pairs with half-lives, current z-scores, hedge ratios, borrow breakevens and out-of-sample checks, as one self-contained file plus a one-page brief."}},
+{"@type":"Question","name":"How are the pairs tested?","acceptedAnswer":{"@type":"Answer","text":"Engle-Granger in both orientations against MacKinnon finite-sample critical values, hedge ratios by total least squares, half-lives with the Kendall small-sample correction, a held-back year for out-of-sample checks, and a false-discovery q-value beside every test statistic."}},
+{"@type":"Question","name":"Which markets does it cover?","acceptedAnswer":{"@type":"Answer","text":"US stocks and ETFs, about 1,900 liquid names per build. Not India, not crypto, not FX."}},
+{"@type":"Question","name":"Is there a free version?","acceptedAnswer":{"@type":"Answer","text":"Yes. The complete 21 August 2026 build is free and aged on purpose: 12,000 register rows, 700 candidates with charts, the methodology inside. The decay table on this page shows what the aging costs."}},
+{"@type":"Question","name":"Does it predict which pairs will make money?","acceptedAnswer":{"@type":"Answer","text":"No, and the page says so. With acceptance recomputed inside each test year, accepted pairs do not beat correlation-matched rejected ones, and no column ranks the year ahead. The desk sells computation, freshness and correctness, not forward information."}},
+{"@type":"Question","name":"What does it cost and how is it delivered?","acceptedAnswer":{"@type":"Answer","text":"$29, $39 or $49 a month by cadence: monthly, bi-weekly or weekly desk and brief, delivered by email as a file that opens in any browser with nothing to install. The first ten subscribers take the weekly desk at $39 a month, locked."}}
+]}
+</script>
 <style>
 /* Self-contained by law: this page never touches the site stylesheet. It wears the desk's
    printed-circular identity at full strength; the sheet sits on a slightly darker surround the
@@ -81,7 +92,7 @@ td.n,th.n{text-align:right}
 <body class="pairdesk">
 <div class="frame">
 <div class="crumb"><a href="index.html">&larr; financebroski.com</a></div>
-<div class="over">A WEEKLY REGISTER OF STATISTICAL PAIRS</div>
+<div class="over">A WEEKLY PAIRS TRADING SCREENER FOR US STOCKS AND ETFS</div>
 <h1>PAIR DESK</h1>
 <div class="date">
   <span class="l">EST.&nbsp;AUGUST&nbsp;2026</span>
@@ -223,6 +234,30 @@ which decay flags rose. The register carries acceptance statistics with their tr
 size printed beside them, half-lives, walk-forward standings, borrow breakevens, deal and
 reporting-window flags, and survivorship costs, quantified. The caveats are on the page, not in
 a footnote, because the reader this desk is for checks.</p>
+
+<div class="divider">&middot;&nbsp;&middot;&nbsp;&middot;</div>
+
+<h2>Plain answers</h2>
+<p><b>What is PairDesk?</b> A weekly pairs trading screener for US stocks and ETFs. Each build
+tests about 1.7 million pairs for cointegration and delivers a register of accepted pairs with
+half-lives, current z-scores, hedge ratios, borrow breakevens and out-of-sample checks, as one
+self-contained file plus a one-page brief.</p>
+<p><b>How are the pairs tested?</b> Engle-Granger in both orientations against MacKinnon
+finite-sample critical values, hedge ratios by total least squares, half-lives with the Kendall
+small-sample correction, a held-back year for out-of-sample checks, and a false-discovery q-value
+beside every test statistic.</p>
+<p><b>Which markets?</b> US stocks and ETFs, about 1,900 liquid names per build. Not India, not
+crypto, not FX.</p>
+<p><b>Is there a free version?</b> Yes, the complete 21 August 2026 build,
+<a href="pairdesk-sample.html">aged on purpose</a>: 12,000 register rows, 700 candidates with
+charts, the methodology inside. The decay table above shows what the aging costs.</p>
+<p><b>Does it predict which pairs will make money?</b> No, and this page says so. With acceptance
+recomputed inside each test year, accepted pairs do not beat correlation-matched rejected ones,
+and no column ranks the year ahead. The desk sells computation, freshness and correctness, not
+forward information.</p>
+<p><b>What does it cost, and how does it arrive?</b> $29, $39 or $49 a month by cadence, monthly,
+bi-weekly or weekly, delivered by email as a file that opens in any browser with nothing to
+install. The first ten subscribers take the weekly desk at $39 a month, locked.</p>
 
 <div class="foot">
 <div class="thin">Built by <a href="index.html">Finance-broski</a> &nbsp;&middot;&nbsp;
