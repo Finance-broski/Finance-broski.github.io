@@ -1,7 +1,8 @@
-# Ayan Jain — Backtest Audit
+# Ayan Jain: Backtest Audit and PairDesk
 
 > Independent forensic verification of quantitative trading backtests. Six checks for the
 > failure modes that turn a paper edge into a live loss. Fixed price, written verdict.
+> And PairDesk, a weekly pairs trading screener for US stocks and ETFs, sold as a file.
 
 I build point-in-time Indian equity data and audit backtests and datasets for the biases that
 inflate them. The public work below exists so that the standard I audit against is checkable
@@ -24,9 +25,15 @@ computed.
 - The Indian Backtest Bias Table: measured bias constants for Indian equities (survivorship,
   index-membership look-ahead, announcement lag, cost non-stationarity, marking frequency).
   https://github.com/Finance-broski/backtest-bias/blob/main/BIAS_TABLE.md
-- backtest-bias (Python package): tests a price panel for survivorship and dead-name coverage.
-  `pip install backtest-bias` https://pypi.org/project/backtest-bias/
+- backtest-bias (Python package, 0.3.0): tests a price panel for survivorship and dead-name
+  coverage, ticker identity, universe look-ahead, and selection look-ahead in a screening rule
+  (check_selection). `pip install backtest-bias` https://pypi.org/project/backtest-bias/
   Citable via DOI: https://doi.org/10.5281/zenodo.21770386
+- PairDesk: a weekly register of Engle-Granger pairs in US equities, both orientations at
+  finite-sample critical values, walk-forward standings, capacity from measured dollar volume.
+  Free 21 August 2026 sample, prices, and terms: https://financebroski.com/pairdesk.html
+  Selection look-ahead protocol measured on the screen itself:
+  https://github.com/Finance-broski/pairdesk/blob/main/SELECTION_LOOKAHEAD.md
 - The Graveyard: a public ledger of killed research hypotheses, with preregistered bars,
   verdicts, and configuration counts. https://github.com/Finance-broski/graveyard
 - SSRN working paper on survivorship bias in Indian equity backtests:
@@ -55,4 +62,6 @@ computed.
 ## Contact
 
 Bias Check intake: https://financebroski.com/start.html
+PairDesk: https://financebroski.com/pairdesk.html
+Terms and privacy: https://financebroski.com/terms.html
 Site: https://financebroski.com/
