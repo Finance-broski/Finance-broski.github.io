@@ -42,6 +42,7 @@ h1{text-align:center; font-size:56px; letter-spacing:.24em; font-weight:600; mar
 .date .c{text-align:center}
 .subrule{border-bottom:1px solid var(--ink); margin:0 0 30px; padding-bottom:3px;
   text-align:center; font-size:12px; letter-spacing:.2em; color:var(--dim); font-style:italic}
+.subrule b{color:var(--ink); font-weight:700; font-size:13px}
 h2{font-variant:small-caps; letter-spacing:.09em; font-size:20px; font-weight:600;
   border-bottom:1px solid var(--ink); padding-bottom:5px; margin:0 0 14px; text-wrap:balance}
 .divider{text-align:center; color:var(--dim); letter-spacing:.5em; margin:34px 0 30px;
@@ -99,9 +100,10 @@ td.n,th.n{text-align:right}
   <span class="c"><span class="ph">US EQUITIES</span> <span class="dsep">&nbsp;&middot;&nbsp;</span> <span class="ph">1.7&nbsp;MILLION&nbsp;PAIRS</span> <span class="ph">EXAMINED&nbsp;WEEKLY</span></span>
   <span class="r">SATURDAYS</span>
 </div>
-<div class="subrule">every column carries its caveat</div>
+<div class="subrule"><b>every pairs screen shows you its survivors. this one shows you what surviving is worth</b></div>
 
-<p class="lede">Each build screens roughly 1,900 liquid US names, 1.7 million pairs: Engle-Granger
+<p class="lede">Each build is one file that opens in any browser, no account, nothing installed, nothing
+phoning home, and it screens roughly 1,900 liquid US names, 1.7 million pairs: Engle-Granger
 in both directions at finite-sample critical values, walk-forward hedge ratios, a 108-cell
 parameter sweep, per-leg dollar volume with capital conversion, market beta per spread, deal and
 reporting-window flags from SEC filings, and a build stamp on every number. What it sells is
@@ -247,7 +249,9 @@ function copyAddr(e){
 plus a one-page brief: what entered, what left, what crossed two sigma since the last build, and
 which decay flags rose. The register carries acceptance statistics with their true false-positive
 size printed beside them, half-lives, walk-forward standings, borrow breakevens, deal and
-reporting-window flags, and survivorship costs, quantified. The caveats are on the page, not in
+reporting-window flags, and survivorship costs, quantified. The price source drops most names that
+stopped trading; that cost is measured on the page today, and a survivorship-correct US panel is the
+next build, the one that removes it rather than measures it. The caveats are on the page, not in
 a footnote, because the reader this desk is for checks.</p>
 
 <div class="divider">&middot;&nbsp;&middot;&nbsp;&middot;</div>
@@ -279,7 +283,8 @@ builds from $6,000, quoted before anything is built.</p>
 <div class="foot">
 <div class="thin">Built by <a href="index.html">Finance-broski</a> &nbsp;&middot;&nbsp;
 <a href="https://github.com/Finance-broski/pairdesk">the launch build and the self-test</a>
-&nbsp;&middot;&nbsp; independent quantitative research, numbers shown honest
+&nbsp;&middot;&nbsp; <a href="graveyard.html">the graveyard</a>, the same discipline applied to my own
+strategies &nbsp;&middot;&nbsp; independent quantitative research, numbers shown honest
 <div style="margin-top:6px"><a href="terms.html">Terms</a> &nbsp;&middot;&nbsp; <a href="privacy.html">Privacy</a></div>
 <div class="colophon">Set in Palatino. Computed, not predicted.</div>
 </div>
