@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>For Pair Trading Lab users · PairDesk</title>
+<link rel="icon" type="image/png" href="mark.png">
+<link rel="canonical" href="https://financebroski.com/for-ptl-users.html">
+<meta name="description" content="Pair Trading Lab closes on 1 October 2026. If you used its pair database, here is what PairDesk is and is not: 1.7 million US pairs tested weekly, delivered as one file, with the caveats printed and a self-test that says what surviving is worth. No execution, no live feed.">
+<meta property="og:title" content="For Pair Trading Lab users · PairDesk">
+<meta property="og:description" content="PTL closes on 1 October. What is different, what is missing, and a free build to judge by.">
+<style>
+/* Self-contained by law: the desk's printed-circular sheet, same as pairdesk.html. */
+:root{--paper:#fbf8f2; --ink:#191512; --ox:#8b2117; --dim:#5c584e; --rule:#d8d2c4; --desk:#efe9db}
+*{box-sizing:border-box; margin:0}
+body.pairdesk{background:var(--desk); color:var(--ink);
+  font:16px/1.66 "Palatino Linotype",Palatino,"Hoefler Text",Baskerville,Georgia,serif;
+  padding:34px 14px 54px}
+.frame{max-width:880px; margin:0 auto; border:1.5px solid var(--ink); outline:1px solid var(--ink);
+  outline-offset:3px; padding:30px 52px 28px; background:var(--paper)}
+.crumb{font-size:12.5px; margin-bottom:16px}
+.crumb a{color:var(--dim); text-decoration:none; letter-spacing:.04em}
+.over{text-align:center; font-size:13px; letter-spacing:.38em; color:var(--dim)}
+h1{text-align:center; font-size:48px; letter-spacing:.2em; font-weight:600; margin:6px 0 10px; text-indent:.2em}
+.date{display:grid; grid-template-columns:1fr auto 1fr; align-items:baseline; gap:14px;
+  font-size:12.5px; letter-spacing:.14em; border-top:2.5px solid var(--ink);
+  border-bottom:1px solid var(--ink); padding:7px 2px; margin:0 0 8px}
+.date .l{text-align:left; color:var(--dim)} .date .r{text-align:right; color:var(--dim)} .date .c{text-align:center}
+.subrule{border-bottom:1px solid var(--ink); margin:0 0 30px; padding-bottom:3px;
+  text-align:center; font-size:12px; letter-spacing:.2em; color:var(--dim); font-style:italic}
+.subrule b{color:var(--ink); font-weight:700; font-size:13px}
+h2{font-variant:small-caps; letter-spacing:.09em; font-size:20px; font-weight:600;
+  border-bottom:1px solid var(--ink); padding-bottom:5px; margin:0 0 14px; text-wrap:balance}
+.divider{text-align:center; color:var(--dim); letter-spacing:.5em; margin:34px 0 30px; font-size:14px}
+p{margin:0 0 12px; text-align:justify; hyphens:auto}
+a{color:var(--ox); text-decoration:underline; text-underline-offset:3px}
+.lede::first-letter{font-size:56px; line-height:.82; float:left; padding:6px 10px 0 0; color:var(--ox); font-weight:600}
+ul{margin:0 0 12px 1.2em; padding:0} li{margin:0 0 8px; text-align:justify; hyphens:auto}
+table{border-collapse:collapse; width:100%; margin:8px 0 6px; font-variant-numeric:lining-nums tabular-nums; font-size:14.5px}
+th{font-variant:small-caps; font-weight:600; letter-spacing:.05em; text-align:left;
+  border-bottom:1px solid var(--ink); padding:5px 10px 5px 0; font-size:13.5px; vertical-align:bottom}
+td{border-bottom:1px solid var(--rule); padding:6px 10px 6px 0; vertical-align:top}
+td:first-child{font-variant:small-caps; white-space:nowrap}
+.stale{border:1px solid var(--ink); padding:16px 20px; margin:18px 0; background:#f6f1e7}
+.stale b{font-variant:small-caps; letter-spacing:.04em}
+.notice{border:1.5px solid var(--ink); outline:1px solid var(--ink); outline-offset:2px;
+  padding:14px 22px; margin:20px auto; max-width:600px; text-align:center}
+.notice .nt{font-variant:small-caps; letter-spacing:.16em; font-size:13.5px; margin-bottom:6px}
+.notice p{text-align:center; margin:0; font-style:italic}
+.write{display:inline-block; border:1px solid var(--ink); padding:7px 22px; margin:4px 0 2px;
+  font-variant:small-caps; letter-spacing:.1em; font-size:15px; text-decoration:none; color:var(--ink)}
+.write:hover{background:#f6f1e7}
+.sub-note{font-size:13.5px; color:var(--dim); text-align:center; margin-top:8px}
+.foot{margin-top:40px; font-size:13px; color:var(--dim); text-align:center; border-top:2.5px solid var(--ink); padding-top:4px}
+.foot .thin{border-top:1px solid var(--ink); padding-top:10px; margin-top:2px}
+.colophon{font-style:italic; margin-top:6px}
+@media (max-width:640px){h1{font-size:28px; letter-spacing:.12em} .frame{padding:22px 18px}
+  .date .l,.date .r{display:none} .date{grid-template-columns:1fr} .lede::first-letter{font-size:44px}
+  p,li{text-align:left} td:first-child{white-space:normal} table{font-size:13.5px}}
+</style>
+</head>
+<body class="pairdesk">
+<div class="frame">
+<div class="crumb"><a href="pairdesk.html">&larr; PairDesk</a> &nbsp;&middot;&nbsp; <a href="index.html">financebroski.com</a></div>
+<div class="over">IF YOU USED THE PAIR TRADING LAB DATABASE</div>
+<h1>WHAT IS DIFFERENT</h1>
+<div class="date">
+  <span class="l">SEPTEMBER&nbsp;2026</span>
+  <span class="c">US EQUITIES &nbsp;&middot;&nbsp; 1.7 MILLION PAIRS WEEKLY</span>
+  <span class="r">FREE&nbsp;BUILD&nbsp;BELOW</span>
+</div>
+<div class="subrule"><b>no execution, no live feed, and this page says so before it says anything else</b></div>
+
+<p class="lede">Pair Trading Lab shuts down on 1 October 2026 after fifteen years, and its operator has
+said a new product is coming without saying what. If you built your pairs work on its database,
+this page is the plain comparison: what PairDesk does that the database did, what it does
+differently, and what it does not do at all. Whether it is a Pair Trading Lab alternative depends on
+which half you used: for the database half, judge for yourself below; for execution, no. No testimonials, no press logos, and nothing here
+claims the pairs will make money, because the <a href="https://github.com/Finance-broski/pairdesk">self-test
+published with the launch build</a> found that they cannot be ranked for that in advance.</p>
+
+<div class="divider">&middot;&nbsp;&middot;&nbsp;&middot;</div>
+
+<h2>Side by side</h2>
+<table>
+<tr><th>what you had</th><th>Pair Trading Lab</th><th>PairDesk</th></tr>
+<tr><td>pairs</td><td>about 9.5 million pre-analysed US pairs in a database</td><td>1.7 million pairs tested every week on about 1,900 liquid US stocks and ETFs; a liquidity-screened universe, not every listed name</td></tr>
+<tr><td>cointegration</td><td>cointegration tests at 95% and 99%</td><td>Engle-Granger in both orientations at finite-sample critical values, with a false-discovery q-value beside every test statistic, against a null built from real series rotated out of alignment</td></tr>
+<tr><td>hedge ratio</td><td>orthogonal regression</td><td>total least squares, plus walk-forward ratios that were fitted without seeing the period they are judged on</td></tr>
+<tr><td>half-life, z-score</td><td>per pair</td><td>per pair; the z is walk-forward, and the half-life carries the small-sample correction</td></tr>
+<tr><td>profit stats</td><td>per pair, backtested without slippage, fees, taxes or dividends</td><td>inside each candidate's dossier only, never as a sortable column, because no column ranks the year ahead; costs and borrow breakevens printed beside them</td></tr>
+<tr><td>capacity</td><td>not stated</td><td>from actual dollar volume, with the leg that binds it identified per pair</td></tr>
+<tr><td>online backtester</td><td>yes, your own rules</td><td>no; a 108-setting sweep is precomputed per candidate, but you cannot run your own rules</td></tr>
+<tr><td>portfolio tools</td><td>portfolio organiser and backtester</td><td>a book tab that re-forms a candidate book under name and correlation caps in the browser; it is not a backtester</td></tr>
+<tr><td>execution</td><td>PTL Trader, automated</td><td>none, and never</td></tr>
+<tr><td>freshness</td><td>database updated on the vendor's schedule</td><td>a new build every week for paid seats; the free build is the 21 August desk, aged on purpose, and the decay table on the landing says what the aging costs</td></tr>
+<tr><td>delivery</td><td>web application, login, premium membership</td><td>one file that opens in any browser, no account, nothing installed, nothing phoning home; a one-page brief by email</td></tr>
+<tr><td>the honest part</td><td>a 2008 to 2009 backtest on the home page</td><td>a self-test on the front page that says accepted pairs do not beat correlation-matched rejected ones out of sample</td></tr>
+</table>
+
+<h2>What PairDesk does not do</h2>
+<ul>
+<li>It does not execute anything, and it never will. It is a screen and a register.</li>
+<li>It has no live feed. Standings are as of the build date, printed on every page.</li>
+<li>It does not run your rules. If your PTL work was the backtester, this replaces the database half, not that half.</li>
+<li>It covers US stocks and ETFs only. Not India, not crypto, not FX, not futures.</li>
+<li>Its price source drops most names that stopped trading. The cost of that is measured and printed today; a survivorship-correct US panel is the next build.</li>
+</ul>
+
+<div class="stale"><b>How to judge it in ten minutes.</b> Open the free build, type three pairs you knew
+from the PTL database into the register, and read their dossiers: the test in both directions, the
+walk-forward z, the half-life, the capacity, and the caveats that apply to that pair. If what you
+find is worse than what you had, you have lost ten minutes. If it is more honest, the seat prices
+are below.</div>
+
+<div class="divider">&middot;&nbsp;&middot;&nbsp;&middot;</div>
+
+<div class="notice">
+<div class="nt">The free build</div>
+<p>The complete 21 August 2026 desk: 12,000 register rows, 700 candidates with charts, the methodology inside.</p>
+<a class="write" href="pairdesk-sample.html" data-goatcounter-click="ptl-free-build" data-goatcounter-title="PTL page, open the free build">OPEN THE FREE BUILD</a>
+<div class="sub-note">no account, nothing to install</div>
+</div>
+
+<div class="notice">
+<div class="nt">Seats</div>
+<p>$29, $39 or $49 a month by cadence: monthly, bi-weekly or weekly desk and brief. The first ten
+subscribers take the weekly desk at $39 a month, locked. Firms take a five-seat license with the
+register export at $199 a month.</p>
+<a class="write" href="pairdesk.html" data-goatcounter-click="ptl-to-landing" data-goatcounter-title="PTL page, to the landing">THE DESK, IN FULL</a>
+<div class="sub-note">every column carries its caveat</div>
+</div>
+
+<div class="foot">
+<div class="thin">Built by <a href="index.html">Ayan Jain</a>, Jaipur, India &nbsp;&middot;&nbsp;
+no affiliation with Pair Trading Lab or Quantverse &nbsp;&middot;&nbsp; nothing here is investment advice
+&nbsp;&middot;&nbsp; <a href="terms.html">Terms</a> &nbsp;&middot;&nbsp; <a href="privacy.html">Privacy</a>
+<div class="colophon">Set in Palatino. Computed, not predicted.</div>
+</div>
+</div>
+</div>
+<script data-goatcounter="https://financebroski.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
