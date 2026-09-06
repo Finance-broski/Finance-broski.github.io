@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Desk build · PairDesk</title>
+<link rel="icon" type="image/png" href="mark.png">
+<link rel="canonical" href="https://financebroski.com/desk-build.html">
+<meta name="description" content="A pairs screening desk built to your own universe, data and delivery shape: the PairDesk protocol on your names, with the caveats printed and the method document you can reimplement. From $6,000, quoted before anything is built.">
+<meta property="og:title" content="Desk build · PairDesk">
+<meta property="og:description" content="The PairDesk protocol on your universe, your data, your cadence. Computation and caveats, never a forecast. From $6,000, quoted before anything is built.">
+<style>
+/* Self-contained by law: this page never touches the site stylesheet. It wears the desk's
+   printed-circular identity, the same sheet as pairdesk.html, because it is the same desk. */
+:root{--paper:#fbf8f2; --ink:#191512; --ox:#8b2117; --dim:#5c584e; --rule:#d8d2c4; --desk:#efe9db}
+*{box-sizing:border-box; margin:0}
+body.pairdesk{background:var(--desk); color:var(--ink);
+  font:16px/1.66 "Palatino Linotype",Palatino,"Hoefler Text",Baskerville,Georgia,serif;
+  padding:34px 14px 54px}
+.frame{max-width:880px; margin:0 auto; border:1.5px solid var(--ink); outline:1px solid var(--ink);
+  outline-offset:3px; padding:30px 52px 28px; background:var(--paper)}
+.crumb{font-size:12.5px; margin-bottom:16px}
+.crumb a{color:var(--dim); text-decoration:none; letter-spacing:.04em}
+.over{text-align:center; font-size:13px; letter-spacing:.38em; color:var(--dim)}
+h1{text-align:center; font-size:56px; letter-spacing:.24em; font-weight:600; margin:6px 0 10px;
+  text-indent:.24em}
+.date{display:grid; grid-template-columns:1fr auto 1fr; align-items:baseline; gap:14px;
+  font-size:12.5px; letter-spacing:.14em; border-top:2.5px solid var(--ink);
+  border-bottom:1px solid var(--ink); padding:7px 2px; margin:0 0 8px}
+.date .l{text-align:left; color:var(--dim)} .date .r{text-align:right; color:var(--dim)}
+.date .c{text-align:center}
+.subrule{border-bottom:1px solid var(--ink); margin:0 0 30px; padding-bottom:3px;
+  text-align:center; font-size:12px; letter-spacing:.2em; color:var(--dim); font-style:italic}
+h2{font-variant:small-caps; letter-spacing:.09em; font-size:20px; font-weight:600;
+  border-bottom:1px solid var(--ink); padding-bottom:5px; margin:0 0 14px; text-wrap:balance}
+.divider{text-align:center; color:var(--dim); letter-spacing:.5em; margin:34px 0 30px;
+  font-size:14px}
+p{margin:0 0 12px; text-align:justify; hyphens:auto}
+a{color:var(--ox); text-decoration:underline; text-underline-offset:3px}
+.lede::first-letter{font-size:56px; line-height:.82; float:left; padding:6px 10px 0 0;
+  color:var(--ox); font-weight:600}
+ul{margin:0 0 12px 1.2em; padding:0}
+li{margin:0 0 8px; text-align:justify; hyphens:auto}
+li b{font-variant:small-caps; letter-spacing:.04em; font-weight:600}
+table{border-collapse:collapse; width:100%; margin:8px 0 6px;
+  font-variant-numeric:lining-nums tabular-nums; font-size:15px}
+th{font-variant:small-caps; font-weight:600; letter-spacing:.05em; text-align:left;
+  border-bottom:1px solid var(--ink); padding:5px 10px 5px 0; font-size:13.5px}
+td{border-bottom:1px solid var(--rule); padding:6px 10px 6px 0; vertical-align:top}
+.tiers td:first-child{font-variant:small-caps}
+.stale{border:1px solid var(--ink); padding:16px 20px; margin:18px 0; background:#f6f1e7}
+.stale b{font-variant:small-caps; letter-spacing:.04em}
+.notice{border:1.5px solid var(--ink); outline:1px solid var(--ink); outline-offset:2px;
+  padding:14px 22px; margin:20px auto; max-width:600px; text-align:center}
+.notice .nt{font-variant:small-caps; letter-spacing:.16em; font-size:13.5px; margin-bottom:6px}
+.notice p{text-align:center; margin:0; font-style:italic}
+.notice .big{font-size:26px; font-style:normal; letter-spacing:.02em; margin:2px 0 6px}
+.write{display:inline-block; border:1px solid var(--ink); padding:7px 22px; margin:4px 0 2px;
+  font-variant:small-caps; letter-spacing:.1em; font-size:15px; text-decoration:none;
+  color:var(--ink)}
+.write:hover{background:#f6f1e7}
+.sub-note{font-size:13.5px; color:var(--dim); text-align:center; margin-top:8px}
+.foot{margin-top:40px; font-size:13px; color:var(--dim); text-align:center;
+  border-top:2.5px solid var(--ink); padding-top:4px}
+.foot .thin{border-top:1px solid var(--ink); padding-top:10px; margin-top:2px}
+.colophon{font-style:italic; margin-top:6px}
+.small{font-size:13.5px; color:var(--dim)}
+@media (max-width:640px){h1{font-size:30px; letter-spacing:.15em}
+  .frame{padding:22px 18px} .date .l,.date .r{display:none} .date{grid-template-columns:1fr}
+  .lede::first-letter{font-size:44px} p,li{text-align:left}}
+@media print{body.pairdesk{background:#fff; padding:0} .frame{outline:none; border:1px solid var(--ink)}}
+</style>
+</head>
+<body class="pairdesk">
+<div class="frame">
+<div class="crumb"><a href="pairdesk.html">PairDesk</a> &nbsp;&middot;&nbsp; <a href="index.html">financebroski.com</a></div>
+<div class="over">THE PAIRDESK PROTOCOL ON YOUR OWN UNIVERSE</div>
+<h1>DESK BUILD</h1>
+<div class="date">
+  <span class="l">SEPTEMBER&nbsp;2026</span>
+  <span class="c">YOUR UNIVERSE &nbsp;&middot;&nbsp; YOUR DATA &nbsp;&middot;&nbsp; YOUR CADENCE</span>
+  <span class="r">FROM&nbsp;$6,000</span>
+</div>
+<div class="subrule">quoted in writing before anything is built</div>
+
+<p class="lede">PairDesk runs the same protocol every week on about 1,900 US names. A desk build
+runs it on yours: your universe, your data, your delivery shape, on your cadence. What you
+receive is the computation and the caveats, never a forecast, and the method document is
+complete enough that your own people can reimplement and check every number.</p>
+
+<div class="divider">&middot;&nbsp;&middot;&nbsp;&middot;</div>
+
+<h2>What one build contains</h2>
+<ul>
+<li><b>The register.</b> Every pair in your universe that passes the stated test, with the test
+statistic, the false-discovery q-value beside it, half-life, hedge ratios, the current reading,
+capacity, borrow breakeven and the out-of-sample checks, as one self-contained file that opens in
+a browser and as a table for your own systems.</li>
+<li><b>The dossiers.</b> The strongest candidates, several hundred per build, each open into their
+own page: the spread, the walk-forward hedge ratio, the setting sweep, and the caveats that apply
+to that pair specifically. The register lists every accepted pair; the dossiers go deep on the ones
+worth the depth.</li>
+<li><b>The brief.</b> One page on what moved since the last build: entries, exits, the pairs that
+lost their relationship, the ones near the boundary.</li>
+<li><b>The method document.</b> Every definition, threshold and control, written so that the desk
+is checkable from your side rather than trusted.</li>
+</ul>
+
+<h2>How it is built</h2>
+<p>Engle-Granger in both orientations against finite-sample critical values, hedge ratios by total
+least squares, half-lives with the small-sample correction, a held-back period for out-of-sample
+checks, and a false-discovery rate against a null built from real series rotated out of
+alignment. Capacity comes from actual dollar volume, with the leg that binds it identified per
+pair. Same-issuer, same-underlying and same-exposure pairs are flagged rather than hidden. The
+data source's survivorship gaps are measured and printed, not assumed away.</p>
+<div class="stale"><b>The self-test ships with it.</b> When acceptance is recomputed inside each
+test year so nothing can know the year it is judged on, accepted pairs do not beat
+correlation-matched rejected ones, and no column ranks the year ahead. The desk is honest about
+that on its front page. It sells computation, freshness and correctness. And it is honest about
+its blind spot: a relationship that has recently died still passes the test most of the time, so
+the survival facts are printed per pair and nothing ranks on them.</div>
+
+<h2>Universes</h2>
+<table class="tiers">
+<tr><th>universe</th><th>state</th></tr>
+<tr><td>US stocks and ETFs</td><td>built, running weekly since August 2026 on about 1,900 liquid names; the free build is the full 21 August desk</td></tr>
+<tr><td>NSE F&amp;O universe</td><td>built first, on a survivorship-correct panel back to 2010</td></tr>
+<tr><td>Your list</td><td>any market with a daily price history, quoted after a look at the data</td></tr>
+</table>
+
+<div class="divider">&middot;&nbsp;&middot;&nbsp;&middot;</div>
+
+<h2>Price and terms</h2>
+<div class="notice">
+<div class="nt">The first build</div>
+<p class="big">from $6,000</p>
+<p>half on signing, half on the first accepted build; ongoing builds priced per period in the same letter</p>
+</div>
+<p>Scoped and quoted in writing before anything is built, against a stated universe, data source,
+delivery format and cadence. No revenue share, no success fee, no payment that depends on the desk
+making money. The first build arrives within three to four weeks of the data being available.</p>
+<p>The engagement runs under the published <a href="engagement-letter.html">desk-build letter</a>:
+you own every build and the method document; the engine stays mine; your data and ideas never
+inform my own book, and nothing from my book enters your desk.</p>
+
+<h2>Judge the work before writing</h2>
+<ul>
+<li>The <a href="pairdesk-sample.html">free build</a>, the complete 21 August desk, aged on purpose.</li>
+<li>The <a href="https://github.com/Finance-broski/pairdesk">protocol and the self-test</a>, fourteen sections, every audit included.</li>
+<li>The <a href="graveyard.html">graveyard</a>: 159 strategies tested, the deaths published with their cause, git-timestamped.</li>
+</ul>
+
+<div class="divider">&middot;&nbsp;&middot;&nbsp;&middot;</div>
+
+<div class="notice">
+<div class="nt">To start</div>
+<p>Write with the universe, the data you hold or want used, and the shape you want the desk
+delivered in. You get a written scope and a price back, and nothing is built until you have both.</p>
+<a class="write" href="mailto:ayanjain259@gmail.com?subject=Desk%20build" data-goatcounter-click="desk-build-write" data-goatcounter-title="write, desk build">WRITE FOR A SCOPE</a>
+<div class="sub-note">ayanjain259@gmail.com</div>
+</div>
+
+<div class="foot">
+<div class="thin">Built by <a href="index.html">Ayan Jain</a>, Jaipur, India &nbsp;&middot;&nbsp;
+nothing here is investment advice &nbsp;&middot;&nbsp; <a href="terms.html">Terms</a> &nbsp;&middot;&nbsp; <a href="privacy.html">Privacy</a>
+<div class="colophon">Set in Palatino. Computed, not predicted.</div>
+</div>
+</div>
+</div>
+<script data-goatcounter="https://financebroski.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
