@@ -23,6 +23,9 @@ body.review .mrow:last-child{border-bottom:0}
 body.review .mrow b{font-size:1rem}
 body.review .mrow small{display:block;color:var(--muted);font-size:.84rem;margin-top:.15rem}
 body.review .mrow .amt{font-family:var(--mono);font-weight:700;font-size:1.02rem;white-space:nowrap;color:var(--accent-hi)}
+body.review ul.catches{margin:.5rem 0 0;padding-left:1.2rem;max-width:66ch;color:var(--fg);line-height:1.6}
+body.review ul.catches li{margin:.15rem 0}
+@media(max-width:560px){body.review .mrow{flex-direction:column;align-items:flex-start;gap:.3rem;padding:12px 0} body.review .mrow .amt{font-size:1rem}}
 body.review .gline{margin:1.4rem 0 0;padding:.95rem 1.25rem;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;background:var(--panel-hi)}
 body.review .gline b{font:600 .74rem/1 var(--sans);letter-spacing:.14em;color:var(--accent-hi)}
 body.review .census{margin:2.4rem 0 0}
@@ -49,26 +52,32 @@ body.review .copybtn:hover{background:var(--accent-hi)}
   <h1>Review before your audience reviews you.</h1>
   <p class="sub" style="max-width:66ch">An independent referee for quantitative work: LinkedIn
   and X posts, white papers, journal submissions, theses, backtests, and the code underneath
-  them. Every number recomputed from the material alone, every chart checked against its own
-  text, citations verified against their sources, findings back in writing, in your register,
-  ready to apply, and the corrected version checked again once you have applied them. The errors this catches are the ones that survive AI passes and self-review:
-  the chart that contradicts its own caption, the stale version that undoes last week's fix,
-  the last sentence that lost its ending. The work this method grew on runs graduate to
-  post-doctoral level.</p>
+  them. Every number is recomputed from the material alone, every chart is checked against its
+  own text, every citation against its source. Findings come back in writing, in your register,
+  ready to apply, and the corrected version is checked again once you have applied them.</p>
+  <p class="sub" style="max-width:66ch;margin-top:.8rem">The errors this catches are the ones that survive AI passes and self-review:</p>
+  <ul class="catches">
+    <li>the chart that contradicts its own caption</li>
+    <li>the stale version that undoes last week's fix</li>
+    <li>the last sentence that lost its ending</li>
+  </ul>
+  <p class="sub" style="max-width:66ch">The method was built on graduate and post-doctoral work.
+  See the deliverable before you write: <a href="sample-review.html">a delivered report, redacted</a>,
+  published with the client's written permission.</p>
+
+  <div class="gline"><b>GUARANTEE</b> &nbsp;·&nbsp; Any finding shown to be incorrect makes that
+  review free of charge. I track my own errors the same way I track everyone else's.</div>
 
   <div class="menu">
-    <div class="mrow"><span><b>First engagement: three posts with their charts</b><small>the introduction, once per client</small></span><span class="amt">$50</span></div>
+    <div class="mrow"><span><b>First engagement: three posts with their charts</b><small>three for the price of one, once per client</small></span><span class="amt">$50</span></div>
     <div class="mrow"><span><b>Post review</b><small>the text, the chart, and the seam between them</small></span><span class="amt">$50</span></div>
     <div class="mrow"><span><b>The rewrite, re-checked</b><small>send the corrected version back; it is verified against the same catches, no second fee</small></span><span class="amt">included</span></div>
-    <div class="mrow"><span><b>Chart, table, or dashboard verification</b><small>printed values against their own setup · two count as one post</small></span><span class="amt">$25</span></div>
+    <div class="mrow"><span><b>Chart, table, or dashboard verification</b><small>printed values against their own setup; a pair of charts is billed as one post</small></span><span class="amt">$25 each</span></div>
     <div class="mrow"><span><b>Python or MATLAB script review</b><small>logic, algorithms, and the bugs between them</small></span><span class="amt">from $75</span></div>
     <div class="mrow"><span><b>Technical paper, methods doc, or thesis</b><small>scoped by depth, agreed in writing before work starts</small></span><span class="amt">from $100</span></div>
     <div class="mrow"><span><b>On-record proofing</b><small>the email or deck that cannot afford a wrong number</small></span><span class="amt">$50</span></div>
     <div class="mrow"><span><b>Turnaround</b><small>48 hours standard · 24-hour rush moves you to the front</small></span><span class="amt">+50%</span></div>
   </div>
-
-  <div class="gline"><b>GUARANTEE</b> &nbsp;·&nbsp; Any finding shown to be incorrect makes that
-  review free of charge. I track my own errors the same way I track everyone else's.</div>
 
   <p class="fine" style="margin-top:1.2rem">Citation checks ride along free: references verified
   against their sources, paraphrases checked for honest distance from the original. All reviews
@@ -78,8 +87,8 @@ body.review .copybtn:hover{background:var(--accent-hi)}
 
   <div class="census">
     <h2 style="font-family:var(--serif);font-size:1.35rem;margin:0 0 .5rem">What a week of this actually catches</h2>
-    <p class="fine" style="margin:0 0 .9rem">One client, 35 works, every number recomputed.
-    Counts only; no names, no content.</p>
+    <p class="fine" style="margin:0 0 .9rem">One client, 35 works, every number recomputed:
+    44 findings across 22 of the 35, and 13 clean passes. Counts only; no names, no content.</p>
     <img src="review-census.png" alt="Census of findings from one week of review work: 44 findings across 35 works by type, 13 clean passes, client rating five stars" loading="lazy">
   </div>
   <p class="fine" style="margin-top:1rem">And see the deliverable itself:

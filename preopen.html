@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The pre-open alignment, preregistered &middot; NSE, 7 September 2026</title>
+<meta name="description" content="NSE aligns its equity pre-open with the closing auction from 7 September 2026. The measurement, the control and the bars were fixed before the data exists; the number publishes either way.">
+<meta property="og:title" content="The pre-open alignment, preregistered">
+<meta property="og:description" content="Measurement, control and bars fixed before NSE's pre-open change takes effect. Baseline: 69 sessions on NSE and BSE. Publishes either way.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://financebroski.com/og-v2.png">
+<link rel="icon" href="mark.png">
+<link rel="stylesheet" href="style.css">
+<style>
+body.auction{background:var(--bg);color:var(--fg)}
+body.auction .wrap{max-width:980px;margin:0 auto;padding:3.2rem 1.2rem 4rem}
+body.auction h1{font-family:var(--serif);font-size:clamp(1.9rem,4.5vw,2.7rem);margin:.2rem 0 .6rem;letter-spacing:-.01em}
+body.auction .kick{font-family:var(--mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-hi)}
+body.auction .sub{color:var(--muted);max-width:64ch;line-height:1.6;margin:.4rem 0 0}
+body.auction .statrow{display:flex;gap:2.2rem;flex-wrap:wrap;margin:1.6rem 0 0}
+body.auction .stat .n{font-family:var(--mono);font-size:1.5rem;color:var(--fg)}
+body.auction .stat .l{font-size:.82rem;color:var(--faint);margin-top:.15rem}
+body.auction h2{font-family:var(--serif);font-size:1.35rem;margin:2.6rem 0 .5rem}
+body.auction p{color:var(--muted);line-height:1.6;max-width:70ch}
+body.auction ul,body.auction ol{color:var(--muted);line-height:1.6;max-width:70ch;padding-left:1.3rem}
+body.auction li{margin:.35rem 0}
+body.auction .tablewrap{overflow-x:auto;margin-top:.9rem}
+body.auction table{border-collapse:collapse;width:100%;font-size:.92rem}
+body.auction th{text-align:left;font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:.5rem .8rem;border-bottom:2px solid var(--line)}
+body.auction td{padding:.55rem .8rem;border-bottom:1px solid var(--line);vertical-align:top}
+body.auction td.mono{font-family:var(--mono);font-size:.88rem;white-space:nowrap}
+body.auction .rules{background:var(--panel-hi);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:1.1rem 1.3rem;margin-top:1rem}
+body.auction .rules p{margin:.35rem 0;font-size:.92rem}
+body.auction .rules ol{margin:.4rem 0 0}
+body.auction pre{font-family:var(--mono);font-size:.88rem;color:var(--fg);background:var(--panel-hi);border:1px solid var(--line);border-radius:8px;padding:.8rem 1rem;overflow-x:auto;max-width:70ch}
+body.auction a{color:var(--accent-hi)}
+body.auction .brand{color:var(--fg)}
+body.auction .nav a{color:var(--muted)}
+body.auction .fine{font-size:.85rem;color:var(--faint);line-height:1.55;margin-top:2.4rem}
+@media(max-width:640px){body.auction table.wide{min-width:680px} body.auction .statrow{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem 1.4rem}}
+@media(max-width:430px){body.auction .stat .n{font-size:1.15rem}}
+</style>
+</head>
+<body class="auction">
+<div class="topbar"><div class="in">
+  <a class="brand" href="index.html">Ayan Jain &middot; Backtest Audit</a>
+  <nav class="nav">
+    <a href="auction.html">The Auction Ledger</a>
+  </nav>
+</div></div>
+<div class="wrap">
+  <div class="kick">The Auction Ledger &middot; preregistration</div>
+  <h1>The pre-open alignment, measured from day one.</h1>
+  <p class="sub">From Monday 7 September 2026 NSE aligns its equity pre-open session with the
+  closing auction: a limit-only phase with a random close replaces the last minutes of open
+  order entry. Nobody has history for the new mechanism, so this page fixes the measurement,
+  the control and the bars before the first aligned session exists. The number publishes here
+  either way. Written 5 September 2026; baseline measured 6 September; the git timestamp on this
+  file is the proof the bars preceded the result.</p>
+
+  <div class="statrow">
+    <div class="stat"><div class="n">69</div><div class="l">baseline sessions, both exchanges</div></div>
+    <div class="stat"><div class="n">33.6 bp</div><div class="l">NSE median open dislocation, baseline</div></div>
+    <div class="stat"><div class="n">41.9 bp</div><div class="l">BSE, the control</div></div>
+    <div class="stat"><div class="n">40 + 40</div><div class="l">sessions each side before the bars are read</div></div>
+  </div>
+
+  <h2>What changes, in NSE's words</h2>
+  <div class="tablewrap"><table class="wide">
+    <tr><th>phase</th><th>before</th><th>from 7 September</th></tr>
+    <tr><td>order entry, all types</td><td class="mono">09:00 to 09:08</td><td class="mono">09:00 to 09:05</td></tr>
+    <tr><td>order entry, limit orders only</td><td>none</td><td class="mono">09:05 to 09:10, random close in the last 2 minutes</td></tr>
+    <tr><td>matching</td><td class="mono">09:08 to 09:12</td><td class="mono">09:10 to 09:12</td></tr>
+    <tr><td>transition to continuous</td><td class="mono">to 09:15</td><td class="mono">09:12 to 09:15</td></tr>
+  </table></div>
+  <p>The load-bearing change is the limit-only phase. Market orders entered in the closing
+  seconds were the cheapest way to push a pre-open print, and from Monday they cannot be entered
+  at all in the final five minutes. Execution priority is unchanged: market against market by
+  time, then residual market against limit, then limit against limit, by price and time. NSE
+  also extended the closing-auction reference-price and price-band rules to index futures from
+  the same date (circular NSE/CMTR/76170, 3 September 2026), a separate change on the same day
+  that is not part of this measurement. The alignment itself is circular NSE/CMTR/74969 of
+  1 July 2026, with a mock session on 5 September under NSE/CMTR/76187.</p>
+
+  <h2>The claim being tested</h2>
+  <p>If the limit-only phase makes the pre-open print harder to push, the opening price should
+  be a better estimate of where the stock actually trades, and the market's correction of it in
+  the first minutes should get smaller.</p>
+
+  <h2>The measurement, defined now</h2>
+  <pre>open_dislocation = (first continuous traded price at or after 09:15 / official open) - 1,
+                   in basis points</pre>
+  <ul>
+    <li><b>official open</b>: the raw NSE CM bhavcopy open, which is the pre-open equilibrium
+    price. Raw, not the adjusted panel, for the same reason the closing-auction series uses raw:
+    adjusted opens against raw intraday prices measure the corporate action, not the auction.</li>
+    <li><b>first continuous price</b>: the close of the first minute bar at or after 09:15 with
+    volume above zero. A stale bar is not a price.</li>
+    <li>Both legs are computable for any historical session, which is the whole point: the
+    pre-period goes back as far as the minute bars do, and the measurement is identical on both
+    sides of 7 September. The change is the treatment; the ruler does not move.</li>
+  </ul>
+  <p><b>Secondary, same definitions:</b> the 09:15 to 09:30 return conditional on the sign and
+  size of the open dislocation. A print that was pushed should revert; a print that was fair
+  should not.</p>
+  <p><b>Universe:</b> the F&amp;O-eligible list, the same names the closing-auction series
+  measures.</p>
+
+  <h2>The control</h2>
+  <p>BSE, same symbols, same days, same two-leg definition. BSE runs its own pre-open and is not
+  covered by this NSE circular, so a change that shows up on both exchanges is not this
+  circular's doing. This is the same cross-exchange control the closing-auction series already
+  uses, for the same reason: without it, any market-wide change in September reads as a
+  treatment effect.</p>
+
+  <h2>The bars, fixed before the data exists</h2>
+  <div class="rules">
+    <p>Comparison windows: the 40 sessions before 7 September against the first 40 sessions from
+    7 September, medians per session, difference in differences against BSE.</p>
+    <ol>
+      <li><b>The headline claim publishes only if</b> the median absolute open dislocation on
+      NSE falls by at least 10% relative to its pre-period median AND the same statistic on BSE
+      does not fall by as much, with the NSE-minus-BSE difference outside a bootstrap 95%
+      interval over sessions.</li>
+      <li><b>The reversal claim publishes only if</b> the 09:15 to 09:30 reversal coefficient on
+      the open dislocation shrinks toward zero on NSE and not on BSE, again outside the
+      interval.</li>
+      <li><b>If neither clears, that is the published result.</b> "The alignment did not
+      measurably change the honesty of the opening print in its first 40 sessions" is a finding,
+      and it goes on the auction ledger beside the closing-auction numbers with the same
+      prominence.</li>
+      <li><b>No trading claim is made from this either way.</b> This measures a price formation
+      mechanism. A tradable claim would need its own preregistration, its own costs and its own
+      gate.</li>
+    </ol>
+  </div>
+
+  <h2>What could make this uninformative, said now</h2>
+  <ul>
+    <li>40 sessions is 40 observations per side on a session-median statistic. If the effect is
+    small, this cannot see it, and "no measurable change" then means the study lacked power
+    rather than the change lacked effect. Power will be stated with the result.</li>
+    <li>September is one month. A regime that moves opens for unrelated reasons contaminates
+    both arms, which is what the BSE control is there to absorb, imperfectly.</li>
+    <li>The index-futures price-band change lands the same day. It does not touch this
+    measurement's two legs, but it is a same-day confound for anything wider, and nothing wider
+    will be claimed.</li>
+  </ul>
+
+  <h2>Baseline, measured 6 September 2026, one trading day before the change</h2>
+  <p>69 sessions, 15 June to 4 September 2026, the F&amp;O universe. The bars above are
+  unchanged by this; it is the pre-period the first 40 aligned sessions will be compared
+  against.</p>
+  <div class="tablewrap"><table class="wide">
+    <tr><th>exchange</th><th>symbol-days</th><th>sessions</th><th>symbols</th><th>median of session medians, abs open dislocation</th><th>session range</th><th>median abs 09:15 to 09:30 return</th></tr>
+    <tr><td>NSE</td><td class="mono">14,487</td><td class="mono">69</td><td class="mono">210</td><td class="mono">33.6 bp</td><td class="mono">24.5 to 65.4 bp</td><td class="mono">35.6 bp</td></tr>
+    <tr><td>BSE</td><td class="mono">14,348</td><td class="mono">69</td><td class="mono">208</td><td class="mono">41.9 bp</td><td class="mono">29.1 to 70.3 bp</td><td class="mono">36.6 bp</td></tr>
+  </table></div>
+  <p>Paired NSE and BSE symbol-days: 14,348; the correlation of the two exchanges' dislocations
+  across them is 0.81, which is what makes BSE usable as the control: the two opens move
+  together on the days that move them, so a change on NSE alone is visible against it.</p>
+
+  <h2>Clarification, 6 September, before any aligned session; the bars are unchanged</h2>
+  <p>An audit of the baseline tried the first traded bar's open as the first-continuous-print
+  leg and found it equal to the bhavcopy open on 98% of symbol-days on both exchanges: the
+  official open is, by construction, the first print of continuous trading, so a leg built on it
+  is identically zero and measures nothing. The preregistered leg, the close of the first traded
+  minute bar at or after 09:15, is therefore what the measurement is, and its honest description
+  is: the price at the end of the first continuous minute against the pre-open equilibrium
+  price. It carries that minute's drift by design; that drift is the market's first correction of
+  the auction print, which is the object of the study.</p>
+
+  <h2>The capture that cannot be repeated</h2>
+  <p>The order-book evolution inside 09:00 to 09:12 exists only while it happens. A tick
+  recorder captures 08:58 to 09:20 every session from 5 September, which covers the whole new
+  pre-open including the random close. That capture is not required by the bars above, which run
+  on bhavcopy and minute bars; it exists because Monday's opening book is a one-time object and
+  the same reasoning that justified the closing-auction capture applies here.</p>
+
+  <p class="fine">Publication: this page and <a href="auction.html">the auction ledger</a>, after
+  40 aligned sessions, around early November 2026, and not before. The series is built nightly
+  by the same pipeline as the closing-auction record. Nothing here is investment advice; this
+  measures a market mechanism, not a strategy. <a href="terms.html">Terms</a> &middot;
+  <a href="privacy.html">Privacy</a></p>
+</div>
+</body>
+</html>
