@@ -38,6 +38,9 @@ computed.
   verdicts, and configuration counts. https://github.com/Finance-broski/graveyard
 - SSRN working paper on survivorship bias in Indian equity backtests:
   https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7099378
+- SSRN working paper on selection look-ahead in screening rules, measured on the PairDesk screen
+  itself (posted 7 September 2026): https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7423179
+  DOI 10.2139/ssrn.7423179
 - The US Death Registry: what happened to every S&P 500 name that goes missing from free
   membership data. 143 exits, each with fate (acquired, taken private, merged, renamed,
   bankrupt), last trading date, and a primary source; 14 of the tickers were later reused by a
