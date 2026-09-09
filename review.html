@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>The Referee Desk: independent review of quantitative work</title>
-<meta name="description" content="Independent review of quantitative content before publication, catching the errors that survive AI passes and self-review: LinkedIn posts, white papers, journal submissions, backtests. Every number recomputed, every chart checked against its own text. Per-piece pricing, written findings, guarantee.">
+<meta name="description" content="Independent review of quantitative content before publication, catching the errors that survive AI passes and self-review: LinkedIn posts, white papers, journal submissions, backtests, and code with or without a paper behind it. Every number recomputed, every chart checked against its own text. Per-piece pricing, written findings, guarantee.">
 <meta property="og:title" content="The Referee Desk">
 <meta property="og:description" content="Independent referee for quant work. Review before your audience reviews you. The errors that survive AI passes and self-review, caught. Every number recomputed, every chart checked against its own text. Per-piece pricing, in writing.">
 <meta property="og:type" content="website">
@@ -13,7 +13,7 @@
 <link rel="icon" type="image/png" href="mark.png">
 <meta name="referrer" content="strict-origin">
 <link rel="stylesheet" href="style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"The Referee Desk","serviceType":"Independent refereeing of quantitative research content before publication","description":"Independent verification of quantitative posts, white papers, journal submissions and backtests before publication: statistics recomputed, charts checked against their own text, findings delivered in writing.","provider":{"@type":"Person","name":"Ayan Jain"},"areaServed":"Worldwide","url":"https://financebroski.com/review.html","offers":{"@type":"Offer","price":"50","priceCurrency":"USD","description":"Per post (text and chart, cross-read)"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"The Referee Desk","serviceType":"Independent refereeing of quantitative research content and code before publication","description":"Independent verification of quantitative posts, white papers, journal submissions, backtests and code (with or without a paper behind it) before publication: statistics recomputed, charts checked against their own text, scripts debugged, findings delivered in writing.","provider":{"@type":"Person","name":"Ayan Jain"},"areaServed":"Worldwide","url":"https://financebroski.com/review.html","offers":{"@type":"Offer","price":"50","priceCurrency":"USD","description":"Per post (text and chart, cross-read)"}}</script>
 <style>
 body.review .wrap{max-width:880px;margin:0 auto;padding:3rem 1.2rem 4rem}
 body.review .lead{font-family:var(--serif);font-size:clamp(1.12rem,2.3vw,1.38rem);line-height:1.35;color:var(--fg);max-width:48ch;margin:0 0 1.1rem}
@@ -57,11 +57,15 @@ body.review .copybtn:hover{background:var(--accent-hi)}
   them. Every number is recomputed from the material alone, every chart is checked against its
   own text, every citation against its source. Findings come back in writing, in your register,
   ready to apply, and the corrected version is checked again once you have applied them.</p>
+  <p class="sub" style="max-width:66ch;margin-top:.8rem">No post or paper yet? Code alone counts.
+  Send the script that will not run, or the one that runs and gives a number you do not trust,
+  and it gets the same treatment: read line by line, the bug named, the fix written out.</p>
   <p class="sub" style="max-width:66ch;margin-top:.8rem">What those look like:</p>
   <ul class="catches">
     <li>the chart that contradicts its own caption</li>
     <li>the stale version that undoes last week's fix</li>
     <li>the last sentence that lost its ending</li>
+    <li>the off-by-one that shifts every return by a day and still prints a Sharpe</li>
   </ul>
   <p class="sub" style="max-width:66ch">The method was built on graduate and post-doctoral work.
   See the deliverable before you write: <a href="sample-review.html">a delivered report, redacted</a>,
@@ -75,7 +79,7 @@ body.review .copybtn:hover{background:var(--accent-hi)}
     <div class="mrow"><span><b>Post review</b><small>the text, the chart, and the seam between them</small></span><span class="amt">$50</span></div>
     <div class="mrow"><span><b>The rewrite, re-checked</b><small>send the corrected version back; it is verified against the same catches, no second fee</small></span><span class="amt">included</span></div>
     <div class="mrow"><span><b>Chart, table, or dashboard verification</b><small>printed values against their own setup; a pair of charts is billed as one post</small></span><span class="amt">$25 each</span></div>
-    <div class="mrow"><span><b>Python or MATLAB script review</b><small>logic, algorithms, and the bugs between them</small></span><span class="amt">from $75</span></div>
+    <div class="mrow"><span><b>Code review and debugging, no post or paper needed</b><small>Python or MATLAB: the script that will not run, or the one whose number you do not trust; logic, algorithms, and the bugs between them; scoped after a read, quoted in writing</small></span><span class="amt">from $75</span></div>
     <div class="mrow"><span><b>Technical paper, methods doc, or thesis</b><small>scoped by depth, agreed in writing before work starts</small></span><span class="amt">from $100</span></div>
     <div class="mrow"><span><b>On-record proofing</b><small>the email or deck that cannot afford a wrong number</small></span><span class="amt">$50</span></div>
     <div class="mrow"><span><b>Turnaround</b><small>48 hours standard · 24-hour rush moves you to the front</small></span><span class="amt">+50%</span></div>
